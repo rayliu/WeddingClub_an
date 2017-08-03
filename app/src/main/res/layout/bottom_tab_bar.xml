@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/title_bg_color">
+    <RadioGroup
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:checkedButton="@+id/rbHome">
+
+        <RadioButton
+            android:id="@+id/rbHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_tabbar_home_selector"
+            android:gravity="center"
+            android:text="@string/nav_1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bottom_menu_text_size"/>
+
+        <RadioButton
+            android:id="@+id/rbAsk"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_tabbar_order_selector"
+            android:gravity="center"
+            android:text="@string/nav_2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bottom_menu_text_size"/>
+
+        <RadioButton
+            android:id="@+id/rbMsg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_tabbar_mail_selector"
+            android:gravity="center"
+            android:text="@string/nav_3"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bottom_menu_text_size"/>
+
+        <RadioButton
+            android:id="@+id/rbIssue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_tabbar_mail_selector"
+            android:gravity="center"
+            android:text="@string/nav_4"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bottom_menu_text_size"/>
+
+        <RadioButton
+            android:id="@+id/rbMe"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_tabbar_wode_selector"
+            android:gravity="center"
+            android:text="@string/nav_5"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bottom_menu_text_size"/>
+
+    </RadioGroup>
+</LinearLayout>

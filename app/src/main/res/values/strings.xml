@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">婚礼帮</string>
+    <string name="nav_1">婚淘品</string>
+    <string name="nav_2">婚礼问问</string>
+    <string name="nav_3">精选婚礼</string>
+    <string name="nav_4">筹备项目</string>
+    <string name="nav_5">个人中心</string>
+</resources>
