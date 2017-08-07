@@ -14,13 +14,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView4"
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:cropToPadding="false"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/banner_pic"/>
+                />
+
 
             <ImageView
                 android:id="@+id/imageView5"
