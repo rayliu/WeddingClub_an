@@ -10,7 +10,7 @@
         android:title="@string/nav_2"/>
     <item
         android:id="@+id/action_msg"
-        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:icon="@drawable/main_menu_icon3"
         android:title="@string/nav_3"/>
     <item
         android:id="@+id/action_msg1"

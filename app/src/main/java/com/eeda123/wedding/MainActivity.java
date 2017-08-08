@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity{
     RadioButton rbHome;
     @BindView(R.id.rbAsk)
     RadioButton rbAsk;
-    @BindView(R.id.rbMsg)
-    RadioButton rbMsg;
-    @BindView(R.id.rbIssue)
-    RadioButton rbIssue;
+    @BindView(R.id.rbBest)
+    RadioButton rbBest;
+    @BindView(R.id.rbProject)
+    RadioButton rbProject;
     @BindView(R.id.rbMe)
     RadioButton rbMe;
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    @OnClick({R.id.rbHome, R.id.rbAsk, R.id.rbMsg, R.id.rbIssue, R.id.rbMe})
+    @OnClick({R.id.rbHome, R.id.rbAsk, R.id.rbBest, R.id.rbProject, R.id.rbMe})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rbHome:
@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity{
             case R.id.rbAsk:
                 showAskFragment();
                 break;
-            case R.id.rbMsg:
+            case R.id.rbBest:
                 showBestFragment();
                 break;
-            case R.id.rbIssue:
+            case R.id.rbProject:
                 showMyProjectFragment();
                 break;
             case R.id.rbMe:
