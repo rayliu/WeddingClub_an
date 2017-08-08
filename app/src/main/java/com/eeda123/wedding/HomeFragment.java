@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -77,17 +78,17 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
 
         slider = (SliderLayout) view.findViewById(R.id.slider);
 
-        HashMap<String,String> url_maps = new HashMap<String, String>();
-        url_maps.put("摄楼1", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("摄楼2", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("摄楼3", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("摄楼4", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+        LinkedList<String> url_maps = new LinkedList<String>();
+        url_maps.add("http://mt-share.qiniudn.com/2017/4/26/wS4JrG0TQy4isCcZY_HbtCCMSTM6X7TG.jpg");
+        url_maps.add("http://mt-share.qiniudn.com/2017/4/26/8bxp3yQG_f7y3PtswF4SKzGjf4WzkMY4.jpg");
+        url_maps.add("http://mt-share.qiniudn.com/2017/4/26/apk6Ze0nYkzkfAywst2bEAf757Cy5iS0.jpg");
+        url_maps.add("http://qnm.hunliji.com/DAFAEBCBB61E67534246266F75F4E406");
 
-        for (String title:url_maps.keySet()) {
+        for (String url:url_maps) {
             TextSliderView textSlider = new TextSliderView(getActivity());
             textSlider
-                    .description(title)
-                    .image(url_maps.get(title));
+                    .description("")
+                    .image(url);
 
             slider.addSlider(textSlider);
         }
