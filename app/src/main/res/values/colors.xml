@@ -17,14 +17,14 @@
     <color name="monsoon">#777777</color>
     <color name="jumbo">#888888</color>
     <color name="aluminum">#999999</color>
-    <color name="base">#AAAAAA</color>
+    <color name="base">#aaaaaa</color>
     <color name="iron">#cccccc</color>
 
     <color name="tab_text_color_normal">#A7A7A7</color>
     <color name="tab_text_color_selected">#FB5553</color>
     <color name="progress_color">#FB5553</color>
     <color name="bg_red_color">#FB5553</color>
-    <color name="bg_red_color_pressed">#FFEEF0</color>
+    <color name="bg_red_color_pressed">#83faecec</color>
 
     <color name="room_table_text_color">#808080</color>
     <color name="room_lable_title_color">#333333</color>
