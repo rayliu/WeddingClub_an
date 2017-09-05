@@ -7,16 +7,13 @@ package com.eeda123.wedding.bestCase;
 public class BestCaseModel {
 
     private String strTitle;
+    private String img;
 
-    public BestCaseModel(String strTitle){
+
+    public BestCaseModel(String strTitle,String photo){
         this.strTitle = strTitle;
+        this.img = photo;
     }
-
-
-
-
-
-
 
 
 }

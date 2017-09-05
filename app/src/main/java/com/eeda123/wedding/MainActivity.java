@@ -1,7 +1,6 @@
 
 package com.eeda123.wedding;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,19 +9,19 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-//import com.truiton.bottomnavigation.R;
-
 import com.eeda123.wedding.ask.AskFragment;
 import com.eeda123.wedding.bestCase.BestFragment;
 import com.eeda123.wedding.myProject.MyProjectFragment;
-import com.eeda123.wedding.myProject.MyProjectItemModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+//import com.truiton.bottomnavigation.R;
+
 public class MainActivity extends AppCompatActivity{
-    public static String HOST_URL = "http://192.168.0.108:8080/";
+//    public static String HOST_URL = "http://192.168.0.108:8080/";
+    public static String HOST_URL = "http://192.168.0.103:8080/";
 //    public static String HOST_URL = "http://192.168.0.4:8080/";
 //    public static String HOST_URL = "https://wms.eeda123.com/";
     int selectedId = 0;

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.ask.AskItemHolder;
 
 import java.util.List;
 

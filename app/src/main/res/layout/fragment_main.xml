@@ -174,7 +174,7 @@
             <ListView
                 android:id="@android:id/list"
                 android:layout_width="match_parent"
-                android:layout_height="286dp"/>
+                android:layout_height="400dp"/>
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipeLayout"
