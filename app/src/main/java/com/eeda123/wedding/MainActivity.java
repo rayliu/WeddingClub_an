@@ -20,8 +20,7 @@ import butterknife.OnClick;
 //import com.truiton.bottomnavigation.R;
 
 public class MainActivity extends AppCompatActivity{
-//    public static String HOST_URL = "http://192.168.0.108:8080/";
-    public static String HOST_URL = "http://192.168.0.103:8080/";
+    public static String HOST_URL = "http://192.168.0.101:8080/";
 //    public static String HOST_URL = "http://192.168.0.4:8080/";
 //    public static String HOST_URL = "https://wms.eeda123.com/";
     int selectedId = 0;

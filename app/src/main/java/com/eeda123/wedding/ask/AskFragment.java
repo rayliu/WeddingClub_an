@@ -2,6 +2,7 @@
 
 package com.eeda123.wedding.ask;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.eeda123.wedding.LoginActivity;
 import com.eeda123.wedding.R;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 public class AskFragment extends Fragment {
     private RecyclerView mListRecyclerView;
@@ -42,6 +48,12 @@ public class AskFragment extends Fragment {
         updateUI();
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
     }
 
     private void updateUI() {
@@ -72,4 +84,19 @@ public class AskFragment extends Fragment {
     }
 
 
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+////        ButterKnife.unbind(this);
+//    }
+
+    @OnClick(R.id.btnAsk) void onBtnAskClick() {
+        Intent intent = new Intent(this.getActivity(), AskQuestionActivity.class);
+        startActivity(intent);
+    }
+
+    @OnLongClick(R.id.btnAsk) boolean onBtnAskLongClick() {
+        //TODO implement
+        return true;
+    }
 }

@@ -92,7 +92,7 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getData();
+        //getData();
 
     }
 
