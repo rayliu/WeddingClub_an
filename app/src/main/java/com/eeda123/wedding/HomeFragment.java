@@ -2,6 +2,8 @@
 
 package com.eeda123.wedding;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ListFragment;
@@ -10,8 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -19,6 +24,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.eeda123.wedding.model.HomeCuItemArrayAdapter;
 import com.eeda123.wedding.model.HomeCuItemModel;
+import com.eeda123.wedding.shop.ShopActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,6 +45,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
+import static android.R.attr.name;
+import static com.eeda123.wedding.MainActivity.HOST_URL;
+
 public class HomeFragment extends ListFragment implements BaseSliderView.OnSliderClickListener{
     public static final String TAG = "CallInstances";
     private boolean isRefresh = false;//是否刷新中
@@ -46,6 +55,8 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
 
     private SliderLayout slider;
     private Button button;
+
+    private  HomeFragment fragment = this;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -56,8 +67,6 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        button = (Button) this.getActivity().findViewById(R.id.button4);
-//        button.setOnClickListener(new OnClickListenerImpl());
     }
 
 //    private class OnClickListenerImpl implements View.OnClickListener {
@@ -92,7 +101,7 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //getData();
+        getData();
 
     }
 
@@ -120,7 +129,7 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MainActivity.HOST_URL)
+                .baseUrl(HOST_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();
@@ -129,38 +138,23 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
 
         Call<HashMap<String, Object>> call = service.list("tao","orderData");
 
-        call.enqueue(eedaCallback());
+        call.enqueue(eedaCallback(this));
     }
 
 
     @NonNull
-    private Callback<HashMap<String,Object>> eedaCallback() {
+    private Callback<HashMap<String,Object>> eedaCallback(ListFragment fragment) {
+
         return new Callback<HashMap<String,Object>>() {
             @Override
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                 // The network call was a success and we got a response
                 Log.d(TAG, "server contacted at: " + call.request().url());
                 HashMap<String,Object> json = response.body();
-
                 /**
                  *  横幅广告
                  */
-                ArrayList<Map> bannerList =  (ArrayList<Map>)json.get("BANNERLIST");
-                LinkedList<String> url_maps = new LinkedList<String>();
-                for(Map<String, Object> list: bannerList){
-                    String ad_index = list.get("AD_INDEX").toString();
-                    String user_id = list.get("USER_ID").toString();
-                    String product_id = list.get("PRODUCT_ID").toString();
-                    String photo = list.get("PHOTO").toString();
-
-                    url_maps.add(MainActivity.HOST_URL+"upload/"+photo);
-                }
-                for (String url:url_maps) {
-                    TextSliderView textSlider = new TextSliderView(getActivity());
-                    textSlider.description("").image(url);
-
-                    slider.addSlider(textSlider);
-                }
+                buildSlides(json);
 
                 /**
                  * 促销列表
@@ -195,6 +189,29 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
         };
     }
 
+    private void buildSlides(HashMap<String, Object> json) {
+        ArrayList<Map> bannerList =  (ArrayList<Map>)json.get("BANNERLIST");
+        LinkedList<String> url_maps = new LinkedList<String>();
+        TextSliderView textSlider = new TextSliderView(getActivity());
+        for(Map<String, Object> list: bannerList){
+            String ad_index = list.get("AD_INDEX").toString();
+            Long user_id = ((Double)list.get("USER_ID")).longValue();
+            String product_id = list.get("PRODUCT_ID").toString();
+            String photo = list.get("PHOTO").toString();
+
+            String url = MainActivity.HOST_URL+"upload/"+photo;
+            textSlider.description("").image(url).setOnSliderClickListener(this);
+
+            //设置业务数据
+            textSlider.bundle(new Bundle());
+            textSlider.getBundle()
+                    .putLong("USER_ID", user_id);//商家ID
+            slider.addSlider(textSlider);
+        }
+
+
+    }
+
     public interface EedaService {
         @GET("/app/{type}/{methord}")
 
@@ -204,8 +221,15 @@ public class HomeFragment extends ListFragment implements BaseSliderView.OnSlide
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(getActivity().getBaseContext(), "ddd", Toast.LENGTH_LONG).show();
-        //Toast.makeText(this.getActivity(),slider.getBundle().get("extra") + "",Toast.LENGTH_SHORT).show();
+
+        Long user_id = (Long)slider.getBundle().get("USER_ID");
+
+        //商家页面
+        Intent intent = new Intent(this.getActivity(), ShopActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("user_id", user_id);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 }

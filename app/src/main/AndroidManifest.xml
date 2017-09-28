@@ -32,6 +32,14 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ask.AskQuestionActivity">
         </activity>
+        <activity android:name=".shop.ShopActivity">
+        </activity>
+        <activity android:name=".shop.ShopInfoActivity">
+        </activity>
+        <activity android:name=".shop.ProductActivity">
+        </activity>
+        <activity android:name=".bestCase.CaseDetailActivity">
+        </activity>
     </application>
 
 </manifest>

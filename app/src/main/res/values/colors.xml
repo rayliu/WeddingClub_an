@@ -40,6 +40,6 @@
     <color name="default_bg_color">#f0f0f0</color>
     <color name="room_edit_bg">#f8f8f8</color>
     <color name="title_bg_color">#fafafa</color>
-    <color name="mine_follower_bg">#1f000000</color>
+    <color name="mine_follower_bg">#dde6ea</color>
     <color name="line_bg">#e5e5e5</color>
 </resources>
