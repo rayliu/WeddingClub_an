@@ -5,29 +5,57 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:id="@+id/home_list_cu_item"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_weight="18"
+        android:background="@color/iron"
+        android:visibility="visible"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >
 
         <LinearLayout
             android:id="@+id/bestLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_weight="18"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/best_img"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_weight="0"
-                app:srcCompat="@drawable/banner_pic"
-                android:cropToPadding="false"/>
+                android:cropToPadding="false"
+                app:srcCompat="@drawable/banner_pic"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="111dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/girl"/>
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                app:srcCompat="@drawable/ic_splash_default"/>
         </LinearLayout>
 
     </LinearLayout>

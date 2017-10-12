@@ -2,6 +2,8 @@
 
 package com.eeda123.wedding.bestCase;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.ask.questionDetail.QuestionAnswerActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,10 +42,20 @@ public class BestFragment extends Fragment {
     private BestItemArrayAdapter mAdapter;
     List<BestCaseModel> mItems ;
 
+
+    public static Intent newIntent(Context context, int questionId) {
+        Intent intent = new Intent(context, CaseDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("question_id", questionId);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
     public static BestFragment newInstance() {
         BestFragment fragment = new BestFragment();
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

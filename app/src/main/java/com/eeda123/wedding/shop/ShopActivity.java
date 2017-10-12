@@ -1,5 +1,6 @@
 package com.eeda123.wedding.shop;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,10 +26,10 @@ public class ShopActivity extends AppCompatActivity  {
 
 
     @BindView(R.id.shop_text) TextView shopText;
-    @BindView(R.id.shop_text_arrow) TextView shopTextArrow;
-    @BindView(R.id.product1_arrow) TextView product1Arrow;
-    @BindView(R.id.product2_arrow) TextView product2Arrow;
-    @BindView(R.id.product3_arrow) TextView product3Arrow;
+   // @BindView(R.id.shop_text_arrow) TextView shopTextArrow;
+//    @BindView(R.id.product1_arrow) TextView product1Arrow;
+//    @BindView(R.id.product2_arrow) TextView product2Arrow;
+//    @BindView(R.id.product3_arrow) TextView product3Arrow;
 
     @BindView(R.id.case1) ImageView case1;
     @BindView(R.id.case2) ImageView case2;
@@ -49,17 +50,17 @@ public class ShopActivity extends AppCompatActivity  {
 
     }
 
-    @OnClick({R.id.shop_text, R.id.shop_text_arrow})
+    @OnClick({R.id.shop_text})
     public void onShopClick(View view) {
         Intent intent = new Intent(this, ShopInfoActivity.class);
         startActivity(intent);
     }
 
-    @OnClick({R.id.product1_arrow, R.id.product2_arrow, R.id.product3_arrow})
-    public void onProduct1_arrowClick(View view) {
-        Intent intent = new Intent(this, ProductActivity.class);
-        startActivity(intent);
-    }
+//    @OnClick({R.id.product1_arrow, R.id.product2_arrow, R.id.product3_arrow})
+//    public void onProduct1_arrowClick(View view) {
+//        Intent intent = new Intent(this, ProductActivity.class);
+//        startActivity(intent);
+//    }
 
     @OnClick({R.id.case1, R.id.case2, R.id.case3})
     public void onCase_Click(View view) {
@@ -76,5 +77,14 @@ public class ShopActivity extends AppCompatActivity  {
                 finish();
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    //提供给holder使用
+    public static Intent newIntent(Context context, int shopId) {
+        Intent intent = new Intent(context, ShopActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("user_id", shopId);
+        intent.putExtras(bundle);
+        return intent;
     }
 }

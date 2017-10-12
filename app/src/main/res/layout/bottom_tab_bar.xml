@@ -4,12 +4,14 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/title_bg_color">
+
     <RadioGroup
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:checkedButton="@+id/rbHome">
+        android:background="@drawable/nav_bar_bg"
+        android:checkedButton="@+id/rbHome"
+        android:orientation="horizontal"
+        android:padding="6dp">
 
         <RadioButton
             android:id="@+id/rbHome"

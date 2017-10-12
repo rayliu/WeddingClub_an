@@ -2,6 +2,7 @@
 
 package com.eeda123.wedding.ask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.eeda123.wedding.LoginActivity;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.ask.questionDetail.QuestionAnswerActivity;
+import com.eeda123.wedding.shop.ShopActivity;
 
 
 import java.util.ArrayList;
@@ -32,6 +35,15 @@ public class AskFragment extends Fragment {
         AskFragment fragment = new AskFragment();
         return fragment;
     }
+
+    public static Intent newIntent(Context context, int questionId) {
+        Intent intent = new Intent(context, QuestionAnswerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("question_id", questionId);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,6 +8,11 @@
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,6 +44,21 @@
         <activity android:name=".shop.ProductActivity">
         </activity>
         <activity android:name=".bestCase.CaseDetailActivity">
+        </activity>
+        <activity android:name=".category.CategoryActivity">
+        </activity>
+        <activity android:name=".ask.questionDetail.QuestionAnswerActivity">
+        </activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:label="@string/title_activity_login">
+        </activity>
+        <activity android:name=".login.RegisterActivity"
+                  android:label="@string/title_activity_register">
+        </activity>
+        <activity android:name=".login.UserProtocolActivity">
+        </activity>
+        <activity android:name=".login.ForgetPwdActivity">
         </activity>
     </application>
 

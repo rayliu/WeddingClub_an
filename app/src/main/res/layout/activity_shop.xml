@@ -119,13 +119,12 @@
                 android:layout_weight="1"
                 android:text="珠海市香洲区紫荆路1232号"/>
 
-            <TextView
-                android:id="@+id/textView13"
+            <ImageView
+                android:id="@+id/imageView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=">"
-                android:textAlignment="textEnd"/>
+                app:srcCompat="@drawable/righticon"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -147,13 +146,11 @@
                 android:layout_weight="1.07"
                 android:text="商铺介绍"/>
 
-            <TextView
-                android:id="@+id/shop_text_arrow"
+            <ImageView
+                android:id="@+id/imageView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.41"
-                android:text=">"
-                android:textAlignment="textEnd"/>
+                app:srcCompat="@drawable/righticon"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -229,14 +226,12 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/bangumi_home_ic_season_1"/>
 
-            <TextView
-                android:id="@+id/product1_arrow"
+            <ImageView
+                android:id="@+id/imageView16"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1.00"
-                android:paddingRight="5dp"
-                android:text=">"
-                android:textAlignment="viewEnd"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                app:srcCompat="@drawable/righticon"/>
 
         </LinearLayout>
 

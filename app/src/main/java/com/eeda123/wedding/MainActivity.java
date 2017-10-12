@@ -1,9 +1,11 @@
 
 package com.eeda123.wedding;
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
@@ -20,7 +22,7 @@ import butterknife.OnClick;
 //import com.truiton.bottomnavigation.R;
 
 public class MainActivity extends AppCompatActivity{
-    public static String HOST_URL = "http://192.168.0.105:8080/";
+    public static String HOST_URL = "http://192.168.0.195:8080/";
 //    public static String HOST_URL = "http://192.168.0.4:8080/";
 //    public static String HOST_URL = "https://wms.eeda123.com/";
     int selectedId = 0;
@@ -48,6 +50,20 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //返回箭头（默认不显示）
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            // 使左上角图标(系统)是否显示
+            actionBar.setDisplayShowHomeEnabled(false);
+            // 显示标题
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowCustomEnabled(true);
+
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); //Enable自定义的View
+            actionBar.setCustomView(R.layout.header_bar);//设置自定义的布局：header_bar
+        }
 
 //        getSupportActionBar().hide();//隐藏actionBar
 //        登录页面

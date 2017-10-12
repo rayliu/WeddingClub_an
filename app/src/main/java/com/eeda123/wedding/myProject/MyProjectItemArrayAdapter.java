@@ -21,6 +21,7 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
     private List<MyProjectItemModel> mAskItemModels;
     private FragmentActivity activity;
 
+
     public MyProjectItemArrayAdapter(List<MyProjectItemModel> askItemModels, FragmentActivity activity) {
         this.mAskItemModels = askItemModels;
         this.activity = activity;
@@ -31,13 +32,13 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
         View view = layoutInflater
                 .inflate(R.layout.my_project_list_item, parent, false);
-        return new MyProjectItemHolder(view);
+        return new MyProjectItemHolder(this, view);
     }
 
     @Override
     public void onBindViewHolder(MyProjectItemHolder holder, int position) {
         MyProjectItemModel askItem = mAskItemModels.get(position);
-        holder.bindAskItem(askItem);
+        holder.bindAskItem(askItem, position);
     }
 
     @Override

@@ -14,36 +14,46 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/project_header"
             android:padding="5dp"
-            android:text="结婚日期: 2017-12-12       倒计时56天"
-            android:textSize="24sp"/>
+            android:text=" 倒计时56天"
+            android:textColor="@color/accent"
+            android:textSize="18sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnAsk"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/sortByProject"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
                 android:text="按项目排列"
-                android:textColor="@color/accent"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="18sp"/>
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
+            <View
+                android:id="@+id/main_div_line"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                android:text="按时间"
-                android:textColor="@color/accent"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/sortByTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="按时间排列"
+                android:textAlignment="center"
+                android:textColor="@color/base"
                 android:textSize="18sp"/>
+
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

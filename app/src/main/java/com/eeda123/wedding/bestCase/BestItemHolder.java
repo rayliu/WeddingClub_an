@@ -1,5 +1,7 @@
 package com.eeda123.wedding.bestCase;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -40,8 +42,8 @@ public class BestItemHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @Override
     public void onClick(View v) {
-//        Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
-//        startActivity(intent);
-        Log.d(TAG, "onClick: AskItemHolder item");
+        Context c = v.getContext();
+        Intent intent = BestFragment.newIntent(c, 111);//case id
+        c.startActivity(intent);
     }
 }

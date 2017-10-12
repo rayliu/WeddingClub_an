@@ -1,5 +1,6 @@
 package com.eeda123.wedding.ask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +16,7 @@ import com.eeda123.wedding.R;
  */
 
 public class AskItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    private String TAG = "AskItemHolder";
+    private String TAG = "CategoryItemHolder";
     private AskItemModel askItemModel;
 
     private TextView mTitleTextView;
@@ -43,8 +44,8 @@ public class AskItemHolder extends RecyclerView.ViewHolder implements View.OnCli
 
     @Override
     public void onClick(View v) {
-//        Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
-//        startActivity(intent);
-        Log.d(TAG, "onClick: AskItemHolder item");
+        Context context = v.getContext();
+        Intent intent = AskFragment.newIntent(context, 1);
+        context.startActivity(intent);
     }
 }

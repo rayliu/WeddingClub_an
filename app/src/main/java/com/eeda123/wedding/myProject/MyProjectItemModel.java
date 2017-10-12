@@ -5,22 +5,13 @@ package com.eeda123.wedding.myProject;
  */
 
 public class MyProjectItemModel {
-    private String strCreateTime;
 
-    public String getStrCreateTime() {
-        return strCreateTime;
+    public String getIntCount() {
+        return intCount;
     }
 
-    public void setStrCreateTime(String strCreateTime) {
-        this.strCreateTime = strCreateTime;
-    }
-
-    public int getIntAnswerCount() {
-        return intAnswerCount;
-    }
-
-    public void setIntAnswerCount(int intAnswerCount) {
-        this.intAnswerCount = intAnswerCount;
+    public void setIntCount(String intCount) {
+        this.intCount = intCount;
     }
 
     public String getStrTitle() {
@@ -31,13 +22,18 @@ public class MyProjectItemModel {
         this.strTitle = strTitle;
     }
 
-    private int intAnswerCount;
-    private String strTitle;
+    public int getIntSeq() {
+        return intSeq;
+    }
 
-    public MyProjectItemModel(String strTitle, String strCreateTime, int intAnswerCount){
+    private String intCount;
+    private String strTitle;
+    private int intSeq;
+
+    public MyProjectItemModel(String strTitle, String intCount, int seq){
         this.strTitle = strTitle;
-        this.strCreateTime = strCreateTime;
-        this.intAnswerCount = intAnswerCount;
+        this.intCount = intCount;
+        this.intSeq = seq;
     }
 
 
