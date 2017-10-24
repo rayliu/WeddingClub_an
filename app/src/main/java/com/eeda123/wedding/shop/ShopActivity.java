@@ -37,6 +37,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.img_back_arrow;
 
 
 public class ShopActivity extends AppCompatActivity  {
@@ -54,6 +55,11 @@ public class ShopActivity extends AppCompatActivity  {
     TextView action_bar_title;
     @BindView(R.id.cityChange)
     LinearLayout cityChange;
+    @BindView(R.id.img_back_arrow)
+    ImageView img_back_arrow;
+    @BindView(R.id.back_arrow)
+    LinearLayout back_arrow;
+
     private Long user_id;
 
     @Override
@@ -78,6 +84,7 @@ public class ShopActivity extends AppCompatActivity  {
         ButterKnife.bind(this);
         action_bar_title.setText("商铺展示");
         cityChange.setVisibility(View.GONE);
+        img_back_arrow.setVisibility(View.VISIBLE);
 
         shopName = (TextView) findViewById(R.id.shopName);
         categoryName = (TextView) findViewById(R.id.categoryName);
@@ -90,6 +97,10 @@ public class ShopActivity extends AppCompatActivity  {
         getData();
     }
 
+    @OnClick({R.id.back_arrow})
+    public void onBack_arrowClick(View view) {
+        finish();
+    }
 
     private void getData() {
         Gson gson = new GsonBuilder()
