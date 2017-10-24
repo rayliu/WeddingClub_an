@@ -13,9 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.eeda123.wedding.order.AliexpressOrderFragment;
-import com.eeda123.wedding.order.AmazonOrderFragment;
-import com.eeda123.wedding.order.EbayOrderFragment;
 
 
 import java.util.ArrayList;
@@ -63,9 +60,6 @@ public class OrderFragment extends Fragment {
         public DemoCollectionPagerAdapter(FragmentManager fm) {
             super(fm);
             fragmentList = new ArrayList<Fragment>(3);
-            fragmentList.add(new EbayOrderFragment());
-            fragmentList.add(new AmazonOrderFragment());
-            fragmentList.add(new AliexpressOrderFragment());
         }
 
         @Override

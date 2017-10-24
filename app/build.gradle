@@ -28,14 +28,12 @@ dependencies {
     // Load Images
 
     // GSON with Retrofit
-    
-    
 
     //首页滚动条 https://github.com/daimajia/AndroidImageSlider
     //compile "com.android.support:support-v4:+"
 
     //compile 'com.squareup.picasso:picasso:2.3.2'
-    
+
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:support-v4:25.1.0'

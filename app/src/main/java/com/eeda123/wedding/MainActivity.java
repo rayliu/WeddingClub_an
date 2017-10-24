@@ -2,17 +2,20 @@
 package com.eeda123.wedding;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.eeda123.wedding.ask.AskFragment;
 import com.eeda123.wedding.bestCase.BestFragment;
+import com.eeda123.wedding.home.CityChangeActivity;
 import com.eeda123.wedding.myProject.MyProjectFragment;
 
 import butterknife.BindView;
@@ -22,7 +25,7 @@ import butterknife.OnClick;
 //import com.truiton.bottomnavigation.R;
 
 public class MainActivity extends AppCompatActivity{
-    public static String HOST_URL = "http://192.168.0.195:8080/";
+    public static String HOST_URL = "http://192.168.0.106:8080/";
 //    public static String HOST_URL = "http://192.168.0.4:8080/";
 //    public static String HOST_URL = "https://wms.eeda123.com/";
     int selectedId = 0;
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity{
     @BindView(R.id.rbMe)
     RadioButton rbMe;
 
+    @BindView(R.id.cityChange)
+    LinearLayout cityChange;
+
     HomeFragment homeFragment;
     AskFragment askFragment;
     BestFragment bestFragment;
@@ -49,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
             actionBar.setCustomView(R.layout.header_bar);//设置自定义的布局：header_bar
         }
 
+        ButterKnife.bind(this);
 //        getSupportActionBar().hide();//隐藏actionBar
 //        登录页面
 //        Intent intent = new Intent(this, LoginActivity.class);
@@ -84,6 +91,12 @@ public class MainActivity extends AppCompatActivity{
             super.onBackPressed();
         }
 
+    }
+
+    @OnClick({R.id.cityChange})
+    public void onCityClick(View view) {
+        Intent intent = new Intent(this, CityChangeActivity.class);
+        startActivity(intent);
     }
 
     @OnClick({R.id.rbHome, R.id.rbAsk, R.id.rbBest, R.id.rbProject, R.id.rbMe})

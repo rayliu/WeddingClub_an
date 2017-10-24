@@ -31,10 +31,20 @@ public class AskItemModel {
         this.strTitle = strTitle;
     }
 
+    public int getIntQuestionId() {
+        return intQuestionId;
+    }
+
+    public void setIntQuestionId(int intQuestionId) {
+        this.intQuestionId = intQuestionId;
+    }
+
     private int intAnswerCount;
     private String strTitle;
+    private int intQuestionId;
 
-    public AskItemModel(String strTitle, String strCreateTime, int intAnswerCount){
+    public AskItemModel(int intQuestionId ,String strTitle, String strCreateTime, int intAnswerCount){
+        this.intQuestionId = intQuestionId;
         this.strTitle = strTitle;
         this.strCreateTime = strCreateTime;
         this.intAnswerCount = intAnswerCount;

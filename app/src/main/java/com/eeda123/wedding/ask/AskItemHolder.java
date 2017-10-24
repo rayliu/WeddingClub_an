@@ -2,11 +2,8 @@ package com.eeda123.wedding.ask;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.eeda123.wedding.R;
@@ -45,7 +42,7 @@ public class AskItemHolder extends RecyclerView.ViewHolder implements View.OnCli
     @Override
     public void onClick(View v) {
         Context context = v.getContext();
-        Intent intent = AskFragment.newIntent(context, 1);
+        Intent intent = AskFragment.newIntent(context, this.askItemModel.getIntQuestionId(),this.askItemModel.getStrTitle(),this.askItemModel.getStrCreateTime(),this.askItemModel.getIntAnswerCount());
         context.startActivity(intent);
     }
 }
