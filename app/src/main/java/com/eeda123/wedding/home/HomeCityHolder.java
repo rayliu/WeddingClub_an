@@ -1,5 +1,6 @@
 package com.eeda123.wedding.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,10 @@ import android.widget.TextView;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.shop.ShopActivity;
 
+import static android.app.Activity.RESULT_OK;
 import static com.eeda123.wedding.R.id.tvDesc;
+import static com.eeda123.wedding.R.id.view;
+import static java.security.AccessController.getContext;
 
 /**
  * Created by a13570610691 on 2017/3/22.
@@ -39,6 +43,7 @@ public class HomeCityHolder extends RecyclerView.ViewHolder implements View.OnCl
     @Override
     public void onClick(View v) {
         //返回mainActivity
-        
+        CityChangeActivity host = (CityChangeActivity) v.getContext();
+        host.onCityClick(model);
     }
 }

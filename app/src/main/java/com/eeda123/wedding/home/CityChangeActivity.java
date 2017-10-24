@@ -1,5 +1,6 @@
 package com.eeda123.wedding.home;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eeda123.wedding.R;
 
@@ -17,6 +19,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.attr.host;
 
 
 public class CityChangeActivity extends AppCompatActivity {
@@ -75,5 +79,16 @@ public class CityChangeActivity extends AppCompatActivity {
         }
     }
 
-
+    public void onCityClick(HomeCityModel model){
+//        Toast.makeText(this,
+//                model.getStrName() + " 被选择!", Toast.LENGTH_SHORT)
+//                .show();
+        Intent intent = new Intent();
+        Bundle b = new Bundle();
+        intent.putExtra("cityCode", model.getStrCode());
+        intent.putExtra("cityName", model.getStrName());
+        intent.putExtras(b);
+        setResult(RESULT_OK, intent); //intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle
+        finish();//此处一定要调用finish()方法
+    }
 }

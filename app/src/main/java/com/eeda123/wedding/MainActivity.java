@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eeda123.wedding.ask.AskFragment;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity{
 
     @BindView(R.id.cityChange)
     LinearLayout cityChange;
+
+    @BindView(R.id.city_name)
+    TextView city_name;
 
     HomeFragment homeFragment;
     AskFragment askFragment;
@@ -96,7 +100,22 @@ public class MainActivity extends AppCompatActivity{
     @OnClick({R.id.cityChange})
     public void onCityClick(View view) {
         Intent intent = new Intent(this, CityChangeActivity.class);
-        startActivity(intent);
+        //这里采用startActivityForResult来做跳转，此处的0为一个依据，可以写其他的值，但一定要>=0
+        startActivityForResult(intent, 0);
+    }
+
+    //重写onActivityResult方法，用来接收B回传的数据
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case RESULT_OK:
+                Bundle b=data.getExtras(); //data为B中回传的Intent
+                String cityName=b.getString("cityName");//str即为回传的值
+                city_name.setText(cityName);
+                break;
+            default:
+                break;
+        }
     }
 
     @OnClick({R.id.rbHome, R.id.rbAsk, R.id.rbBest, R.id.rbProject, R.id.rbMe})
