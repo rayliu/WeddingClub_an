@@ -26,7 +26,7 @@ import butterknife.OnClick;
 //import com.truiton.bottomnavigation.R;
 
 public class MainActivity extends AppCompatActivity{
-    public static String HOST_URL = "http://192.168.0.103:8080/";
+    public static String HOST_URL = "http://192.168.0.105:8080/";
 //    public static String HOST_URL = "http://192.168.0.4:8080/";
 //    public static String HOST_URL = "https://wms.eeda123.com/";
     int selectedId = 0;
@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity{
     @BindView(R.id.cityChange)
     LinearLayout cityChange;
 
+    @BindView(R.id.action_bar_title)
+    TextView action_bar_title;
     @BindView(R.id.city_name)
     TextView city_name;
 
@@ -122,18 +124,23 @@ public class MainActivity extends AppCompatActivity{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rbHome:
+                action_bar_title.setText("婚淘品");
                 showHomeFragment();
                 break;
             case R.id.rbAsk:
+                action_bar_title.setText("婚礼问问");
                 showAskFragment();
                 break;
             case R.id.rbBest:
+                action_bar_title.setText("精选婚礼");
                 showBestFragment();
                 break;
             case R.id.rbProject:
+                action_bar_title.setText("筹备项目");
                 showMyProjectFragment();
                 break;
             case R.id.rbMe:
+                action_bar_title.setText("个人中心");
                 showMineFragment();
                 break;
         }

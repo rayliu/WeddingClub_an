@@ -181,8 +181,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private void buildSlides(HashMap<String, Object> json) {
         ArrayList<Map> bannerList =  (ArrayList<Map>)json.get("BANNERLIST");
         LinkedList<String> url_maps = new LinkedList<String>();
-        TextSliderView textSlider = new TextSliderView(getActivity());
+        TextSliderView textSlider = null;
+
         for(Map<String, Object> list: bannerList){
+            textSlider = new TextSliderView(getActivity());
             String ad_index = list.get("AD_INDEX").toString();
             Long user_id = ((Double)list.get("USER_ID")).longValue();
             String product_id = list.get("PRODUCT_ID").toString();
