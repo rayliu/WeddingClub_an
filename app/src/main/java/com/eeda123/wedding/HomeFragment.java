@@ -204,7 +204,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private void buildCuList(ArrayList<Map> cuList) {
         mItems = new LinkedList<HomeCuItemModel>();
         for(Map<String, Object> list: cuList){
-            int shop_id = Integer.valueOf(list.get("USER_ID").toString());
+            int userId = Integer.valueOf(list.get("USER_ID").toString());
             String type = "["+list.get("TRADE_TYPE").toString()+"]";
             String compnay_name = list.get("COMPNAY_NAME").toString();
             String begin_date = list.get("BEGIN_DATE").toString();
@@ -212,7 +212,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             String title = list.get("TITLE").toString();
             String content = list.get("CONTENT").toString();
 
-            HomeCuItemModel model = new HomeCuItemModel(type, " "+compnay_name+":"+begin_date+"~"+end_date+"促销活动:"+ title, shop_id);
+            HomeCuItemModel model = new HomeCuItemModel(type, " "+compnay_name+":"+begin_date+"~"+end_date+"促销活动:"+ title, userId);
 
             mItems.add(model);
         }

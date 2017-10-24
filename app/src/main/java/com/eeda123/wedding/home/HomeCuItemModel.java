@@ -7,12 +7,12 @@ package com.eeda123.wedding.home;
 public class HomeCuItemModel {
     private String strType;
     private String strDesc;
-    private int shopId;
+    private int userId;
 
-    public HomeCuItemModel(String strType, String strDesc,int shopId){
+    public HomeCuItemModel(String strType, String strDesc,int userId){
         this.strType = strType;
         this.strDesc = strDesc;
-        this.shopId = shopId;
+        this.userId = userId;
     }
 
     public String getStrType() {
@@ -31,12 +31,12 @@ public class HomeCuItemModel {
         this.strDesc = strDesc;
     }
 
-    public int getShopId() {
-        return shopId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setShopId(int shopId) {
-        this.shopId = shopId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
 

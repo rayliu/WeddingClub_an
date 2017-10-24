@@ -40,7 +40,7 @@ public class HomeItemHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void onClick(View v) {
         Context context = v.getContext();
 
-        Intent intent = ShopActivity.newIntent(context, this.model.getShopId());;
+        Intent intent = ShopActivity.newIntent(context, this.model.getUserId());;
         context.startActivity(intent);
     }
 }
