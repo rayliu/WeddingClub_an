@@ -154,7 +154,7 @@ public class AskFragment extends Fragment {
             String title = list.get("TITLE").toString();
             String create_time = list.get("CREATE_TIME").toString();
 
-            mItems.add(new AskItemModel(id ,title, create_time, 3));
+            mItems.add(new AskItemModel(id ,title, create_time, 5));
         }
 
         if (mAdapter == null) {
