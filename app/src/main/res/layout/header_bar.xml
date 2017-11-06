@@ -22,7 +22,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="10dp"
                     android:visibility="gone"
-                    app:srcCompat="@drawable/back_arrow"/>
+                    app:srcCompat="@drawable/left_arrow_icon"/>
 
                 <ImageView
                     android:id="@+id/img_logo"

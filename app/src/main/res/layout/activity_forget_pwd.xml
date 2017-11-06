@@ -47,21 +47,6 @@
                     android:maxLines="1"
                     android:singleLine="true"/>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/valifyCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="验证码"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true"/>
-
-                </android.support.design.widget.TextInputLayout>
-
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -100,26 +85,53 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/email_sign_in_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/holo_blue_dark"
-                android:text="发送验证码"
-                android:textColor="@color/accent"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_height="51dp"
                 android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/valifyCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="验证码"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/send_validate_code_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:text="发送验证码"
+                    android:textColor="@color/accent"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/sign_up_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="确认"
+                android:textColor="@color/accent"
+                android:textSize="18sp"/>
+
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>
 

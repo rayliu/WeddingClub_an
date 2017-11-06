@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@android:color/holo_blue_dark"
+                android:background="@color/colorPrimary"
                 android:text="登录"
                 android:textColor="@color/accent"
                 android:textSize="18sp"
@@ -86,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="忘记密码?"
+                    android:textColor="@color/iron"
                     android:textSize="18sp"/>
 
                 <TextView
