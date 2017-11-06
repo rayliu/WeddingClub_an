@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,8 +20,10 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.R.attr.host;
+import static com.eeda123.wedding.R.id.img_back_arrow;
 
 
 public class CityChangeActivity extends AppCompatActivity {
@@ -36,6 +39,10 @@ public class CityChangeActivity extends AppCompatActivity {
 
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
+    @BindView(R.id.img_back_arrow)
+    ImageView img_back_arrow;
+    @BindView(R.id.back_arrow)
+    LinearLayout back_arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,7 @@ public class CityChangeActivity extends AppCompatActivity {
 
         listRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         cityChange.setVisibility(View.GONE);
+        img_back_arrow.setVisibility(View.VISIBLE);
         action_bar_title.setText("选择城市");
 
         mItems = new LinkedList<HomeCityModel>();
@@ -77,6 +85,11 @@ public class CityChangeActivity extends AppCompatActivity {
             mAdapter.setItems(mItems);
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @OnClick({R.id.back_arrow, R.id.img_back_arrow})
+    public void onBack_arrowClick(View view) {
+        finish();
     }
 
     public void onCityClick(HomeCityModel model){
