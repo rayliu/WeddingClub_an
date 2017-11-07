@@ -1,0 +1,285 @@
+package com.eeda123.wedding.category;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.PaintDrawable;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.eeda123.wedding.HomeFragment;
+import com.eeda123.wedding.R;
+import com.eeda123.wedding.shop.ShopActivity;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.R.id.list;
+import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.img_back_arrow;
+import static com.eeda123.wedding.R.id.view;
+
+
+public class CategoryActivity extends AppCompatActivity {
+
+    private CategoryItemArrayAdapter mAdapter;
+    private CategoryMenuItemArrayAdapter menuAdapter;
+    List<CategoryItemModel> mItems ;
+
+    List<CategoryMenuItemModel> menuItems ;
+
+    @BindView(R.id.list_recycler_view) RecyclerView listRecyclerView;
+    @BindView(R.id.menu_list_recycler_view) RecyclerView menuListRecyclerView;
+    @BindView(R.id.more) ImageView more_btn;
+//    @BindView(R.id.c1)
+//    @BindView(R.id.c2
+//    @BindView(R.id.c3)
+//    @BindView(R.id.c4)
+
+    @BindView(R.id.action_bar_title)
+    TextView action_bar_title;
+    @BindView(R.id.cityChange)
+    LinearLayout cityChange;
+    @BindView(R.id.img_back_arrow)
+    ImageView img_back_arrow;
+    @BindView(R.id.back_arrow)
+    LinearLayout back_arrow;
+
+    /**使用PopupWindow显示分类*/
+    private PopupWindow popupWindow;
+
+
+    public static Intent newIntent(Context context, int shopId) {
+        Intent intent = new Intent(context, ShopActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("user_id", shopId);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_category);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //返回箭头（默认不显示）
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            // 使左上角图标(系统)是否显示
+            actionBar.setDisplayShowHomeEnabled(false);
+            // 显示标题
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowCustomEnabled(true);
+
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); //Enable自定义的View
+            actionBar.setCustomView(R.layout.header_bar);//设置自定义的布局：header_bar
+        }
+        ButterKnife.bind(this);
+
+        action_bar_title.setText("分类");
+        cityChange.setVisibility(View.GONE);
+        img_back_arrow.setVisibility(View.VISIBLE);
+
+        listRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        menuListRecyclerView.setLayoutManager(linearLayoutManager);
+
+        initMenu();
+        initPopup();
+        getData();
+    }
+
+    private void initMenu() {
+        menuItems = new ArrayList<CategoryMenuItemModel>();
+        menuItems.add(new CategoryMenuItemModel("婚纱"));
+        menuItems.add(new CategoryMenuItemModel("影楼"));
+        menuItems.add(new CategoryMenuItemModel("婚策套餐"));
+        menuItems.add(new CategoryMenuItemModel("酒店"));
+        menuItems.add(new CategoryMenuItemModel("摄像"));
+        menuItems.add(new CategoryMenuItemModel("化妆"));
+        menuItems.add(new CategoryMenuItemModel("蜜月"));
+
+        if (menuAdapter == null) {
+            menuAdapter = new CategoryMenuItemArrayAdapter(menuItems, this);
+            menuListRecyclerView.setAdapter(menuAdapter);
+        } else {
+            menuAdapter.setItems(menuItems);
+            menuAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home://TODO: 返回按钮的默认id, 这里有问题
+                finish();
+            default:
+                finish();
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @OnClick({R.id.back_arrow})
+    public void onBack_arrowClick(View view) {
+        finish();
+    }
+
+    private void getData() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
+
+                Request request = original.newBuilder()
+                        .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                        .addHeader("Accept-Encoding", "gzip, deflate")
+                        .addHeader("Connection", "keep-alive")
+                        .addHeader("Accept", "*/*")
+                        .addHeader("Cookie", "add cookies here")
+                        .header("conditions", "hunli")
+                        .method(original.method(), original.body())
+                        .build();
+
+                return chain.proceed(request);
+            }
+        });
+
+        OkHttpClient client = httpClient.build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HOST_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .build();
+
+        HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
+
+        Call<HashMap<String, Object>> call = service.list("category","searchShopByType");
+
+        call.enqueue(eedaCallback());
+    }
+
+
+    @NonNull
+    private Callback<HashMap<String,Object>> eedaCallback() {
+        return new Callback<HashMap<String,Object>>() {
+            @Override
+            public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
+                // The network call was a success and we got a response
+                HashMap<String,Object> json = response.body();
+                shopList(json);
+
+            }
+
+
+            @Override
+            public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
+                // the network call was a failure
+                Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
+
+            }
+        };
+    }
+
+
+
+    private void shopList(HashMap<String,Object> json ){
+        ArrayList<Map> shopList =  (ArrayList<Map>)json.get("SHOPLIST");
+
+        mItems = new ArrayList<CategoryItemModel>();
+        String date= "时间: 2017-07-13 10:10:10";
+        String logoImg= "http://www.iwedclub.com/upload/bb.jpg";
+
+
+        for(Map<String, Object> list: shopList){
+            String company_name = list.get("COMPANY_NAME").toString();
+            String category_name = list.get("CATEGORY_NAME").toString();
+
+            mItems.add(new CategoryItemModel(company_name, date, 2, logoImg));
+        }
+
+
+
+        if (mAdapter == null) {
+            mAdapter = new CategoryItemArrayAdapter(mItems,this);
+            listRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.setItems(mItems);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+
+    @OnClick({R.id.more})
+    public void onMore_arrowClick(View view) {
+        if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(findViewById(R.id.main_div_line));
+//            popupWindow.setAnimationStyle(-1);
+            //背景变暗
+//            darkView.startAnimation(animIn);
+//            darkView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void initPopup() {
+        popupWindow = new PopupWindow(this);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.category_popup_layout, null);
+
+        popupWindow.setContentView(contentView);
+        popupWindow.setBackgroundDrawable(new PaintDrawable());
+        popupWindow.setFocusable(true);
+
+        popupWindow.setHeight(ScreenUtils.getScreenH(this) * 2 / 3);
+        popupWindow.setWidth(ScreenUtils.getScreenW(this));
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+//                darkView.startAnimation(animOut);
+//                darkView.setVisibility(View.GONE);
+//
+//                leftLV.setSelection(0);
+//                rightLV.setSelection(0);
+            }
+        });
+    }
+}
