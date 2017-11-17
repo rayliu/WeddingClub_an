@@ -7,6 +7,17 @@ package com.eeda123.wedding.category;
 public class CategoryItemModel {
     private String strCreateTime;
 
+
+    public Long getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Long shopId) {
+        this.shopId = shopId;
+    }
+
+    private Long shopId;
+
     public String getStrCreateTime() {
         return strCreateTime;
     }
@@ -44,11 +55,23 @@ public class CategoryItemModel {
 
     private String strShopLogoUrl;
 
-    public CategoryItemModel(String strTitle, String strCreateTime, int intAnswerCount, String strShopLogoUrl){
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    private String categoryName;
+
+    public CategoryItemModel(Long shopId, String strTitle, String strCreateTime, int intAnswerCount, String strShopLogoUrl, String categoryName){
+        this.shopId = shopId;
         this.strTitle = strTitle;
         this.strCreateTime = strCreateTime;
         this.intAnswerCount = intAnswerCount;
         this.strShopLogoUrl = strShopLogoUrl;
+        this.categoryName = categoryName;
     }
 
 

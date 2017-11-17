@@ -42,10 +42,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.id.list;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
-import static com.eeda123.wedding.R.id.img_back_arrow;
-import static com.eeda123.wedding.R.id.view;
 
 
 public class CategoryActivity extends AppCompatActivity {
@@ -59,10 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
     @BindView(R.id.list_recycler_view) RecyclerView listRecyclerView;
     @BindView(R.id.menu_list_recycler_view) RecyclerView menuListRecyclerView;
     @BindView(R.id.more) ImageView more_btn;
-//    @BindView(R.id.c1)
-//    @BindView(R.id.c2
-//    @BindView(R.id.c3)
-//    @BindView(R.id.c4)
+
 
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
@@ -75,12 +69,13 @@ public class CategoryActivity extends AppCompatActivity {
 
     /**使用PopupWindow显示分类*/
     private PopupWindow popupWindow;
+    private String category_name;
 
 
-    public static Intent newIntent(Context context, int shopId) {
+    public static Intent newIntent(Context context, Long shopId) {
         Intent intent = new Intent(context, ShopActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putLong("user_id", shopId);
+        bundle.putLong("shop_id", shopId);
         intent.putExtras(bundle);
         return intent;
     }
@@ -115,6 +110,11 @@ public class CategoryActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         menuListRecyclerView.setLayoutManager(linearLayoutManager);
+
+        //获取传过来的参数值
+        Bundle bundle = new Bundle();
+        bundle = this.getIntent().getExtras();
+        category_name = bundle.getString("category_name");
 
         initMenu();
         initPopup();
@@ -173,7 +173,7 @@ public class CategoryActivity extends AppCompatActivity {
                         .addHeader("Connection", "keep-alive")
                         .addHeader("Accept", "*/*")
                         .addHeader("Cookie", "add cookies here")
-                        .header("conditions", "hunli")
+                        .header("category_name", category_name)
                         .method(original.method(), original.body())
                         .build();
 
@@ -224,15 +224,32 @@ public class CategoryActivity extends AppCompatActivity {
         ArrayList<Map> shopList =  (ArrayList<Map>)json.get("SHOPLIST");
 
         mItems = new ArrayList<CategoryItemModel>();
-        String date= "时间: 2017-07-13 10:10:10";
         String logoImg= "http://www.iwedclub.com/upload/bb.jpg";
 
 
         for(Map<String, Object> list: shopList){
-            String company_name = list.get("COMPANY_NAME").toString();
-            String category_name = list.get("CATEGORY_NAME").toString();
+            Long shop_id = null;
+            String company_name = "";
+            String category_name = "";
+            String create_time = "";
+            String logo = "";
+            if( list.get("SHOP_ID") != null){
+                shop_id = ((Double)list.get("SHOP_ID")).longValue();
+            }
+            if( list.get("COMPANY_NAME") != null){
+                company_name = list.get("COMPANY_NAME").toString();
+            }
+            if( list.get("CATEGORY_NAME") != null){
+                category_name = list.get("CATEGORY_NAME").toString();
+            }
+            if( list.get("CREATE_TIME") != null){
+                create_time = list.get("CREATE_TIME").toString();
+            }
+            if( list.get("LOGO") != null){
+                logo = list.get("LOGO").toString();
+            }
 
-            mItems.add(new CategoryItemModel(company_name, date, 2, logoImg));
+            mItems.add(new CategoryItemModel(shop_id, company_name, create_time, 2, "http://www.iwedclub.com/upload/"+logo,category_name));
         }
 
 

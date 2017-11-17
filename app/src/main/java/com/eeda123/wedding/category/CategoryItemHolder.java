@@ -1,13 +1,10 @@
 package com.eeda123.wedding.category;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,14 +50,15 @@ public class CategoryItemHolder extends RecyclerView.ViewHolder implements View.
                 .into(mLogo);
         mShopName.setText(categoryItemModel.getStrTitle());
         mDesc1.setText(categoryItemModel.getStrCreateTime());
-        mDesc2.setText(String.valueOf(categoryItemModel.getIntAnswerCount())+" 人回答");
+        mDesc2.setText("影响力："+String.valueOf(categoryItemModel.getIntAnswerCount()));
+        mDesc3.setText("类别："+String.valueOf(categoryItemModel.getCategoryName()));
 
     }
 
     @Override
     public void onClick(View v) {
         Context context = v.getContext();
-        Intent intent = CategoryActivity.newIntent(context, 1);;
+        Intent intent = CategoryActivity.newIntent(context,mCategoryItemModel.getShopId());;
         context.startActivity(intent);
     }
 }
