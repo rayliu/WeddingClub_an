@@ -204,13 +204,14 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private void buildCuList(ArrayList<Map> cuList) {
         mItems = new LinkedList<HomeCuItemModel>();
         for(Map<String, Object> list: cuList){
-            int userId = Integer.valueOf(list.get("USER_ID").toString());
+            Long userId = ((Double)list.get("USER_ID")).longValue();
             String type = "["+list.get("TRADE_TYPE").toString()+"]";
             String compnay_name = list.get("COMPNAY_NAME").toString();
             String begin_date = list.get("BEGIN_DATE").toString();
             String end_date = list.get("END_DATE").toString();
             String title = list.get("TITLE").toString();
             String content = list.get("CONTENT").toString();
+
 
             HomeCuItemModel model = new HomeCuItemModel(type, " "+compnay_name+":"+begin_date+"~"+end_date+"促销活动:"+ title, userId);
 
@@ -244,55 +245,55 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         //商家页面
         Intent intent = new Intent(this.getActivity(), ShopActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putLong("user_id", user_id);
+        bundle.putLong("shop_id", user_id);
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
     @OnClick(R.id.c1_btn) void onC1BtnClick() {
-        //分类页面
-        goCategory("婚纱");
+        //分类页面  婚纱
+        goCategory("weddingDress");
     }
 
     @OnClick(R.id.c2_btn) void onC2BtnClick() {
-        //分类页面
-        goCategory("影楼");
+        //分类页面 影楼
+        goCategory("studio");
     }
 
     @OnClick(R.id.c3_btn) void onC3BtnClick() {
-        //分类页面
-        goCategory("婚策套餐");
+        //分类页面  婚策套餐
+        goCategory("marriagePackage");
     }
 
     @OnClick(R.id.c4_btn) void onC4BtnClick() {
-        //分类页面
-        goCategory("酒店");
+        //分类页面  酒店
+        goCategory("hotel");
     }
 
     @OnClick(R.id.c5_btn) void onC5BtnClick() {
-        //分类页面
-        goCategory("摄像");
+        //分类页面  摄像
+        goCategory("camera");
     }
 
     @OnClick(R.id.c6_btn) void onC6BtnClick() {
-        //分类页面
-        goCategory("化妆");
+        //分类页面  化妆
+        goCategory("makeup");
     }
 
     @OnClick(R.id.c7_btn) void onC7BtnClick() {
-        //分类页面
-        goCategory("蜜月");
+        //分类页面  蜜月
+        goCategory("honeymoon");
     }
 
     @OnClick(R.id.c8_btn) void onC8BtnClick() {
-        //分类页面
-        goCategory("更多");
+        //分类页面  更多
+        goCategory("mome");
     }
 
     private void goCategory(String cName) {
         Intent intent = new Intent(this.getActivity(), CategoryActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("category", cName);
+        bundle.putString("category_name", cName);
         intent.putExtras(bundle);
         startActivity(intent);
     }

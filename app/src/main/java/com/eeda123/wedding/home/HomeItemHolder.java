@@ -2,6 +2,7 @@ package com.eeda123.wedding.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -39,8 +40,11 @@ public class HomeItemHolder extends RecyclerView.ViewHolder implements View.OnCl
     @Override
     public void onClick(View v) {
         Context context = v.getContext();
+        Intent intent = new Intent(context, ShopActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("shop_id", model.getUserId());
+        intent.putExtras(bundle);
 
-        Intent intent = ShopActivity.newIntent(context, this.model.getUserId());;
         context.startActivity(intent);
     }
 }

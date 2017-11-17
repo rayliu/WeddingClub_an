@@ -7,9 +7,18 @@ package com.eeda123.wedding.home;
 public class HomeCuItemModel {
     private String strType;
     private String strDesc;
-    private int userId;
 
-    public HomeCuItemModel(String strType, String strDesc,int userId){
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    private Long userId;
+
+    public HomeCuItemModel(String strType, String strDesc,Long userId){
         this.strType = strType;
         this.strDesc = strDesc;
         this.userId = userId;
@@ -31,13 +40,7 @@ public class HomeCuItemModel {
         this.strDesc = strDesc;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
 
 
