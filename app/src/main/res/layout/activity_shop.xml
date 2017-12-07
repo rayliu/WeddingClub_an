@@ -194,7 +194,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/prod_line1">
 
             <ImageView
                 android:id="@+id/product1"
@@ -221,7 +222,7 @@
                     android:id="@+id/prod_price1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="8888元"
+                    android:text=""
                     android:layout_weight="0.2"/>
             </LinearLayout>
 
@@ -246,7 +247,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/prod_line2">
 
             <ImageView
                 android:id="@+id/product2"
@@ -273,7 +275,7 @@
                     android:id="@+id/prod_price2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="8888元"
+                    android:text=""
                     android:layout_weight="0.2"/>
             </LinearLayout>
 
@@ -299,7 +301,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/prod_line3">
 
             <ImageView
                 android:id="@+id/product3"
@@ -326,7 +329,7 @@
                     android:id="@+id/prod_price3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="8888元"
+                    android:text=""
                     android:layout_weight="0.2"/>
             </LinearLayout>
 

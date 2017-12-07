@@ -1,5 +1,6 @@
 package com.eeda123.wedding.shop;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.bestCase.CaseDetailActivity;
+import com.eeda123.wedding.product.ProductActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -57,6 +59,9 @@ public class ShopActivity extends AppCompatActivity  {
     @BindView(R.id.product1) ImageView product1;
     @BindView(R.id.product2) ImageView product2;
     @BindView(R.id.product3) ImageView product3;
+    @BindView(R.id.prod_line1) LinearLayout prod_line1;
+    @BindView(R.id.prod_line2) LinearLayout prod_line2;
+    @BindView(R.id.prod_line3) LinearLayout prod_line3;
     //case
     @BindView(R.id.case1) ImageView case1;
     @BindView(R.id.case2) ImageView case2;
@@ -175,13 +180,12 @@ public class ShopActivity extends AppCompatActivity  {
 
 
     private void shopList(HashMap<String,Object> json ){
-
-        //String title= "维多利亚比较好...";
-        //mItems = new ArrayList<AnswerItemModel>();
         ArrayList<Map> shopList =  (ArrayList<Map>)json.get("SHOPLIST");
         for(Map<String, Object> list: shopList){
             String shop_name = null;
             String category_name = null;
+            String c_address = null;
+            String about = null;
             if(list.get("COMPANY_NAME") != null){
                 shop_name = list.get("COMPANY_NAME").toString();
             }
@@ -189,8 +193,13 @@ public class ShopActivity extends AppCompatActivity  {
                 category_name = list.get("CATEGORY_NAME").toString();
             }
             String logo = list.get("LOGO").toString();
-            String c_address = list.get("ADDRESS").toString();
-            String about = list.get("ABOUT").toString();
+
+            if(list.get("ADDRESS") != null ){
+                c_address = list.get("ADDRESS").toString();
+            }
+            if(list.get("ABOUT") != null ){
+                about = list.get("ABOUT").toString();
+            }
 
             Picasso.with(this)
                     .load("http://www.iwedclub.com/upload/"+logo)
@@ -199,25 +208,23 @@ public class ShopActivity extends AppCompatActivity  {
             categoryName.setText("类别："+category_name);
             address.setText(c_address);
         }
-
-//
-//        if (mAdapter == null) {
-//            mAdapter = new AnswerItemArrayAdapter(mItems, this);
-//            listRecyclerView.setAdapter(mAdapter);
-//        } else {
-//            mAdapter.setItems(mItems);
-//            mAdapter.notifyDataSetChanged();
-//        }
     }
 
 
     private void productList(HashMap<String,Object> json ){
-        ArrayList<Map> shopList =  (ArrayList<Map>)json.get("PRODUCTLIST");
+        ArrayList<Map>  shopList  =  (ArrayList<Map>)json.get("PRODUCTLIST");
         int index = 1;
         for(Map<String, Object> list: shopList){
+            Long product_id = null;
             String cover = null;
             String product_name = null;
             String product_price = null;
+            if(list.get("ID") != null){
+                product_id  = ((Double)list.get("ID")).longValue();
+            }
+            if(list.get("COVER") != null){
+                cover = list.get("COVER").toString();
+            }
             if(list.get("COVER") != null){
                 cover = list.get("COVER").toString();
             }
@@ -232,15 +239,18 @@ public class ShopActivity extends AppCompatActivity  {
                 Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
                                     .into(product1);
                 prod_name1.setText(product_name);
+                prod_name1.setTag(product_id);
                 prod_price1.setText(product_price+" 元");
             }
             if(index == 2){
+                prod_name2.setTag(product_id);
                 Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
                         .into(product2);
                 prod_name2.setText(product_name);
                 prod_price2.setText(product_price+" 元");
             }
             if(index == 3){
+                prod_name3.setTag(product_id);
                 Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
                         .into(product3);
                 prod_name3.setText(product_name);
@@ -312,11 +322,46 @@ public class ShopActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
-//    @OnClick({R.id.product1_arrow, R.id.product2_arrow, R.id.product3_arrow})
-//    public void onProduct1_arrowClick(View view) {
-//        Intent intent = new Intent(this, ProductActivity.class);
-//        startActivity(intent);
-//    }
+    @OnClick({R.id.prod_line1})
+    public void onProduct1Click(View view) {
+        Long product_id = (Long)prod_name1.getTag();
+        if(product_id != null){
+            Context context = view.getContext();
+            Intent intent = new Intent(this, ProductActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("product_id", product_id);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        }
+
+
+    }
+
+    @OnClick({R.id.prod_line2})
+    public void onProduct2Click(View view) {
+        Long product_id = (Long)prod_name2.getTag();
+        if(product_id != null) {
+            Context context = view.getContext();
+            Intent intent = new Intent(this, ProductActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("product_id", product_id);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        }
+    }
+
+    @OnClick({R.id.prod_line3})
+    public void onProduct3Click(View view) {
+        Long product_id = (Long)prod_name3.getTag();
+        if(product_id != null) {
+            Context context = view.getContext();
+            Intent intent = new Intent(this, ProductActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("product_id", product_id);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        }
+    }
 
     @OnClick({R.id.case1, R.id.case2, R.id.case3})
     public void onCase_Click(View view) {
