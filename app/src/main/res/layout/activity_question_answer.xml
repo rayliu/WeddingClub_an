@@ -15,9 +15,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/question_list_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.94"
-            android:orientation="vertical">
+            android:layout_height="335dp"
+            android:orientation="vertical"
+            android:layout_weight="1.02">
 
         </android.support.v7.widget.RecyclerView>
 

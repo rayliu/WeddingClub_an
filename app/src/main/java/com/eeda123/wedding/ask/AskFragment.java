@@ -50,7 +50,7 @@ public class AskFragment extends Fragment {
         return fragment;
     }
 
-    public static Intent newIntent(Context context, int questionId, String title, String create_time, int count) {
+    public static Intent newIntent(Context context, Long questionId, String title, String create_time, int count) {
         Intent intent = new Intent(context, QuestionAnswerActivity.class);
         Bundle bundle = new Bundle();
         bundle.putLong("question_id", questionId);
@@ -149,10 +149,23 @@ public class AskFragment extends Fragment {
 
         mItems = new ArrayList<AskItemModel>();
         for(Map<String, Object> list: askList){
-            int id = Integer.parseInt(list.get("ID").toString());
-            String shop_name = list.get("SHOP_NAME").toString();
-            String title = list.get("TITLE").toString();
-            String create_time = list.get("CREATE_TIME").toString();
+            Long id = null;
+            String shop_name = null;
+            String title = null;
+            String create_time = null;
+
+            if(list.get("ID") != null){
+                id =  ((Double)list.get("ID")).longValue();
+            }
+            if(list.get("SHOP_NAME") != null){
+                shop_name = list.get("SHOP_NAME").toString();
+            }
+            if(list.get("TITLE") != null){
+                title = list.get("TITLE").toString();
+            }
+            if(list.get("CREATE_TIME") != null){
+                create_time = list.get("CREATE_TIME").toString();
+            }
 
             mItems.add(new AskItemModel(id ,title, create_time, 5));
         }
