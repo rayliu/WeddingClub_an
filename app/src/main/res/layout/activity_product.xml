@@ -25,10 +25,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/shop_logo"
+                    android:id="@+id/cover_photo"
                     android:layout_width="match_parent"
                     android:layout_height="210dp"
-                    app:srcCompat="@drawable/product"/>
+                    app:srcCompat="@drawable/bg"/>
 
             </LinearLayout>
 
@@ -39,11 +39,11 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="夏季裸价优惠3件组"
+                    android:text=""
                     android:textAlignment="center"
                     android:textSize="18sp"/>
 
@@ -192,12 +192,12 @@
                     android:textSize="18sp"/>
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/name2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingRight="5dp"
-                    android:text="夏季裸价优惠3件组"
+                    android:text=""
                     android:textAlignment="viewStart"/>
             </LinearLayout>
 
@@ -213,18 +213,24 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView20"
+                        android:id="@+id/unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4.02"
                         android:text="1套"/>
 
                     <TextView
-                        android:id="@+id/textView21"
+                        android:text="价格："
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="价格: 1999~面议"/>
+                        android:id="@+id/textView12"
+                        android:layout_weight="0.27"/>
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.77"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -241,25 +247,26 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="夏季裸价优惠3件组 夏季裸价优惠3件组夏季裸价优惠3件组 夏季裸价优惠3件组夏季裸价优惠3件组 夏季裸价优惠3件组"/>
+                    android:text=""/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imageView12"
-                        android:layout_width="match_parent"
-                        android:layout_height="210dp"
-                        android:layout_weight="0.60"
-                        app:srcCompat="@drawable/product"/>
+                    android:orientation="horizontal"
+                    android:id="@+id/imageView22">
 
                 </LinearLayout>
             </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/prod_recycler_view"
+                tools:listitem="@layout/product_list_item"
+                android:scrollbars="none"/>
 
             <Button
                 android:id="@+id/button11"

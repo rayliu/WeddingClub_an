@@ -37,7 +37,7 @@
         </activity>
         <activity android:name=".shop.ShopInfoActivity">
         </activity>
-        <activity android:name=".shop.ProductActivity">
+        <activity android:name=".product.ProductActivity">
         </activity>
         <activity android:name=".bestCase.CaseDetailActivity">
         </activity>
