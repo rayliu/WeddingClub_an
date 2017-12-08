@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/question_list_recycler_view"
@@ -27,7 +30,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/answerValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="18"
@@ -35,7 +38,7 @@
                 android:inputType="textMultiLine"/>
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/answerBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
