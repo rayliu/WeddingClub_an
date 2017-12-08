@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.home.CityChangeActivity;
 
 /**
  * Created by a13570610691 on 2017/3/22.
@@ -16,23 +17,28 @@ public class CategoryMenuItemHolder extends RecyclerView.ViewHolder implements V
     private String TAG = "CategoryMenuItemHolder";
     private CategoryMenuItemModel mCategoryMenuItemModel;
 
-    private TextView mName;
+
+    public TextView mCategoryName;
 
     public CategoryMenuItemHolder(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
 
-        mName = (TextView)
+        mCategoryName = (TextView)
                 itemView.findViewById(R.id.tvName);
     }
 
     public void bindItem(CategoryMenuItemModel model) {
         this.mCategoryMenuItemModel = model;
-        mName.setText(model.getStrName());
+        mCategoryName.setText(model.getStrName());
     }
 
     @Override
     public void onClick(View v) {
+        int index = getAdapterPosition();
+        //返回mainActivity
+        CategoryActivity host = (CategoryActivity) v.getContext();
+        host.onMenuClick(mCategoryMenuItemModel, index);
 
     }
 }

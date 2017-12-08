@@ -252,42 +252,42 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @OnClick(R.id.c1_btn) void onC1BtnClick() {
         //分类页面  婚纱
-        goCategory("weddingDress");
+        goCategory("婚纱");
     }
 
     @OnClick(R.id.c2_btn) void onC2BtnClick() {
         //分类页面 影楼
-        goCategory("studio");
+        goCategory("影楼");
     }
 
     @OnClick(R.id.c3_btn) void onC3BtnClick() {
         //分类页面  婚策套餐
-        goCategory("marriagePackage");
+        goCategory("婚策套餐");
     }
 
     @OnClick(R.id.c4_btn) void onC4BtnClick() {
         //分类页面  酒店
-        goCategory("hotel");
+        goCategory("酒店");
     }
 
     @OnClick(R.id.c5_btn) void onC5BtnClick() {
         //分类页面  摄像
-        goCategory("camera");
+        goCategory("摄像");
     }
 
     @OnClick(R.id.c6_btn) void onC6BtnClick() {
         //分类页面  化妆
-        goCategory("makeup");
+        goCategory("化妆");
     }
 
     @OnClick(R.id.c7_btn) void onC7BtnClick() {
         //分类页面  蜜月
-        goCategory("honeymoon");
+        goCategory("蜜月");
     }
 
     @OnClick(R.id.c8_btn) void onC8BtnClick() {
         //分类页面  更多
-        goCategory("mome");
+        goCategory("更多");
     }
 
     private void goCategory(String cName) {

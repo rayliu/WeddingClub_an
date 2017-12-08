@@ -19,6 +19,7 @@ import java.util.List;
 public class CategoryMenuItemArrayAdapter extends RecyclerView.Adapter<CategoryMenuItemHolder> {
     private List<CategoryMenuItemModel> models;
     private FragmentActivity activity;
+    public int clickIndex = 0;
 
     public CategoryMenuItemArrayAdapter(List<CategoryMenuItemModel> models, FragmentActivity activity) {
         this.models = models;
@@ -35,8 +36,14 @@ public class CategoryMenuItemArrayAdapter extends RecyclerView.Adapter<CategoryM
 
     @Override
     public void onBindViewHolder(CategoryMenuItemHolder holder, int position) {
+
         CategoryMenuItemModel askItem = models.get(position);
         holder.bindItem(askItem);
+        if(clickIndex == position){
+            holder.mCategoryName.setTextColor(activity.getResources().getColor(R.color.primary));
+        }else{
+            holder.mCategoryName.setTextColor(activity.getResources().getColor(R.color.monsoon));
+        }
     }
 
     @Override
@@ -47,4 +54,5 @@ public class CategoryMenuItemArrayAdapter extends RecyclerView.Adapter<CategoryM
     public void setItems(List<CategoryMenuItemModel> models) {
         this.models = models;
     }
+
 }

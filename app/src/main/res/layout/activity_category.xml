@@ -10,10 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,7 +25,7 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/menu_list_recycler_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
@@ -34,10 +36,9 @@
 
             <ImageView
                 android:id="@+id/more"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:layout_weight=".1"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/main_menu_icon8"/>
 
         </LinearLayout>

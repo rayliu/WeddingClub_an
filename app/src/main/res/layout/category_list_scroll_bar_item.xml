@@ -5,14 +5,15 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:id="@+id/catetory_list_scroll_bar_item"
               android:layout_width="80sp"
-              android:layout_height="wrap_content">
+              android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.49"
-        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         android:text="摄楼摄楼"
         android:textAlignment="center"/>
 

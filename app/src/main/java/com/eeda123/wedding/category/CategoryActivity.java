@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.shop.ShopActivity;
+import com.eeda123.wedding.util.EedaUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -42,11 +44,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.R.attr.host;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 
 public class CategoryActivity extends AppCompatActivity {
-
+    private static final String TAG = "CategoryActivity";
     private CategoryItemArrayAdapter mAdapter;
     private CategoryMenuItemArrayAdapter menuAdapter;
     List<CategoryItemModel> mItems ;
@@ -173,7 +176,7 @@ public class CategoryActivity extends AppCompatActivity {
                         .addHeader("Connection", "keep-alive")
                         .addHeader("Accept", "*/*")
                         .addHeader("Cookie", "add cookies here")
-                        .header("category_name", category_name)
+                        .header("category_name", EedaUtil.encodeHeadInfo(category_name))
                         .method(original.method(), original.body())
                         .build();
 
@@ -298,5 +301,12 @@ public class CategoryActivity extends AppCompatActivity {
 //                rightLV.setSelection(0);
             }
         });
+    }
+
+    public void onMenuClick(CategoryMenuItemModel model, int clickIndex){
+        menuAdapter.clickIndex =clickIndex;
+        menuAdapter.notifyDataSetChanged();
+        category_name = model.getStrName();
+        getData();
     }
 }
