@@ -2,9 +2,13 @@ package com.eeda123.wedding.ask.questionDetail;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +37,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.cityChange;
+import static com.eeda123.wedding.R.id.img_back_arrow;
 
 
 public class QuestionAnswerActivity extends AppCompatActivity {
@@ -48,6 +54,15 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     @BindView(R.id.answerValue)
     TextView answerValue;
 
+    @BindView(R.id.action_bar_title)
+    TextView action_bar_title;
+    @BindView(R.id.cityChange)
+    LinearLayout cityChange;
+    @BindView(R.id.img_back_arrow)
+    ImageView img_back_arrow;
+    @BindView(R.id.back_arrow)
+    LinearLayout back_arrow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,14 +75,34 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         title = bundle.getString("title");
         create_time = bundle.getString("create_time");
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //返回箭头（默认不显示）
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            // 使左上角图标(系统)是否显示
+            actionBar.setDisplayShowHomeEnabled(false);
+            // 显示标题
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowCustomEnabled(true);
+
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); //Enable自定义的View
+            actionBar.setCustomView(R.layout.header_bar);//设置自定义的布局：header_bar
+        }
         ButterKnife.bind(this);
+
+        action_bar_title.setText("问答");
+        cityChange.setVisibility(View.GONE);
+        img_back_arrow.setVisibility(View.VISIBLE);
 
         listRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         getData();
     }
 
-
+    @OnClick({R.id.back_arrow})
+    public void onBack_arrowClick(View view) {
+        finish();
+    }
 
     private void getData() {
         Gson gson = new GsonBuilder()
