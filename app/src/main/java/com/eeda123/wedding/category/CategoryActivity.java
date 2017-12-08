@@ -134,13 +134,32 @@ public class CategoryActivity extends AppCompatActivity {
         menuItems.add(new CategoryMenuItemModel("化妆"));
         menuItems.add(new CategoryMenuItemModel("蜜月"));
 
+        int index = 0;
+        switch(category_name){
+            case "婚纱": index=0;
+                break;
+            case "影楼": index=1;
+                break;
+            case "婚策套餐": index=2;
+                break;
+            case "酒店": index=3;
+                break;
+            case "摄像": index=4;
+                break;
+            case "化妆": index=5;
+                break;
+            case "蜜月": index=6;
+                break;
+        }
         if (menuAdapter == null) {
             menuAdapter = new CategoryMenuItemArrayAdapter(menuItems, this);
+            menuAdapter.clickIndex = index;
             menuListRecyclerView.setAdapter(menuAdapter);
         } else {
             menuAdapter.setItems(menuItems);
             menuAdapter.notifyDataSetChanged();
         }
+
     }
 
     @Override

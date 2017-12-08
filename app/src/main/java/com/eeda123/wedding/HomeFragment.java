@@ -287,7 +287,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @OnClick(R.id.c8_btn) void onC8BtnClick() {
         //分类页面  更多
-        goCategory("更多");
+        goCategory("婚纱");
     }
 
     private void goCategory(String cName) {
