@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
+import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -192,7 +193,7 @@ public class ProductActivity extends AppCompatActivity {
             }
 
             Picasso.with(this)
-                    .load("http://www.iwedclub.com/upload/" + p_cover)
+                    .load(MainActivity.HOST_URL+"upload/" + p_cover)
                     .into(cover_photo);
             name.setText(p_name);
             name2.setText(p_name);
@@ -217,7 +218,7 @@ public class ProductActivity extends AppCompatActivity {
                 prod_photo = list.get("PHOTO").toString();
             }
 
-            mItems.add(new ProductItemModel("http://www.iwedclub.com/upload/"+prod_photo));
+            mItems.add(new ProductItemModel(MainActivity.HOST_URL+"upload/"+prod_photo));
         }
 
         if (mAdapter == null) {

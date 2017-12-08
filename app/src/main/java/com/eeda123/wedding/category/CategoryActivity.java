@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
+import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.shop.ShopActivity;
 import com.eeda123.wedding.util.EedaUtil;
@@ -44,7 +44,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.attr.host;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 
@@ -271,7 +270,7 @@ public class CategoryActivity extends AppCompatActivity {
                 logo = list.get("LOGO").toString();
             }
 
-            mItems.add(new CategoryItemModel(shop_id, company_name, create_time, 2, "http://www.iwedclub.com/upload/"+logo,category_name));
+            mItems.add(new CategoryItemModel(shop_id, company_name, create_time, 2, MainActivity.HOST_URL+"upload/"+logo,category_name));
         }
 
 

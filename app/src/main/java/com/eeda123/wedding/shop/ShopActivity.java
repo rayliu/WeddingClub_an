@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
+import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.bestCase.CaseDetailActivity;
 import com.eeda123.wedding.product.ProductActivity;
@@ -202,7 +203,7 @@ public class ShopActivity extends AppCompatActivity  {
             }
 
             Picasso.with(this)
-                    .load("http://www.iwedclub.com/upload/"+logo)
+                    .load(MainActivity.HOST_URL+"upload/"+logo)
                     .into(shop_logo);
             shopName.setText(shop_name);
             categoryName.setText("类别："+category_name);
@@ -236,7 +237,7 @@ public class ShopActivity extends AppCompatActivity  {
             }
 
             if(index == 1){
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                                     .into(product1);
                 prod_name1.setText(product_name);
                 prod_name1.setTag(product_id);
@@ -244,14 +245,14 @@ public class ShopActivity extends AppCompatActivity  {
             }
             if(index == 2){
                 prod_name2.setTag(product_id);
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(product2);
                 prod_name2.setText(product_name);
                 prod_price2.setText(product_price+" 元");
             }
             if(index == 3){
                 prod_name3.setTag(product_id);
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(product3);
                 prod_name3.setText(product_name);
                 prod_price3.setText(product_price+" 元");
@@ -272,15 +273,15 @@ public class ShopActivity extends AppCompatActivity  {
 
 
             if(index == 1){
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case1);
             }
             if(index == 2){
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case2);
             }
             if(index == 3){
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case3);
             }
             index++;
@@ -299,15 +300,15 @@ public class ShopActivity extends AppCompatActivity  {
 
 
             if(index == 1){
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video1);
             }
             if(index == 2){
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video2);
             }
             if(index == 3){
-                Picasso.with(this).load("http://www.iwedclub.com/upload/"+cover)
+                Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video3);
             }
             index++;
