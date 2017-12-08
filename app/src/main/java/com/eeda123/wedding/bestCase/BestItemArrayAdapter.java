@@ -17,11 +17,11 @@ import java.util.List;
  */
 
 public class BestItemArrayAdapter extends RecyclerView.Adapter<BestItemHolder> {
-    private List<BestCaseModel> mAskItemModels;
+    private List<BestCaseModel> mBestItemModels;
     private FragmentActivity activity;
 
-    public BestItemArrayAdapter(List<BestCaseModel> askItemModels, FragmentActivity activity) {
-        this.mAskItemModels = askItemModels;
+    public BestItemArrayAdapter(List<BestCaseModel> bestItemModels, FragmentActivity activity) {
+        this.mBestItemModels = bestItemModels;
         this.activity = activity;
     }
 
@@ -35,16 +35,16 @@ public class BestItemArrayAdapter extends RecyclerView.Adapter<BestItemHolder> {
 
     @Override
     public void onBindViewHolder(BestItemHolder holder, int position) {
-        BestCaseModel askItem = mAskItemModels.get(position);
-        holder.bindAskItem(askItem);
+        BestCaseModel bestItem = mBestItemModels.get(position);
+        holder.bindAskItem(bestItem,activity);
     }
 
     @Override
     public int getItemCount() {
-        return mAskItemModels.size();
+        return mBestItemModels.size();
     }
 
     public void setItems(List<BestCaseModel> mAskItemModels) {
-        this.mAskItemModels = mAskItemModels;
+        this.mBestItemModels = mAskItemModels;
     }
 }

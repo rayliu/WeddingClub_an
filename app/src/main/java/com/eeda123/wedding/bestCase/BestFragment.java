@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.ask.questionDetail.QuestionAnswerActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -124,11 +123,41 @@ public class BestFragment extends Fragment {
                 LinkedList<String> url_maps = new LinkedList<String>();
                 mItems = new ArrayList<BestCaseModel>();
                 for(Map<String, Object> list: caseList){
-                    String id = list.get("ID").toString();
-                    String photo = list.get("PHOTO").toString();
+                    Long id = null;
+                    String cover = null;
+                    String title = null;
+                    String best_pic1 = null;
+                    String best_pic2 = null;
+                    if(list.get("ID") != null){
+                        id = ((Double)list.get("ID")).longValue();
+                    }
+                    if(list.get("COVER") != null){
+                        cover = MainActivity.HOST_URL+"upload/"+list.get("COVER").toString();
+                    }
+                    if(list.get("TITLE") != null){
+                        title = list.get("TITLE").toString();
+                    }
 
-                    url_maps.add(MainActivity.HOST_URL+"upload/"+photo);
-                    mItems.add(new BestCaseModel("title",MainActivity.HOST_URL+"upload/"+photo));
+                    //获取字表信息
+                    int index = 0;
+                    ArrayList<Map> itemList =  (ArrayList<Map>)list.get("ITEMLIST");
+                    for(Map<String, String> item: itemList){
+                        index++;
+                        if(index == 1){
+                            if(item.get("PHOTO") != null){
+                                best_pic1 = MainActivity.HOST_URL+"upload/"+item.get("PHOTO").toString();
+                            }
+                        }else if(index == 2){
+                            if(item.get("PHOTO") != null){
+                                best_pic2 = MainActivity.HOST_URL+"upload/"+item.get("PHOTO").toString();
+                            }
+                        } else{
+                            break;
+                        }
+                    }
+
+                    //url_maps.add(MainActivity.HOST_URL+"upload/"+photo);
+                    mItems.add(new BestCaseModel(cover,best_pic1,best_pic2));
                 }
 
                 if (mAdapter == null) {
