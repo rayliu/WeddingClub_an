@@ -15,13 +15,7 @@ public class AskItemModel {
         this.strCreateTime = strCreateTime;
     }
 
-    public int getIntAnswerCount() {
-        return intAnswerCount;
-    }
 
-    public void setIntAnswerCount(int intAnswerCount) {
-        this.intAnswerCount = intAnswerCount;
-    }
 
     public String getStrTitle() {
         return strTitle;
@@ -32,8 +26,15 @@ public class AskItemModel {
     }
 
 
+    public String getAnswerCount() {
+        return answerCount;
+    }
 
-    private int intAnswerCount;
+    public void setAnswerCount(String answerCount) {
+        this.answerCount = answerCount;
+    }
+
+    private String answerCount;
     private String strTitle;
 
     public Long getIntQuestionId() {
@@ -46,11 +47,11 @@ public class AskItemModel {
 
     private Long intQuestionId;
 
-    public AskItemModel(Long intQuestionId ,String strTitle, String strCreateTime, int intAnswerCount){
+    public AskItemModel(Long intQuestionId ,String strTitle, String strCreateTime, String answerCount){
         this.intQuestionId = intQuestionId;
         this.strTitle = strTitle;
         this.strCreateTime = strCreateTime;
-        this.intAnswerCount = intAnswerCount;
+        this.answerCount = answerCount;
     }
 
 

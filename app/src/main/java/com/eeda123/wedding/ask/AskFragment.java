@@ -44,19 +44,20 @@ public class AskFragment extends Fragment {
     private RecyclerView mListRecyclerView;
     private AskItemArrayAdapter mAdapter;
     List<AskItemModel> mItems ;
+    private String parent_page = null;
 
     public static AskFragment newInstance() {
         AskFragment fragment = new AskFragment();
         return fragment;
     }
 
-    public static Intent newIntent(Context context, Long questionId, String title, String create_time, int count) {
+    public static Intent newIntent(Context context, Long questionId, String title, String create_time, String count) {
         Intent intent = new Intent(context, QuestionAnswerActivity.class);
         Bundle bundle = new Bundle();
         bundle.putLong("question_id", questionId);
         bundle.putString("title", title);
         bundle.putString("create_time", create_time);
-        bundle.putInt("count", count);
+        bundle.putString("count", count);
 
         intent.putExtras(bundle);
         return intent;
@@ -65,7 +66,22 @@ public class AskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = new Bundle();
+        bundle = getActivity().getIntent().getExtras();
+
+        if(bundle != null){
+            parent_page = bundle.getString("parent_page");
+        }
+
+        getData();
     }
+
+
+    public void onResume(Bundle savedInstanceState){
+        getData();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +91,7 @@ public class AskFragment extends Fragment {
                 .findViewById(R.id.list_recycler_view);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        getData();
+
         return view;
     }
 
@@ -153,6 +169,7 @@ public class AskFragment extends Fragment {
             String shop_name = null;
             String title = null;
             String create_time = null;
+            String answer_count = null;
 
             if(list.get("ID") != null){
                 id =  ((Double)list.get("ID")).longValue();
@@ -166,8 +183,11 @@ public class AskFragment extends Fragment {
             if(list.get("CREATE_TIME") != null){
                 create_time = list.get("CREATE_TIME").toString();
             }
+            if(list.get("ANSWER_COUNT") != null){
+                answer_count = list.get("ANSWER_COUNT").toString();
+            }
 
-            mItems.add(new AskItemModel(id ,title, create_time, 5));
+            mItems.add(new AskItemModel(id ,title, create_time, answer_count));
         }
 
         if (mAdapter == null) {
@@ -178,7 +198,6 @@ public class AskFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
     }
-
 
 
 //    @Override

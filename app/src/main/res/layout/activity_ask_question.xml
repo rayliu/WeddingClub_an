@@ -13,7 +13,7 @@
     tools:layout_editor_absoluteY="8dp">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/questionValue"
         android:layout_width="match_parent"
         android:layout_height="155dp"
         android:background="@color/accent"
@@ -22,7 +22,7 @@
         android:inputType="textMultiLine"/>
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/saveAskBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
