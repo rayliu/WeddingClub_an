@@ -2,10 +2,13 @@ package com.eeda123.wedding.product;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -47,11 +51,39 @@ public class ProductActivity extends AppCompatActivity {
     List<ProductItemModel> mItems ;
     private ProductItemArrayAdapter mAdapter;
 
+    @BindView(R.id.action_bar_title)
+    TextView action_bar_title;
+    @BindView(R.id.cityChange)
+    LinearLayout cityChange;
+    @BindView(R.id.img_back_arrow)
+    ImageView img_back_arrow;
+    @BindView(R.id.back_arrow)
+    LinearLayout back_arrow;
+
     private Long product_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //返回箭头（默认不显示）
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            // 使左上角图标(系统)是否显示
+            actionBar.setDisplayShowHomeEnabled(false);
+            // 显示标题
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowCustomEnabled(true);
+
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); //Enable自定义的View
+            actionBar.setCustomView(R.layout.header_bar);//设置自定义的布局：header_bar
+        }
+        ButterKnife.bind(this);
+
+        action_bar_title.setText("商品展示");
+        cityChange.setVisibility(View.GONE);
+        img_back_arrow.setVisibility(View.VISIBLE);
         ButterKnife.bind(this);
 
 
@@ -67,6 +99,11 @@ public class ProductActivity extends AppCompatActivity {
     }
 
 
+    @OnClick({R.id.back_arrow})
+    public void onBack_arrowClick(View view) {
+        finish();
+    }
+    
     private void getData() {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
