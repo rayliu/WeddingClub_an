@@ -32,11 +32,11 @@ public class BestItemHolder extends RecyclerView.ViewHolder implements View.OnCl
                 itemView.findViewById(R.id.best_pic2);
     }
 
-    public void bindAskItem(BestCaseModel bestCaseModel, FragmentActivity activity) {
+    public void bindCaseItem(BestCaseModel bestCaseModel, FragmentActivity activity) {
         this.mBestCaseModel = bestCaseModel;
         String cover_url = mBestCaseModel.getBest_cover();
-        String pic1_url = mBestCaseModel.getBest_cover();
-        String pic2_url = mBestCaseModel.getBest_cover();
+        String pic1_url = mBestCaseModel.getBest_pic1();
+        String pic2_url = mBestCaseModel.getBest_pic2();
 
         Picasso.with(activity)
                 .load(cover_url)

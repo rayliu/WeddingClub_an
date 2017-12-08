@@ -36,7 +36,7 @@ public class BestItemArrayAdapter extends RecyclerView.Adapter<BestItemHolder> {
     @Override
     public void onBindViewHolder(BestItemHolder holder, int position) {
         BestCaseModel bestItem = mBestItemModels.get(position);
-        holder.bindAskItem(bestItem,activity);
+        holder.bindCaseItem(bestItem,activity);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class BestItemArrayAdapter extends RecyclerView.Adapter<BestItemHolder> {
         return mBestItemModels.size();
     }
 
-    public void setItems(List<BestCaseModel> mAskItemModels) {
-        this.mBestItemModels = mAskItemModels;
+    public void setItems(List<BestCaseModel> mBestItemModels) {
+        this.mBestItemModels = mBestItemModels;
     }
 }
