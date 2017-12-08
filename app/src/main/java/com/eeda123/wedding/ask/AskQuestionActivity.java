@@ -107,7 +107,7 @@ public class AskQuestionActivity extends AppCompatActivity {
         call.enqueue(eedaCallback());
     }
 
-    private static String encodeHeadInfo( String headInfo ) {
+    private String encodeHeadInfo( String headInfo ) {
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0, length = headInfo.length(); i < length; i++) {
             char c = headInfo.charAt(i);
