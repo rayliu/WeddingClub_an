@@ -243,7 +243,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("userId", login_id)
+                        .header("login_id", login_id)
                         .header("answerValue", encodeHeadInfo(answerValue.getText().toString()))
                         .header("questionId", question_id.toString())
                         .method(original.method(), original.body())

@@ -34,13 +34,13 @@
                     android:layout_gravity="center"/>
 
                 <TextView
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="朱小明"
                     android:textSize="16sp"
-                    android:visibility="invisible"/>
+                    android:id="@+id/login_name"
+                    android:layout_width="match_parent"
+                    />
 
                 <TextView
                     android:id="@+id/login"
@@ -108,7 +108,8 @@
                 leon:isShowUnderLine="false"
                 leon:leftIcon="@drawable/logout"
                 leon:leftText="退出登录"
-                leon:rightStyle="iconHide" />
+                leon:rightStyle="iconHide"
+                android:id="@+id/logout"/>
 
     </LinearLayout>
     </ScrollView>
