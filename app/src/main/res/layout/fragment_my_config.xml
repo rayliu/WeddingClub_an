@@ -54,62 +54,57 @@
             </LinearLayout>
 
 
-            <com.leon.lib.settingview.LSettingItem
-                android:id="@+id/item_one"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/history"
-                leon:leftText="推送消息"/>
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="推送消息"/>
 
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/download"
-                leon:leftText="婚期"/>
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="婚期"/>
 
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/credit_card"
-                leon:leftText="检测新版本"/>
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="检测新版本"/>
 
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/credit_card"
-                leon:leftText="信息反馈"/>
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="信息反馈"/>
 
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/credit_card"
-                leon:leftText="关于婚礼帮"/>
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/credit_card"
-                leon:leftText="业务联系"/>
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/credit_card"
-                leon:leftText="私隐政策"/>
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="关于婚礼帮"/>
 
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leon:leftIcon="@drawable/credit_card"
-                leon:leftText="服务条款"/>
-            <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:layout_marginTop="10dp"
-                leon:isShowUnderLine="false"
-                leon:leftIcon="@drawable/logout"
-                leon:leftText="退出登录"
-                leon:rightStyle="iconHide"
-                android:id="@+id/logout"/>
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="业务联系"/>
+
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="私隐政策"/>
+
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftText="服务条款"/>
+
+        <com.leon.lib.settingview.LSettingItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="10dp"
+            leon:leftIcon="@drawable/logout"
+            leon:isShowUnderLine="false"
+            leon:leftText="退出登录"
+            leon:rightStyle="iconHide"
+            android:id="@+id/logout"/>
 
     </LinearLayout>
     </ScrollView>

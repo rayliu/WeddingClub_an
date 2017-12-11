@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leon.lib.settingview.LSettingItem;
 import com.squareup.picasso.Picasso;
@@ -62,7 +63,13 @@ public class MyConfigFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-
+        LSettingItem mSettingItemOne = (LSettingItem) view.findViewById(R.id.logout);
+        mSettingItemOne.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                onLogoutClick();
+            }
+        });
         //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
                 Activity.MODE_PRIVATE);
@@ -85,7 +92,8 @@ public class MyConfigFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.logout) void onLogoutClick() {
+    public void onLogoutClick() {
+        Toast.makeText(this.getActivity().getApplicationContext(), "我的消息", Toast.LENGTH_SHORT).show();
         //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
                 Activity.MODE_PRIVATE);
