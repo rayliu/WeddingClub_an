@@ -2,13 +2,16 @@
 
 package com.eeda123.wedding.ask;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.ask.questionDetail.QuestionAnswerActivity;
+import com.eeda123.wedding.login.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -25,6 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -73,7 +79,6 @@ public class AskFragment extends Fragment {
         if(bundle != null){
             parent_page = bundle.getString("parent_page");
         }
-
         getData();
     }
 
@@ -145,6 +150,9 @@ public class AskFragment extends Fragment {
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
+                //is_login = json.get("IS_LOGIN").toString();
+
+
                 askList(json);
 
             }
@@ -174,8 +182,8 @@ public class AskFragment extends Fragment {
             if(list.get("ID") != null){
                 id =  ((Double)list.get("ID")).longValue();
             }
-            if(list.get("SHOP_NAME") != null){
-                shop_name = list.get("SHOP_NAME").toString();
+            if(list.get("LOGIN_NAME") != null){
+                shop_name = list.get("LOGIN_NAME").toString();
             }
             if(list.get("TITLE") != null){
                 title = list.get("TITLE").toString();
@@ -207,8 +215,28 @@ public class AskFragment extends Fragment {
 //    }
 
     @OnClick(R.id.btnAsk) void onBtnAskClick() {
-        Intent intent = new Intent(this.getActivity(), AskQuestionActivity.class);
-        startActivity(intent);
+        //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        String mobile = sharedPreferences.getString("mobile", "");
+        String login_id = sharedPreferences.getString("login_id", "");
+
+        if(TextUtils.isEmpty(login_id)){
+            Toast.makeText(getActivity(), "您未登录，请前往登录", Toast.LENGTH_LONG).show();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            };
+            (new Timer()).schedule(task,3000);
+        }else{
+            Intent intent = new Intent(this.getActivity(), AskQuestionActivity.class);
+            intent.putExtra("login_id", login_id);
+            startActivity(intent);
+        }
     }
 
     @OnLongClick(R.id.btnAsk) boolean onBtnAskLongClick() {

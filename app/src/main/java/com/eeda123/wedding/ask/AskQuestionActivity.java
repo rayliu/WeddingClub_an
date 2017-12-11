@@ -47,6 +47,7 @@ public class AskQuestionActivity extends AppCompatActivity {
     ImageView img_back_arrow;
     @BindView(R.id.back_arrow)
     LinearLayout back_arrow;
+    private String login_id = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,10 @@ public class AskQuestionActivity extends AppCompatActivity {
             actionBar.setCustomView(R.layout.header_bar);//设置自定义的布局：header_bar
         }
         ButterKnife.bind(this);
+
+        //获取传过来的参数值
+        Bundle bundle =  this.getIntent().getExtras();
+        login_id = bundle.getString("login_id");
 
         action_bar_title.setText("问答");
         cityChange.setVisibility(View.GONE);
@@ -117,7 +122,7 @@ public class AskQuestionActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("userId", "66")
+                        .header("login_id", login_id)
                         .header("questionValue", encodeHeadInfo(questionValue.getText().toString()))
                         .method(original.method(), original.body())
                         .build();

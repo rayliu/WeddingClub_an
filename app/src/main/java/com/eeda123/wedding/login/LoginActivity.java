@@ -3,10 +3,12 @@ package com.eeda123.wedding.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -53,6 +55,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.os.Build.VERSION_CODES.M;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 /**
@@ -232,6 +235,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String  result = json.get("RESULT").toString();
 
                 if("true".equals(result)){
+                    //实例化SharedPreferences对象（第一步）
+                    SharedPreferences mySharedPreferences= getSharedPreferences("login_file",
+                            Activity.MODE_PRIVATE);
+                    //实例化SharedPreferences.Editor对象（第二步）
+                    SharedPreferences.Editor editor = mySharedPreferences.edit();
+                    editor.putString("mobile", mobile.getText().toString());
+                    editor.putString("login_id", json.get("USER_ID").toString());
+                    //提交当前数据
+                    editor.commit();
+
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(intent);
                 }else{
@@ -291,7 +304,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT < M) {
             return true;
         }
         if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
@@ -301,7 +314,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Snackbar.make(mEmailView, "R.string.permission_rationale", Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
-                        @TargetApi(Build.VERSION_CODES.M)
+                        @TargetApi(M)
                         public void onClick(View v) {
                             requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
                         }

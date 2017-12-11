@@ -1,11 +1,15 @@
 package com.eeda123.wedding.ask.questionDetail;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.login.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,6 +27,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,8 +44,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
-import static com.eeda123.wedding.R.id.cityChange;
-import static com.eeda123.wedding.R.id.img_back_arrow;
 
 
 public class QuestionAnswerActivity extends AppCompatActivity {
@@ -62,6 +67,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     ImageView img_back_arrow;
     @BindView(R.id.back_arrow)
     LinearLayout back_arrow;
+    private String login_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,7 +203,25 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.answerBtn) void onAnswerBtnClick() {
+        //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+        SharedPreferences sharedPreferences = getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        login_id = sharedPreferences.getString("login_id", "");
 
+        if(TextUtils.isEmpty(login_id)){
+            Toast.makeText(getBaseContext(), "您未登录，请前往登录", Toast.LENGTH_LONG).show();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            };
+            (new Timer()).schedule(task,3000);
+        }else{
+            saveData();
+        }
         saveData();
     }
 
@@ -219,7 +243,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("userId", "66")
+                        .header("userId", login_id)
                         .header("answerValue", encodeHeadInfo(answerValue.getText().toString()))
                         .header("questionId", question_id.toString())
                         .method(original.method(), original.body())
