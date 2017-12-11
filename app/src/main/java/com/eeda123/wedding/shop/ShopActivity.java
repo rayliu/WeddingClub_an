@@ -50,6 +50,9 @@ public class ShopActivity extends AppCompatActivity  {
     @BindView(R.id.shopName) TextView shopName;
     @BindView(R.id.categoryName) TextView categoryName;
     @BindView(R.id.address) TextView address;
+
+    @BindView(R.id.info_line1) LinearLayout info_line1;
+    @BindView(R.id.info_line2) LinearLayout info_line2;
     //product
     @BindView(R.id.prod_name1) TextView prod_name1;
     @BindView(R.id.prod_name2) TextView prod_name2;
@@ -315,9 +318,7 @@ public class ShopActivity extends AppCompatActivity  {
         }
     }
 
-
-
-    @OnClick({R.id.shop_text})
+    @OnClick({R.id.info_line2})
     public void onShopClick(View view) {
         Intent intent = new Intent(this, ShopInfoActivity.class);
         startActivity(intent);
