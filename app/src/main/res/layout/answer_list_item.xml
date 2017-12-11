@@ -45,8 +45,9 @@
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="47dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/history"/>
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                app:srcCompat="@drawable/ic_answer"/>
 
             <TextView
                 android:id="@+id/value"

@@ -44,7 +44,11 @@ public class AskItemHolder extends RecyclerView.ViewHolder implements View.OnCli
     @Override
     public void onClick(View v) {
         Context context = v.getContext();
-        Intent intent = AskFragment.newIntent(context, this.askItemModel.getIntQuestionId(),this.askItemModel.getStrTitle(),this.askItemModel.getStrCreateTime(),this.askItemModel.getAnswerCount());
+        Intent intent = AskFragment.newIntent(context,
+                this.askItemModel.getIntQuestionId(),
+                this.askItemModel.getStrTitle(),
+                this.askItemModel.getStrCreateTime(),
+                this.askItemModel.getAnswerCount());
         context.startActivity(intent);
     }
 

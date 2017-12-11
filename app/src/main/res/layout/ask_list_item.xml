@@ -22,7 +22,8 @@
                 android:id="@+id/imageView6"
                 android:layout_width="47dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/history"/>
+                android:paddingTop="2dp"
+                app:srcCompat="@drawable/ic_ask"/>
 
             <TextView
                 android:id="@+id/tvTitle"
