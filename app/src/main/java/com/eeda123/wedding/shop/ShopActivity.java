@@ -17,6 +17,7 @@ import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.bestCase.CaseDetailActivity;
+import com.eeda123.wedding.bestCase.bestCaseItem.CaseItemActivity;
 import com.eeda123.wedding.product.ProductActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -270,6 +271,7 @@ public class ShopActivity extends AppCompatActivity  {
         int index = 1;
         for(Map<String, Object> list: shopList){
             String cover = null;
+            Long case_id = ((Double)list.get("ID")).longValue();
             if(list.get("PICTURE_NAME") != null){
                 cover = list.get("PICTURE_NAME").toString();
             }
@@ -278,14 +280,17 @@ public class ShopActivity extends AppCompatActivity  {
             if(index == 1){
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case1);
+                case1.setTag(case_id);
             }
             if(index == 2){
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case2);
+                case2.setTag(case_id);
             }
             if(index == 3){
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case3);
+                case3.setTag(case_id);
             }
             index++;
         }
@@ -297,23 +302,27 @@ public class ShopActivity extends AppCompatActivity  {
         int index = 1;
         for(Map<String, Object> list: shopList){
             String cover = null;
+            Long video_id = ((Double)list.get("ID")).longValue();
             if(list.get("COVER") != null){
                 cover = list.get("COVER").toString();
             }
 
-
             if(index == 1){
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video1);
+                video1.setTag(video_id);
             }
             if(index == 2){
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video2);
+                video2.setTag(video_id);
             }
             if(index == 3){
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video3);
+                video3.setTag(video_id);
             }
+
             index++;
         }
     }
@@ -367,8 +376,19 @@ public class ShopActivity extends AppCompatActivity  {
 
     @OnClick({R.id.case1, R.id.case2, R.id.case3})
     public void onCase_Click(View view) {
+        Long case_id = (Long)view.getTag();
+        Intent intent = new Intent(this, CaseItemActivity.class);
+        intent.putExtra("case_id",case_id);
+        this.startActivity(intent);
+    }
+
+
+    @OnClick({R.id.video1, R.id.video2, R.id.video3})
+    public void onVideoClick(View view) {
+        Long case_id = (Long)view.getTag();
         Intent intent = new Intent(this, CaseDetailActivity.class);
-        startActivity(intent);
+        intent.putExtra("case_id",case_id);
+        this.startActivity(intent);
     }
 
     @Override

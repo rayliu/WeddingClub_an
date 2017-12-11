@@ -222,7 +222,6 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         }else{
             saveData();
         }
-        saveData();
     }
 
     @OnLongClick(R.id.answerBtn) boolean onAnswerBtnLongClick() {

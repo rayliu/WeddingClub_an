@@ -41,6 +41,8 @@
         </activity>
         <activity android:name=".bestCase.CaseDetailActivity">
         </activity>
+        <activity android:name=".bestCase.bestCaseItem.CaseItemActivity">
+        </activity>
         <activity android:name=".category.CategoryActivity"
                   android:exported="true">
         </activity>
