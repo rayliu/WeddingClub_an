@@ -28,6 +28,7 @@
                     android:id="@+id/cover_photo"
                     android:layout_width="match_parent"
                     android:layout_height="210dp"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/bg"/>
 
             </LinearLayout>
@@ -67,7 +68,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.21"
-                        app:srcCompat="@drawable/bangumi_home_ic_season_1"/>
+                        android:paddingTop="3dp"
+                        app:srcCompat="@drawable/ic_shop"/>
 
                     <TextView
                         android:id="@+id/shop_text"
@@ -76,13 +78,11 @@
                         android:layout_weight="1.07"
                         android:text="商铺介绍"/>
 
-                    <TextView
-                        android:id="@+id/shop_text_arrow"
+                    <ImageView
+                        android:id="@+id/imageView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.41"
-                        android:text=">"
-                        android:textAlignment="textEnd"/>
+                        app:srcCompat="@drawable/righticon"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -162,14 +162,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="此商品正进行促销活动 此商品正进行促销活动此商品正进行促销活动"
-                            android:textSize="12sp"/>
+                            />
 
                         <TextView
                             android:id="@+id/textView18"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="此商品正进行促销活动 此商品正进行促销活动"
-                            android:textSize="12sp"/>
+                            />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -198,18 +198,29 @@
                     android:layout_weight="1"
                     android:paddingRight="5dp"
                     android:text=""
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="viewStart"
+                    android:textSize="18sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
                 android:background="@color/accent"
                 android:orientation="vertical">
+
+                <View
+                    android:id="@+id/main_div_line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/default_bg_color"
+                    android:visibility="visible"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -217,21 +228,33 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4.02"
-                        android:text="1套"/>
+                        android:text="1套"
+                        android:textAlignment="center"
+                        android:textSize="18sp"/>
 
                     <TextView
-                        android:text="价格："
+                        android:id="@+id/textView12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView12"
-                        android:layout_weight="0.27"/>
+                        android:layout_weight="0.27"
+                        android:text="价格："
+                        android:textSize="18sp"/>
 
                     <TextView
                         android:id="@+id/price"
                         android:layout_width="85dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.77"/>
+                        android:layout_weight="0.77"
+                        android:textSize="18sp"/>
+
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/main_div_line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/default_bg_color"
+                    android:visibility="visible"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,20 +266,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="简介"/>
+                        android:padding="5dp"
+                        android:text="简介"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text=""/>
 
                 <LinearLayout
+                    android:id="@+id/imageView22"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:id="@+id/imageView22">
+                    android:orientation="horizontal">
 
                 </LinearLayout>
             </LinearLayout>

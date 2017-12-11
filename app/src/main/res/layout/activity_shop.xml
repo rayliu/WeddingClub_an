@@ -250,8 +250,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/bangumi_home_ic_season_1"
-                android:scaleType="center"/>
+                android:scaleType="center"
+                app:srcCompat="@drawable/cu_mask"/>
 
             <ImageView
                 android:id="@+id/imageView16"
@@ -303,8 +303,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/bangumi_home_ic_season_1"
-                android:scaleType="center"/>
+                android:scaleType="center"
+                app:srcCompat="@drawable/cu_mask"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -357,8 +357,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/bangumi_home_ic_season_1"
-                android:scaleType="center"/>
+                android:scaleType="center"
+                app:srcCompat="@drawable/cu_mask"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -413,6 +413,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_weight="0.60"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/bg"/>
 
         </LinearLayout>
@@ -427,6 +428,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_weight="0.60"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/bg"/>
 
         </LinearLayout>
@@ -441,6 +443,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_weight="0.60"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/bg"/>
 
         </LinearLayout>
@@ -487,6 +490,7 @@
                 android:id="@+id/video1"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/bg"/>
 
         </LinearLayout>
@@ -501,6 +505,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_weight="0.60"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/bg"/>
 
         </LinearLayout>
@@ -515,6 +520,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_weight="0.60"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/bg"/>
 
         </LinearLayout>
