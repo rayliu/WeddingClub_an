@@ -393,7 +393,7 @@ public class ShopActivity extends AppCompatActivity  {
     @OnClick({R.id.video1, R.id.video2, R.id.video3})
     public void onVideoClick(View view) {
         Long case_id = (Long)view.getTag();
-        Intent intent = new Intent(this, CaseItemActivity.class);
+        Intent intent = new Intent(this, VideoActivity.class);
         intent.putExtra("from_page","video");
         this.startActivity(intent);
     }
