@@ -169,11 +169,14 @@ public class AskQuestionActivity extends AppCompatActivity {
                 HashMap<String,Object> json = response.body();
                 String  result = json.get("RESULT").toString();
 
-
-                Intent intent = new Intent();
-                intent.putExtra("parent_page", "addQuestion");
-                setResult(RESULT_OK, intent);
-                finish();
+                if("true".equals(result)){
+                    Intent intent = new Intent();
+                    intent.putExtra("parent_page", "addQuestion");
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }else{
+                    Toast.makeText(getBaseContext(),"操作失败，稍后请重试", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

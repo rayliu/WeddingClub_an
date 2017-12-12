@@ -57,11 +57,26 @@
                 android:layout_height="wrap_content"
                 android:text=""/>
 
-            <TextView
-                android:id="@+id/categoryName"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="69dp"
+                    android:layout_height="wrap_content"
+                    android:text="类别："
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/categoryName"
+                    android:layout_width="69dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -527,7 +542,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/consult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

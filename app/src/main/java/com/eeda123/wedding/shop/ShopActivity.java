@@ -1,11 +1,14 @@
 package com.eeda123.wedding.shop;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +20,8 @@ import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.bestCase.bestCaseItem.CaseItemActivity;
+import com.eeda123.wedding.consult.ConsultActivity;
+import com.eeda123.wedding.login.LoginActivity;
 import com.eeda123.wedding.product.ProductActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,6 +31,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -209,7 +216,7 @@ public class ShopActivity extends AppCompatActivity  {
                     .load(MainActivity.HOST_URL+"upload/"+logo)
                     .into(shop_logo);
             shopName.setText(shop_name);
-            categoryName.setText("类别："+category_name);
+            categoryName.setText(category_name);
             address.setText(c_address);
         }
     }
@@ -399,6 +406,35 @@ public class ShopActivity extends AppCompatActivity  {
             default:
                 finish();
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @OnClick({R.id.consult})
+    public void onConsultClick(View view) {
+        //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+        SharedPreferences sharedPreferences = getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        String login_id = sharedPreferences.getString("login_id", "");
+        String mobile = sharedPreferences.getString("mobile", "");
+        if(TextUtils.isEmpty(login_id)){
+            Toast.makeText(this, "您未登录，请前往登录", Toast.LENGTH_LONG).show();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            };
+            (new Timer()).schedule(task,3000);
+        }else{
+            Intent intent = new Intent(this, ConsultActivity.class);
+            intent.putExtra("shop_id",shop_id);
+            intent.putExtra("mobile",mobile);
+            intent.putExtra("login_id",login_id);
+            intent.putExtra("shop_name",shopName.getText());
+            intent.putExtra("category",categoryName.getText());
+            startActivity(intent);
         }
     }
 
