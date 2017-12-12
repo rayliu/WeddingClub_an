@@ -58,6 +58,11 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     RecyclerView listRecyclerView;
     @BindView(R.id.answerValue)
     TextView answerValue;
+    @BindView(R.id.title)
+    TextView mTitle;
+    @BindView(R.id.create_time)
+    TextView mCreate_time;
+
 
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
@@ -101,6 +106,10 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         img_back_arrow.setVisibility(View.VISIBLE);
 
         listRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //
+        mTitle.setText(title);
+        mCreate_time.setText(create_time);
 
         getData();
     }
@@ -173,7 +182,6 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         //String title= "维多利亚比较好...";
         mItems = new ArrayList<AnswerItemModel>();
-        mItems.add(new AnswerItemModel(title, create_time, null));//这个是提问
 
         for(Map<String, Object> list: responseList){
             Long id = null;
@@ -218,9 +226,16 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             };
-            (new Timer()).schedule(task,3000);
+            (new Timer()).schedule(task,2000);
         }else{
-            saveData();
+            //非空校验
+            String mValue = answerValue.getText().toString();
+            if(TextUtils.isEmpty(mValue)){
+                Toast.makeText(getBaseContext(),"内容不能为空", Toast.LENGTH_LONG).show();
+                return ;
+            }else{
+                saveData();
+            }
         }
     }
 

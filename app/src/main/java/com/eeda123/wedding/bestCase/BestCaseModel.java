@@ -46,11 +46,44 @@ public class BestCaseModel {
 
     private Long case_id;
 
-    public BestCaseModel(String best_cover,String best_pic1,String best_pic2,Long case_id){
+    public String getShop_name() {
+        return shop_name;
+    }
+
+    public void setShop_name(String shop_name) {
+        this.shop_name = shop_name;
+    }
+
+    private String shop_name;
+
+    public String getShop_logo() {
+        return shop_logo;
+    }
+
+    public void setShop_logo(String shop_logo) {
+        this.shop_logo = shop_logo;
+    }
+
+    private String shop_logo;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;
+
+    public BestCaseModel(String best_cover,String best_pic1,String best_pic2,Long case_id,String title ,String shop_name, String shop_logo){
         this.best_cover = best_cover;
         this.best_pic1 = best_pic1;
         this.best_pic2 = best_pic2;
         this.case_id = case_id;
+        this.shop_logo = shop_logo;
+        this.shop_name = shop_name;
+        this.title = title;
     }
 
 

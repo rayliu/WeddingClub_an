@@ -37,8 +37,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.attr.id;
-
 public class BestFragment extends Fragment {
     private RecyclerView mListRecyclerView;
     private BestItemArrayAdapter mAdapter;
@@ -129,6 +127,8 @@ public class BestFragment extends Fragment {
                     Long case_id = null;
                     String cover = null;
                     String title = null;
+                    String shop_name = null;
+                    String shop_logo = null;
                     String best_pic1 = null;
                     String best_pic2 = null;
                     if(list.get("ID") != null){
@@ -136,6 +136,15 @@ public class BestFragment extends Fragment {
                     }
                     if(list.get("COVER") != null){
                         cover = MainActivity.HOST_URL+"upload/"+list.get("COVER").toString();
+                    }
+                    if(list.get("TITLE") != null){
+                        title = list.get("TITLE").toString();
+                    }
+                    if(list.get("SHOP_NAME") != null){
+                        shop_name = list.get("SHOP_NAME").toString();
+                    }
+                    if(list.get("SHOP_LOGO") != null){
+                        shop_logo = MainActivity.HOST_URL+"upload/"+list.get("SHOP_LOGO").toString();
                     }
                     if(list.get("TITLE") != null){
                         title = list.get("TITLE").toString();
@@ -160,7 +169,7 @@ public class BestFragment extends Fragment {
                     }
 
                     //url_maps.add(MainActivity.HOST_URL+"upload/"+photo);
-                    mItems.add(new BestCaseModel(cover,best_pic1,best_pic2,case_id));
+                    mItems.add(new BestCaseModel(cover,best_pic1,best_pic2,case_id,title,shop_name,shop_logo));
                 }
 
                 if (mAdapter == null) {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -84,7 +85,14 @@ public class AskQuestionActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.saveAskBtn) void onSaveBtnClick() {
-        saveData();
+        //非空校验
+        String mValue = questionValue.getText().toString();
+        if(TextUtils.isEmpty(mValue)){
+            Toast.makeText(getBaseContext(),"内容不能为空", Toast.LENGTH_LONG).show();
+            return ;
+        }else{
+            saveData();
+        }
     }
 
     @OnLongClick(R.id.saveAskBtn) boolean onSaveBtnLongClick() {

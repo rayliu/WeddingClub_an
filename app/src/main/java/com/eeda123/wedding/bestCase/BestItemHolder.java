@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.eeda123.wedding.R;
 import com.squareup.picasso.Picasso;
@@ -22,6 +23,9 @@ public class BestItemHolder extends RecyclerView.ViewHolder implements View.OnCl
     private ImageView best_pic2;
     private BestCaseModel mBestCaseModel;
     private LinearLayout case_line;
+    private TextView shopName;
+    private TextView title;
+    private ImageView shopLogo;
 
     public BestItemHolder(View itemView) {
         super(itemView);
@@ -34,6 +38,12 @@ public class BestItemHolder extends RecyclerView.ViewHolder implements View.OnCl
                 itemView.findViewById(R.id.best_pic2);
         case_line = (LinearLayout)
                 itemView.findViewById(R.id.case_line);
+        shopName = (TextView)
+                itemView.findViewById(R.id.shop_name);
+        title = (TextView)
+                itemView.findViewById(R.id.title);
+        shopLogo = (ImageView)
+                itemView.findViewById(R.id.shop_logo);
     }
 
 
@@ -43,7 +53,15 @@ public class BestItemHolder extends RecyclerView.ViewHolder implements View.OnCl
         String pic1_url = mBestCaseModel.getBest_pic1();
         String pic2_url = mBestCaseModel.getBest_pic2();
 ;       Long case_id = mBestCaseModel.getCase_id();
+;       String shop_name = mBestCaseModel.getShop_name();
+;       String shop_logo = mBestCaseModel.getShop_logo();
+;       String mTitle = mBestCaseModel.getTitle();
 
+        shopName.setText("商家:"+shop_name);
+        title.setText(mTitle);
+        Picasso.with(activity)
+                .load(shop_logo)
+                .into(shopLogo);
         Picasso.with(activity)
                 .load(cover_url)
                 .into(best_cover);

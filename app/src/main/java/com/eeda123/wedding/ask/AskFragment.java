@@ -231,7 +231,7 @@ public class AskFragment extends Fragment {
                     startActivity(intent);
                 }
             };
-            (new Timer()).schedule(task,3000);
+            (new Timer()).schedule(task,2000);
         }else{
             Intent intent = new Intent(this.getActivity(), AskQuestionActivity.class);
             intent.putExtra("login_id", login_id);
