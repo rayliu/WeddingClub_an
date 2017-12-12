@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.bestCase.bestCaseItem.CaseItemActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,16 +37,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.R.attr.id;
+
 public class BestFragment extends Fragment {
     private RecyclerView mListRecyclerView;
     private BestItemArrayAdapter mAdapter;
     List<BestCaseModel> mItems ;
 
 
-    public static Intent newIntent(Context context, int questionId) {
-        Intent intent = new Intent(context, CaseDetailActivity.class);
+    public static Intent newIntent(Context context, Long caseId) {
+        Intent intent = new Intent(context, CaseItemActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putLong("question_id", questionId);
+        bundle.putLong("case_id", caseId);
         intent.putExtras(bundle);
         return intent;
     }
@@ -123,13 +126,13 @@ public class BestFragment extends Fragment {
                 LinkedList<String> url_maps = new LinkedList<String>();
                 mItems = new ArrayList<BestCaseModel>();
                 for(Map<String, Object> list: caseList){
-                    Long id = null;
+                    Long case_id = null;
                     String cover = null;
                     String title = null;
                     String best_pic1 = null;
                     String best_pic2 = null;
                     if(list.get("ID") != null){
-                        id = ((Double)list.get("ID")).longValue();
+                        case_id = ((Double)list.get("ID")).longValue();
                     }
                     if(list.get("COVER") != null){
                         cover = MainActivity.HOST_URL+"upload/"+list.get("COVER").toString();
@@ -157,7 +160,7 @@ public class BestFragment extends Fragment {
                     }
 
                     //url_maps.add(MainActivity.HOST_URL+"upload/"+photo);
-                    mItems.add(new BestCaseModel(cover,best_pic1,best_pic2));
+                    mItems.add(new BestCaseModel(cover,best_pic1,best_pic2,case_id));
                 }
 
                 if (mAdapter == null) {

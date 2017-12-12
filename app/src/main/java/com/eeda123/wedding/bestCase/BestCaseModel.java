@@ -30,16 +30,27 @@ public class BestCaseModel {
         this.best_pic2 = best_pic2;
     }
 
+    public Long getCase_id() {
+        return case_id;
+    }
+
+    public void setCase_id(Long case_id) {
+        this.case_id = case_id;
+    }
+
     private String best_cover;
 
     private String best_pic1;
 
     private String best_pic2;
 
-    public BestCaseModel(String best_cover,String best_pic1,String best_pic2){
+    private Long case_id;
+
+    public BestCaseModel(String best_cover,String best_pic1,String best_pic2,Long case_id){
         this.best_cover = best_cover;
         this.best_pic1 = best_pic1;
         this.best_pic2 = best_pic2;
+        this.case_id = case_id;
     }
 
 

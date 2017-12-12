@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.bestCase.CaseDetailActivity;
 import com.eeda123.wedding.bestCase.bestCaseItem.CaseItemActivity;
 import com.eeda123.wedding.product.ProductActivity;
 import com.google.gson.Gson;
@@ -379,6 +378,7 @@ public class ShopActivity extends AppCompatActivity  {
         Long case_id = (Long)view.getTag();
         Intent intent = new Intent(this, CaseItemActivity.class);
         intent.putExtra("case_id",case_id);
+        intent.putExtra("from_page","case");
         this.startActivity(intent);
     }
 
@@ -386,8 +386,8 @@ public class ShopActivity extends AppCompatActivity  {
     @OnClick({R.id.video1, R.id.video2, R.id.video3})
     public void onVideoClick(View view) {
         Long case_id = (Long)view.getTag();
-        Intent intent = new Intent(this, CaseDetailActivity.class);
-        intent.putExtra("case_id",case_id);
+        Intent intent = new Intent(this, CaseItemActivity.class);
+        intent.putExtra("from_page","video");
         this.startActivity(intent);
     }
 

@@ -60,6 +60,7 @@ public class CaseItemActivity extends AppCompatActivity {
     LinearLayout back_arrow;
 
     private Long case_id;
+    private String from_page;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +81,7 @@ public class CaseItemActivity extends AppCompatActivity {
         }
         ButterKnife.bind(this);
 
-        action_bar_title.setText("精选婚礼");
+
         cityChange.setVisibility(View.GONE);
         img_back_arrow.setVisibility(View.VISIBLE);
         ButterKnife.bind(this);
@@ -93,8 +94,16 @@ public class CaseItemActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
         case_id = bundle.getLong("case_id");
+        from_page = bundle.getString("from_page");
+        String title = "";
+        if("case".equals(from_page)){
+            title = "案例展示";
+        }else{
+            title = "精选案例";
+        }
 
-        getData();
+        action_bar_title.setText(title);
+        getCaseData();
     }
 
 
@@ -103,7 +112,7 @@ public class CaseItemActivity extends AppCompatActivity {
         finish();
     }
 
-    private void getData() {
+    private void getCaseData() {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
@@ -132,6 +141,7 @@ public class CaseItemActivity extends AppCompatActivity {
                 .build();
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
+
 
         Call<HashMap<String, Object>> call = service.list("bestCase","find_case_by_id");
 
