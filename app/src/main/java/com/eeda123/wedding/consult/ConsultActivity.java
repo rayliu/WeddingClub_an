@@ -1,12 +1,13 @@
 package com.eeda123.wedding.consult;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.util.EedaUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,25 +41,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
-import static com.eeda123.wedding.R.id.shop_name;
-import static com.eeda123.wedding.R.id.user_name;
-import static com.eeda123.wedding.R.id.wedding_date;
-import static com.eeda123.wedding.util.EedaUtil.encodeHeadInfo;
 
 public class ConsultActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_consult)
     RelativeLayout activityConsult;
-    @BindView(user_name)
-    AutoCompleteTextView userName;
-    @BindView(R.id.mobile) EditText mobile;
-    @BindView(wedding_date) EditText weddingDate;
-    @BindView(shop_name) TextView shopName;
+    @BindView(R.id.user_name)
+    TextView userName;
+    @BindView(R.id.mobile) TextView mobile;
+    @BindView(R.id.wedding_date) TextView weddingDate;
+    @BindView(R.id.shop_name) TextView shopName;
     @BindView(R.id.project) TextView project;
     @BindView(R.id.create_date) TextView createDate;
     @BindView(R.id.remark) EditText remark;
     Long shop_id = null;
-    Long login_id = null;
+    String login_id = null;
 
 
     @BindView(R.id.action_bar_title)
@@ -96,18 +94,27 @@ public class ConsultActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
         shop_id = bundle.getLong("shop_id");
-        login_id = bundle.getLong("login_id");
         String shop_name = bundle.getString("shop_name");
         String category = bundle.getString("category");
-        String login_mobile = bundle.getString("mobile");
+
+
+        //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+        SharedPreferences sharedPreferences = getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        login_id = sharedPreferences.getString("login_id", "");
+        String login_mobile = sharedPreferences.getString("mobile", "");
+        String user_name = sharedPreferences.getString("user_name", "");
+        String wedding_date = sharedPreferences.getString("wedding_date", "");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new java.util.Date());
         shopName.setText(shop_name);
+        userName.setText(user_name);
+        weddingDate.setText(wedding_date);
         project.setText(category);
         createDate.setText(date);
         mobile.setText(login_mobile);
-
     }
 
     @OnClick({R.id.back_arrow})
@@ -128,11 +135,11 @@ public class ConsultActivity extends AppCompatActivity {
 
                 Request request = original.newBuilder()
                         .header("shop_id", shop_id.toString())
-                        .header("login_id", login_id.toString())
-                        .header("remark", encodeHeadInfo(remark.getText().toString()))
-                        .header("user_name", encodeHeadInfo(userName.getText().toString()))
-                        .header("mobile", encodeHeadInfo(mobile.getText().toString()))
-                        .header("wedding_date", encodeHeadInfo(weddingDate.getText().toString()))
+                        .header("login_id", login_id)
+                        .header("remark", EedaUtil.encodeHeadInfo(remark.getText().toString()))
+                        .header("user_name", EedaUtil.encodeHeadInfo(userName.getText().toString()))
+                        .header("mobile", EedaUtil.encodeHeadInfo(mobile.getText().toString()))
+                        .header("wedding_date", EedaUtil.encodeHeadInfo(weddingDate.getText().toString()))
                         .method(original.method(), original.body())
                         .build();
 
@@ -192,27 +199,8 @@ public class ConsultActivity extends AppCompatActivity {
     @OnClick(R.id.saveBtn) void onSaveBtnClick() {
         //TODO implement
         //校验非空
-        String mUserName = userName.getText().toString();
-        String mMobile = mobile.getText().toString();
-        String mWeddingDate = weddingDate.getText().toString();
         String mRemark = remark.getText().toString();
-        if(TextUtils.isEmpty(mUserName)){
-            Toast.makeText(getBaseContext(), "姓名不能为空", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(mMobile)){
-            Toast.makeText(getBaseContext(), "电话不能为空", Toast.LENGTH_LONG).show();
-            return;
-        }else{
-            if(!isMobile(mMobile)){
-                Toast.makeText(getBaseContext(), "手机号码不合法", Toast.LENGTH_LONG).show();
-                return;
-            }
-        }
-        if(TextUtils.isEmpty(mWeddingDate)){
-            Toast.makeText(getBaseContext(), "婚期不能为空", Toast.LENGTH_LONG).show();
-            return;
-        }
+
         if(TextUtils.isEmpty(mRemark)){
             Toast.makeText(getBaseContext(), "备注不能为空", Toast.LENGTH_LONG).show();
             return;
@@ -244,4 +232,41 @@ public class ConsultActivity extends AppCompatActivity {
         //TODO implement
         return true;
     }
+
+
+
+//    @OnClick({R.id.wedding_date})
+//    public void onWeddingDateClick(View view) {
+//        getDate(view);
+//    }
+//
+//
+//    SimpleDateFormat y = new SimpleDateFormat("yyyy");
+//    int year = Integer.parseInt(y.format(new java.util.Date()));
+//    SimpleDateFormat m = new SimpleDateFormat("MM");
+//    int month = Integer.parseInt(m.format(new java.util.Date()));
+//    SimpleDateFormat d = new SimpleDateFormat("dd");
+//    int day = Integer.parseInt(d.format(new java.util.Date()));
+//
+//    // 点击事件,湖区日期
+//    public void getDate(View v) {
+//
+//        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear,
+//                                  int dayOfMonth) {
+//                ConsultActivity.this.year = year;
+//                month = monthOfYear+1;
+//                day = dayOfMonth;
+//                showDate();
+//            }
+//        }, year, month-1, day).show();
+//
+//    }
+//
+//    // 显示选择日期
+//    private void showDate() {
+//        weddingDate.setText(year + "/" + month + "/" + day);
+//    }
 }
