@@ -1,11 +1,15 @@
 package com.eeda123.wedding.bestCase.bestCaseItem;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +19,8 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.consult.ConsultActivity;
+import com.eeda123.wedding.login.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -24,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +68,7 @@ public class CaseItemActivity extends AppCompatActivity {
     LinearLayout back_arrow;
 
     private Long case_id;
+    private String shop_id;
     private String from_page;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +184,9 @@ public class CaseItemActivity extends AppCompatActivity {
         String shop_name_value = null;
         String shop_logo_value = null;
         String category_value = null;
+        if(shop.get(0).get("CREATOR") != null){
+            shop_id = shop.get(0).get("CREATOR").toString();
+        }
         if(shop.get(0).get("C_NAME") != null){
             shop_name_value = shop.get(0).get("C_NAME").toString();
         }
@@ -213,6 +225,34 @@ public class CaseItemActivity extends AppCompatActivity {
     }
 
 
+    @OnClick({R.id.consult})
+    public void onConsultClick(View view) {
+        //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+        SharedPreferences sharedPreferences = getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        String login_id = sharedPreferences.getString("login_id", "");
+        String mobile = sharedPreferences.getString("mobile", "");
+        String user_name = sharedPreferences.getString("user_name", "");
+        String wedding_date = sharedPreferences.getString("wedding_date", "");
+        if (TextUtils.isEmpty(login_id)) {
+            Toast.makeText(this, "您未登录，请前往登录", Toast.LENGTH_LONG).show();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            };
+            (new Timer()).schedule(task, 2000);
+        } else {
+            Intent intent = new Intent(this, ConsultActivity.class);
+            intent.putExtra("shop_id", shop_id);
+            intent.putExtra("shop_name", shop_name.getText());
+            intent.putExtra("category", category.getText());
+            startActivity(intent);
+        }
+    }
 
 
 

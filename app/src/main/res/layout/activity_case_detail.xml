@@ -107,7 +107,7 @@
                 android:id="@+id/case_recycler_view"/>
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/consult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
