@@ -395,6 +395,7 @@ public class ShopActivity extends AppCompatActivity  {
         Long case_id = (Long)view.getTag();
         Intent intent = new Intent(this, VideoActivity.class);
         intent.putExtra("from_page","video");
+        intent.putExtra("case_id",case_id);
         this.startActivity(intent);
     }
 
@@ -417,6 +418,8 @@ public class ShopActivity extends AppCompatActivity  {
         // 使用getString方法获得value，注意第2个参数是value的默认值
         String login_id = sharedPreferences.getString("login_id", "");
         String mobile = sharedPreferences.getString("mobile", "");
+        String user_name = sharedPreferences.getString("user_name", "");
+        String wedding_date = sharedPreferences.getString("wedding_date", "");
         if(TextUtils.isEmpty(login_id)){
             Toast.makeText(this, "您未登录，请前往登录", Toast.LENGTH_LONG).show();
             TimerTask task = new TimerTask() {
@@ -426,12 +429,10 @@ public class ShopActivity extends AppCompatActivity  {
                     startActivity(intent);
                 }
             };
-            (new Timer()).schedule(task,3000);
+            (new Timer()).schedule(task,2000);
         }else{
             Intent intent = new Intent(this, ConsultActivity.class);
             intent.putExtra("shop_id",shop_id);
-            intent.putExtra("mobile",mobile);
-            intent.putExtra("login_id",login_id);
             intent.putExtra("shop_name",shopName.getText());
             intent.putExtra("category",categoryName.getText());
             startActivity(intent);
