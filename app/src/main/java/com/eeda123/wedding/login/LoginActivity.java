@@ -241,7 +241,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     //实例化SharedPreferences.Editor对象（第二步）
                     SharedPreferences.Editor editor = mySharedPreferences.edit();
                     editor.putString("mobile", mobile.getText().toString());
-                    editor.putString("login_id", json.get("USER_ID").toString());
+                    editor.putString("login_id", json.get("LOGIN_ID").toString());
+                    editor.putString("user_name", json.get("USER_NAME").toString());
+                    editor.putString("wedding_date", json.get("WEDDING_DATE").toString());
                     //提交当前数据
                     editor.commit();
 
