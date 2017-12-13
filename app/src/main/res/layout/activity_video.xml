@@ -65,7 +65,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/category"
+                        android:id="@+id/category_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
@@ -110,13 +110,29 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                >
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title"
+                    tools:textAlignment="center"
+                    />
+            </LinearLayout>
+
             <WebView
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/consult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
