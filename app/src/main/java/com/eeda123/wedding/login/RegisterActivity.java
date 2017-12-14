@@ -213,24 +213,30 @@ public class RegisterActivity extends AppCompatActivity {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
                 String  result = json.get("RESULT").toString();
-
-                Toast.makeText(getBaseContext(), "注册成功，请前往登录", Toast.LENGTH_LONG).show();
-
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        /**
-                         *要执行的操作
-                         */
-                        Intent intent = new Intent(getBaseContext(), LoginActivity.class);
-                        startActivity(intent);
-
-                    }
-                };
-
                 if("true".equals(result)){
-                    (new Timer()).schedule(task,3000);
+
+                    Toast.makeText(getBaseContext(), "注册成功，请前往登录", Toast.LENGTH_LONG).show();
+
+                    TimerTask task = new TimerTask() {
+                        @Override
+                        public void run() {
+                            /**
+                             *要执行的操作
+                             */
+                            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                            startActivity(intent);
+
+                        }
+                    };
+
+                    if("true".equals(result)){
+                        (new Timer()).schedule(task,3000);
+                    }
+                }else{
+                    String  errMsg = json.get("ERRMSG").toString();
+                    Toast.makeText(getBaseContext(), errMsg, Toast.LENGTH_LONG).show();
                 }
+
             }
 
             @Override
