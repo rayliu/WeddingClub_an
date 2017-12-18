@@ -251,11 +251,27 @@ public class CategoryActivity extends AppCompatActivity {
         for(Map<String, Object> list: shopList){
             Long shop_id = null;
             String company_name = "";
+            String influence = "";
             String category_name = "";
+            String diomand = "";
+            String hui = "";
+            String cu = "";
             String create_time = "";
             String logo = "";
             if( list.get("SHOP_ID") != null){
                 shop_id = ((Double)list.get("SHOP_ID")).longValue();
+            }
+            if( list.get("INFLUENCE") != null){
+                influence = list.get("INFLUENCE").toString();
+            }
+            if( list.get("DIOMAND") != null){
+                diomand = list.get("DIOMAND").toString();
+            }
+            if( list.get("HUI") != null){
+                hui = list.get("HUI").toString();
+            }
+            if( list.get("CU") != null){
+                cu = list.get("CU").toString();
             }
             if( list.get("COMPANY_NAME") != null){
                 company_name = list.get("COMPANY_NAME").toString();
@@ -270,7 +286,9 @@ public class CategoryActivity extends AppCompatActivity {
                 logo = list.get("LOGO").toString();
             }
 
-            mItems.add(new CategoryItemModel(shop_id, company_name, create_time, 2, MainActivity.HOST_URL+"upload/"+logo,category_name));
+            mItems.add(new CategoryItemModel(shop_id, company_name, create_time, 2, MainActivity.HOST_URL+"upload/"+logo,category_name,
+                    cu,hui,diomand,influence
+            ));
         }
 
 

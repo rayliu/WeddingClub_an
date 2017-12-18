@@ -65,13 +65,56 @@ public class CategoryItemModel {
 
     private String categoryName;
 
-    public CategoryItemModel(Long shopId, String strTitle, String strCreateTime, int intAnswerCount, String strShopLogoUrl, String categoryName){
+    public String getCu() {
+        return cu;
+    }
+
+    public void setCu(String cu) {
+        this.cu = cu;
+    }
+
+    public String getDiamond() {
+        return diamond;
+    }
+
+    public void setDiamond(String diamond) {
+        this.diamond = diamond;
+    }
+
+    public String getHui() {
+        return hui;
+    }
+
+    public void setHui(String hui) {
+        this.hui = hui;
+    }
+
+    public String getInfluence() {
+        return influence;
+    }
+
+    public void setInfluence(String influence) {
+        this.influence = influence;
+    }
+
+    private String cu;
+    private String hui;
+    private String diamond;
+    private String influence;
+
+    public CategoryItemModel(Long shopId, String strTitle, String strCreateTime,
+                             int intAnswerCount, String strShopLogoUrl, String categoryName,
+                             String cu,String hui,String diamond,String influence){
         this.shopId = shopId;
         this.strTitle = strTitle;
         this.strCreateTime = strCreateTime;
         this.intAnswerCount = intAnswerCount;
         this.strShopLogoUrl = strShopLogoUrl;
         this.categoryName = categoryName;
+        this.cu = cu;
+        this.hui = hui;
+        this.diamond = diamond;
+        this.influence = influence;
     }
 
 

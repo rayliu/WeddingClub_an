@@ -24,6 +24,9 @@ public class CategoryItemHolder extends RecyclerView.ViewHolder implements View.
     private TextView mDesc2;
     private TextView mDesc3;
     private ImageView mLogo;
+    private ImageView mDiamond;
+    private ImageView mCu;
+    private ImageView mhui;
 
     public CategoryItemHolder(View itemView) {
         super(itemView);
@@ -39,19 +42,39 @@ public class CategoryItemHolder extends RecyclerView.ViewHolder implements View.
                 itemView.findViewById(R.id.desc2);
         mDesc3 = (TextView)
                 itemView.findViewById(R.id.desc3);
+        mCu = (ImageView)
+                itemView.findViewById(R.id.cu);
+        mhui = (ImageView)
+                itemView.findViewById(R.id.hui);
+        mDiamond = (ImageView)
+                itemView.findViewById(R.id.diamond);
+
     }
 
     public void bindItem(CategoryItemModel categoryItemModel, FragmentActivity activity) {
         this.mCategoryItemModel = categoryItemModel;
         String internetUrl = mCategoryItemModel.getStrShopLogoUrl();
+        String influence = mCategoryItemModel.getInfluence();
+        String cu = mCategoryItemModel.getCu();
+        String hui = mCategoryItemModel.getHui();
+        String diamond = mCategoryItemModel.getDiamond();
 
         Picasso.with(activity)
                 .load(internetUrl)
                 .into(mLogo);
         mShopName.setText(categoryItemModel.getStrTitle());
-        mDesc1.setText(categoryItemModel.getStrCreateTime());
-        mDesc2.setText("影响力："+String.valueOf(categoryItemModel.getIntAnswerCount()));
-        mDesc3.setText("类别："+String.valueOf(categoryItemModel.getCategoryName()));
+        //mDesc1.setText(categoryItemModel.getStrCreateTime());
+        mDesc2.setText("影响力：" + influence);
+        mDesc3.setText("类别：" + String.valueOf(categoryItemModel.getCategoryName()));
+        if(!"Y".equals(diamond)){
+            mDiamond.setVisibility(View.INVISIBLE);
+        }
+        if(!"Y".equals(cu)){
+            mCu.setVisibility(View.INVISIBLE);
+        }
+        if(!"Y".equals(hui)){
+            mhui.setVisibility(View.INVISIBLE);
+        }
 
     }
 
