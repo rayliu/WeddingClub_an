@@ -3,99 +3,40 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/home_list_cu_item"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/project_item_list"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/project_item_bg"
         android:orientation="vertical"
         android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_name"
+                android:layout_weight="0.18"
+                android:text="婚期体检"
+                android:textSize="18sp"
+                android:textColor="?attr/colorPrimary"/>
+
             <TextView
-                android:id="@+id/tvSeq"
-                android:layout_width="40dp"
+                android:id="@+id/complete_date"
+                android:layout_width="217dp"
                 android:layout_height="wrap_content"
-                android:elevation="21dp"
-                android:padding="8dp"
-                android:text="10"
-                android:textAlignment="center"
-                android:textColor="@color/accent"
-                android:textSize="18sp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/project_title_bg"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:id="@+id/tvTitle"
-                        android:layout_width="233dp"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="定日子"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/accent"
-                        android:textSize="18sp"/>
-
-                    <TextView
-                        android:id="@+id/tvCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.68"
-                        android:text="1/10"
-                        android:textColor="@color/accent"
-                        android:textSize="18sp"/>
-
-                    <ImageView
-                        android:id="@+id/imageView17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="3.27"
-                        android:paddingTop="5dp"
-                        app:srcCompat="@android:drawable/arrow_down_float"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/expandArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/accent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:text="Item One"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:text="Item Two"/>
-
-                </LinearLayout>
-            </LinearLayout>
-
+                android:text="2017-10-10"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                />
         </LinearLayout>
 
     </LinearLayout>

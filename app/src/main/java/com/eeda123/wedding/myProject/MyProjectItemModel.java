@@ -1,46 +1,73 @@
 package com.eeda123.wedding.myProject;
 
+import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
+
+import java.util.List;
+
 /**
  * Created by a13570610691 on 2017/3/22.
  */
 
 public class MyProjectItemModel {
 
-    public String getIntCount() {
-        return intCount;
+
+
+    public String getShow() {
+        return show;
     }
 
-    public void setIntCount(String intCount) {
-        this.intCount = intCount;
+    public void setShow(String show) {
+        this.show = show;
     }
 
-    public String getStrTitle() {
-        return strTitle;
+    public String getSeq() {
+        return seq;
     }
 
-    public void setStrTitle(String strTitle) {
-        this.strTitle = strTitle;
+    public void setSeq(String seq) {
+        this.seq = seq;
     }
 
-    public int getIntSeq() {
-        return intSeq;
+    private String seq;
+
+    public String getTitle() {
+        return title;
     }
 
-    private String intCount;
-    private String strTitle;
-    private int intSeq;
-
-    public MyProjectItemModel(String strTitle, String intCount, int seq){
-        this.strTitle = strTitle;
-        this.intCount = intCount;
-        this.intSeq = seq;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
+    private String title;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    private int count;
+    private String show;
 
 
 
+    public List<MyProjectItem2Model> getProjectModels2() {
+        return projectModels2;
+    }
 
+    public void setProjectModels2(List<MyProjectItem2Model> projectModels2) {
+        this.projectModels2 = projectModels2;
+    }
 
+    private List<MyProjectItem2Model> projectModels2;
 
+    public MyProjectItemModel( String seq ,String title, int count,List<MyProjectItem2Model> projectModels2){
+        this.seq = seq;
+        this.title = title;
+        this.count = count;
+        this.projectModels2 = projectModels2;
+    }
 
 }

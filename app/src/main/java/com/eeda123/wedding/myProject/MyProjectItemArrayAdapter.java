@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.ask.AskItemHolder;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
     public MyProjectItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
         View view = layoutInflater
-                .inflate(R.layout.my_project_list_item, parent, false);
+                .inflate(R.layout.my_project_list, parent, false);
         return new MyProjectItemHolder(this, view);
     }
 

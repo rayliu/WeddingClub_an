@@ -1,29 +1,31 @@
 package com.eeda123.wedding.myProject;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
 
-import static com.eeda123.wedding.R.id.tvDesc;
-import static com.eeda123.wedding.R.id.tvType;
+import java.util.List;
 
 /**
  * Created by a13570610691 on 2017/3/22.
  */
 
 public class MyProjectItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    private String TAG = "AskItemHolder";
-    private com.eeda123.wedding.myProject.MyProjectItemModel askItemModel;
+    private String TAG = "MyProjectItemHolder";
+    private com.eeda123.wedding.myProject.MyProjectItemModel myProjectModel;
     private MyProjectItemArrayAdapter mAdapter;
 
     private TextView mTitleTextView;
     private TextView mCount;
     private TextView mSeq;
     private LinearLayout expandArea;
+//    private CheckBox itemName;
+//    private TextView completeDate;
+    private LinearLayout itemValue;
 
     private int expandedPosition = -1;
 
@@ -40,18 +42,41 @@ public class MyProjectItemHolder extends RecyclerView.ViewHolder implements View
                 itemView.findViewById(R.id.tvSeq);
         expandArea = (LinearLayout)
                 itemView.findViewById(R.id.expandArea);
+//        itemName = (CheckBox)
+//                itemView.findViewById(R.id.item_name);
+//        completeDate = (TextView)
+//                itemView.findViewById(R.id.complete_date);
+
     }
 
-    public void bindAskItem(MyProjectItemModel askItemModel, int position) {
-        this.askItemModel = askItemModel;
-        mTitleTextView.setText(askItemModel.getStrTitle());
-        mCount.setText(askItemModel.getIntCount());
-        mSeq.setText(String.valueOf(askItemModel.getIntSeq()));
 
-        if (position == expandedPosition) {
-            expandArea.setVisibility(View.VISIBLE);
-        } else {
+    public void bindAskItem(MyProjectItemModel model, int position) {
+        this.myProjectModel = model;
+        mTitleTextView.setText(model.getTitle());
+        mCount.setText(String.valueOf(model.getCount()));
+        mSeq.setText(model.getSeq());
+        List<MyProjectItem2Model> mItems2  = model.getProjectModels2();
+
+        //ScrollView group = (ScrollView) itemView.findViewById(R.id.scrollView);
+        for(MyProjectItem2Model mod :mItems2){
+            //itemValue = (LinearLayout)itemView.findViewById(R.id.itemValue);
+            String item_name = mod.getItem_name();
+            String complete_date = mod.getComplete_date();
+        }
+
+
+        String show = myProjectModel.getShow();
+        if(show == null){
+            myProjectModel.setShow("up");
             expandArea.setVisibility(View.GONE);
+        }else{
+            if("down".equals(show)){
+                myProjectModel.setShow("up");
+                expandArea.setVisibility(View.GONE);
+            }else{
+                myProjectModel.setShow("down");
+                expandArea.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -61,14 +86,9 @@ public class MyProjectItemHolder extends RecyclerView.ViewHolder implements View
 //        startActivity(intent);
 
         // Check for an expanded view, collapse if you find one
-        if (expandedPosition >= 0) {
-            int prev = expandedPosition;
-            mAdapter.notifyItemChanged(prev);
-        }
-        // Set the current position to "expanded"
+
         expandedPosition = this.getAdapterPosition();
         mAdapter.notifyItemChanged(expandedPosition);
 
-        Log.d(TAG, "onClick Position:"+this.getAdapterPosition());
     }
 }

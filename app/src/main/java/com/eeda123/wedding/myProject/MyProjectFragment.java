@@ -3,6 +3,7 @@
 package com.eeda123.wedding.myProject;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,20 +12,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2ArrayAdapter;
+import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 public class MyProjectFragment extends Fragment {
     private RecyclerView mListRecyclerView;
+    private RecyclerView mListRecyclerView2;
     private MyProjectItemArrayAdapter mAdapter;
+    private MyProjectItem2ArrayAdapter mAdapter2;
     List<MyProjectItemModel> mItems ;
+    List<MyProjectItem2Model> mItems2 ;
 
     @BindView(R.id.sortByProject)
     TextView sortByProject;
@@ -47,7 +70,14 @@ public class MyProjectFragment extends Fragment {
                 .findViewById(R.id.list_recycler_view);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+
+//        View view2 = inflater.inflate(R.layout.my_project_list, container, false);
+//        mListRecyclerView2 = (RecyclerView) view2
+//                .findViewById(R.id.list_recycler_view2);
+//        mListRecyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        getData();
 
         return view;
     }
@@ -58,32 +88,93 @@ public class MyProjectFragment extends Fragment {
         ButterKnife.bind(this, view);
     }
 
-    private void updateUI() {
-        String date= "时间: 2017-07-13 10:10:10";
-
-        mItems = new ArrayList<MyProjectItemModel>();
-        mItems.add(new MyProjectItemModel("定日子", "1/10", 10));
-        mItems.add(new MyProjectItemModel("定婚宴", "1/10",9));
-        mItems.add(new MyProjectItemModel("拍婚照", "1/10",8));
-        mItems.add(new MyProjectItemModel("定婚庆", "1/10",7));
-        mItems.add(new MyProjectItemModel("选礼服", "1/10",6));
-        mItems.add(new MyProjectItemModel("淘婚品", "1/10",5));
-        mItems.add(new MyProjectItemModel("新娘美妆", "1/10",4));
-        mItems.add(new MyProjectItemModel("婚礼前一天筹备", "1/10",3));
-        mItems.add(new MyProjectItemModel("婚礼当天", "1/10",2));
-        mItems.add(new MyProjectItemModel("度蜜月", "1/10",1));
-        mItems.add(new MyProjectItemModel("自定义", "1/10",0));
 
 
-        if (mAdapter == null) {
-            mAdapter = new MyProjectItemArrayAdapter(mItems, getActivity());
-            mListRecyclerView.setAdapter(mAdapter);
-        } else {
-            mAdapter.setItems(mItems);
-            mAdapter.notifyDataSetChanged();
-        }
+    private void getData() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
 
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
+
+                Request request = original.newBuilder()
+                        .header("question_id", "")
+                        .method(original.method(), original.body())
+                        .build();
+
+                return chain.proceed(request);
+            }
+        });
+
+        OkHttpClient client = httpClient.build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HOST_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .build();
+
+        HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
+
+        Call<HashMap<String, Object>> call = service.list("myProject","orderData");
+
+        call.enqueue(eedaCallback());
     }
+
+
+    @NonNull
+    private Callback<HashMap<String,Object>> eedaCallback() {
+        return new Callback<HashMap<String,Object>>() {
+            @Override
+            public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
+                // The network call was a success and we got a response
+                mItems = new ArrayList<MyProjectItemModel>();
+                HashMap<String,Object> json = response.body();
+                ArrayList<Map> orderdata =  (ArrayList<Map>)json.get("ORDERLIST");
+                for (Map<String ,Object> map : orderdata){
+                    String seq = map.get("ID").toString();
+                    String title = map.get("PROJECT").toString();
+                    int size = ((ArrayList<Map>)map.get("ITEM_LIST")).size();
+
+
+                    mItems2 = new ArrayList<MyProjectItem2Model>();
+                    ArrayList<Map> itemList2 = (ArrayList<Map>)map.get("ITEM_LIST");
+                    for (Map<String ,String> map2 : itemList2){
+                        String item_name = map2.get("ITEM_NAME");
+                        String complete_date = null;
+                        if(map2.get("COMPLETE_DATE") != null){
+                            complete_date = map2.get("COMPLETE_DATE");
+                        }
+                        mItems2.add(new MyProjectItem2Model(item_name,complete_date));
+                    }
+                    mItems.add(new MyProjectItemModel(seq ,title, size,mItems2));
+                }
+
+                if (mAdapter == null) {
+                    mAdapter = new MyProjectItemArrayAdapter(mItems, getActivity());
+                    mListRecyclerView.setAdapter(mAdapter);
+                } else {
+                    mAdapter.setItems(mItems);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+
+
+
+            @Override
+            public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
+                // the network call was a failure
+                Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_LONG).show();
+
+            }
+        };
+    }
+
 
     @OnClick({R.id.sortByProject})
     public void onSortProjectClick(View view) {
