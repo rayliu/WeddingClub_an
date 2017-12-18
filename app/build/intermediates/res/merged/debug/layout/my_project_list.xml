@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/home_list_cu_item"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/project_item_bg"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/project_title_bg"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tvSeq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="10"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="233dp"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="定日子"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tvCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.68"
+                        android:text="1/10"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"/>
+
+                    <ImageView
+                        android:id="@+id/imageView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="3.27"
+                        android:paddingTop="5dp"
+                        app:srcCompat="@android:drawable/arrow_down_float"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/expandArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/accent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/my_project_list_item"
+                        android:id="@+id/list_recycler_view2"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/project_item_list"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_name"
+                android:layout_weight="0.18"
+                android:text="婚期体检"
+                android:textSize="18sp"
+                android:textColor="?attr/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/complete_date"
+                android:layout_width="217dp"
+                android:layout_height="wrap_content"
+                android:text="2017-10-10"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
