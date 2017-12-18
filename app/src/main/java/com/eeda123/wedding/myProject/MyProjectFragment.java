@@ -45,7 +45,8 @@ public class MyProjectFragment extends Fragment {
     private RecyclerView mListRecyclerView;
     private RecyclerView mListRecyclerView2;
     private MyProjectItemArrayAdapter mAdapter;
-    private MyProjectItem2ArrayAdapter mAdapter2;
+    //private MyProjectItem2ArrayAdapter mAdapter2;
+    private ArrayList<MyProjectItem2ArrayAdapter> adapter2ArrayList = new ArrayList<MyProjectItem2ArrayAdapter>();
     List<MyProjectItemModel> mItems ;
     List<MyProjectItem2Model> mItems2 ;
 
@@ -140,7 +141,6 @@ public class MyProjectFragment extends Fragment {
                     String title = map.get("PROJECT").toString();
                     int size = ((ArrayList<Map>)map.get("ITEM_LIST")).size();
 
-
                     mItems2 = new ArrayList<MyProjectItem2Model>();
                     ArrayList<Map> itemList2 = (ArrayList<Map>)map.get("ITEM_LIST");
                     for (Map<String ,String> map2 : itemList2){
@@ -151,11 +151,16 @@ public class MyProjectFragment extends Fragment {
                         }
                         mItems2.add(new MyProjectItem2Model(item_name,complete_date));
                     }
+
                     mItems.add(new MyProjectItemModel(seq ,title, size,mItems2));
+
+                    MyProjectItem2ArrayAdapter mAdapter2 =  new MyProjectItem2ArrayAdapter(mItems2, getActivity());
+                    adapter2ArrayList.add(mAdapter2);
                 }
 
                 if (mAdapter == null) {
                     mAdapter = new MyProjectItemArrayAdapter(mItems, getActivity());
+                    mAdapter.setItem2ArrayAdapterList(adapter2ArrayList);
                     mListRecyclerView.setAdapter(mAdapter);
                 } else {
                     mAdapter.setItems(mItems);

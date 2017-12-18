@@ -2,13 +2,16 @@
 package com.eeda123.wedding.myProject;
 
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2ArrayAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,8 +22,7 @@ import java.util.List;
 public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectItemHolder> {
     private List<MyProjectItemModel> mAskItemModels;
     private FragmentActivity activity;
-
-
+    private ArrayList<MyProjectItem2ArrayAdapter> adapter2ArrayList;
     public MyProjectItemArrayAdapter(List<MyProjectItemModel> askItemModels, FragmentActivity activity) {
         this.mAskItemModels = askItemModels;
         this.activity = activity;
@@ -38,6 +40,9 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
     public void onBindViewHolder(MyProjectItemHolder holder, int position) {
         MyProjectItemModel askItem = mAskItemModels.get(position);
         holder.bindAskItem(askItem, position);
+
+        holder.mListRecyclerView2.setAdapter(adapter2ArrayList.get(position));
+        holder.mListRecyclerView2.setLayoutManager(new LinearLayoutManager(activity));
     }
 
     @Override
@@ -47,5 +52,9 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
 
     public void setItems(List<MyProjectItemModel> mAskItemModels) {
         this.mAskItemModels = mAskItemModels;
+    }
+
+    public void setItem2ArrayAdapterList(ArrayList<MyProjectItem2ArrayAdapter> adapter2ArrayList){
+        this.adapter2ArrayList = adapter2ArrayList;
     }
 }

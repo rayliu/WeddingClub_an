@@ -10,6 +10,8 @@ import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
 
 import java.util.List;
 
+import static com.eeda123.wedding.R.id.view;
+
 /**
  * Created by a13570610691 on 2017/3/22.
  */
@@ -19,6 +21,7 @@ public class MyProjectItemHolder extends RecyclerView.ViewHolder implements View
     private com.eeda123.wedding.myProject.MyProjectItemModel myProjectModel;
     private MyProjectItemArrayAdapter mAdapter;
 
+    public RecyclerView mListRecyclerView2;//list_recycler_view2
     private TextView mTitleTextView;
     private TextView mCount;
     private TextView mSeq;
@@ -34,6 +37,9 @@ public class MyProjectItemHolder extends RecyclerView.ViewHolder implements View
         itemView.setOnClickListener(this);
 
         mAdapter = adapter;
+
+        mListRecyclerView2 =  (RecyclerView) itemView
+                .findViewById(R.id.list_recycler_view2);
         mTitleTextView = (TextView)
                 itemView.findViewById(R.id.tvTitle);
         mCount = (TextView)
