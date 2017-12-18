@@ -68,6 +68,12 @@
         </activity>
         <activity android:name=".shop.VideoActivity">
         </activity>
+
+        <activity android:name=".config.FeedbackActivity"></activity>
+        <activity android:name=".config.AboutUsActivity"></activity>
+        <activity android:name=".config.BizContactActivity"></activity>
+        <activity android:name=".config.PolicyActivity"></activity>
+        <activity android:name=".config.ServiceTermsActivity"></activity>
     </application>
 
 </manifest>

@@ -59,6 +59,7 @@
             android:id="@+id/item_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             leon:leftText="推送消息"/>
 
         <com.leon.lib.settingview.LSettingItem
@@ -69,29 +70,35 @@
         <com.leon.lib.settingview.LSettingItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             leon:leftText="检测新版本"/>
 
         <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/feedback_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             leon:leftText="信息反馈"/>
 
         <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/about_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             leon:leftText="关于婚礼帮"/>
 
         <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/contact_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             leon:leftText="业务联系"/>
 
         <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/policy_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             leon:leftText="私隐政策"/>
 
         <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/service_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             leon:leftText="服务条款"/>

@@ -63,6 +63,46 @@ public class MyConfigFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        LSettingItem feedbackItem = (LSettingItem) view.findViewById(R.id.feedback_item);
+        feedbackItem.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                onFeedbackClick();
+            }
+        });
+
+        LSettingItem about_item = (LSettingItem) view.findViewById(R.id.about_item);
+        about_item.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                onAboutClick();
+            }
+        });
+
+        LSettingItem contact_item = (LSettingItem) view.findViewById(R.id.contact_item);
+        contact_item.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                onContactClick();
+            }
+        });
+
+        LSettingItem policy_item = (LSettingItem) view.findViewById(R.id.policy_item);
+        policy_item.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                onPolicyClick();
+            }
+        });
+
+        LSettingItem service_item = (LSettingItem) view.findViewById(R.id.service_item);
+        service_item.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                onServiceClick();
+            }
+        });
+
         LSettingItem mSettingItemOne = (LSettingItem) view.findViewById(R.id.logout);
         mSettingItemOne.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
@@ -85,6 +125,31 @@ public class MyConfigFragment extends Fragment {
             login.setVisibility(view.INVISIBLE);
             login.setText("");
         }
+    }
+
+    void onAboutClick() {
+        Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.config.AboutUsActivity.class);
+        startActivity(intent);
+    }
+
+    void onContactClick() {
+        Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.config.BizContactActivity.class);
+        startActivity(intent);
+    }
+
+    void onPolicyClick() {
+        Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.config.PolicyActivity.class);
+        startActivity(intent);
+    }
+
+    void onServiceClick() {
+        Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.config.ServiceTermsActivity.class);
+        startActivity(intent);
+    }
+
+    void onFeedbackClick() {
+        Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.config.FeedbackActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.login) void onLoginClick() {
