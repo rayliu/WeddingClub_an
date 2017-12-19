@@ -137,7 +137,7 @@ public class AskFragment extends Fragment {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("ask","askList");
+        Call<HashMap<String, Object>> call = service.getAskList();
 
         call.enqueue(eedaCallback());
     }

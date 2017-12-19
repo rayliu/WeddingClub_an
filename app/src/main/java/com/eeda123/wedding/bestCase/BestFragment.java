@@ -87,7 +87,6 @@ public class BestFragment extends Fragment {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("conditions", "")
                         .method(original.method(), original.body())
                         .build();
 
@@ -105,7 +104,7 @@ public class BestFragment extends Fragment {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("bestCase","orderData");
+        Call<HashMap<String, Object>> call = service.getBestCaseData(null);
 
         call.enqueue(eedaCallback());
     }

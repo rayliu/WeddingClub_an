@@ -133,7 +133,6 @@ public class CaseItemActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("case_id", case_id.toString())
                         .method(original.method(), original.body())
                         .build();
 
@@ -152,7 +151,7 @@ public class CaseItemActivity extends AppCompatActivity {
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
 
-        Call<HashMap<String, Object>> call = service.list("bestCase","find_case_by_id");
+        Call<HashMap<String, Object>> call = service.caseFindById(case_id.toString());
 
         call.enqueue(eedaCallback());
     }

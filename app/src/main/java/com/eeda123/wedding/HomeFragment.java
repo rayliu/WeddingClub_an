@@ -239,6 +239,27 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         @GET("/app/shop/shopList/{param}")
         Call<HashMap<String,Object>> getShopList(@Path("param") String param);
+
+        @GET("/app/product/orderData/{param}")
+        Call<HashMap<String,Object>> getProductData(@Path("param") String param);
+
+        @GET("/app/bestCase/orderData/{param}")
+        Call<HashMap<String,Object>> getBestCaseData(@Path("param") String param);
+
+        @GET("/app/bestCase/findById/{param}")
+        Call<HashMap<String,Object>> caseFindById(@Path("param") String param);
+
+        @GET("/app/bestCase/video_case/{param}")
+        Call<HashMap<String,Object>> videoCaseFindById(@Path("param") String param);
+
+        @GET("/app/ask/askList")
+        Call<HashMap<String,Object>> getAskList();
+
+        @GET("/app/ask/save_question?value={values}&login_id={login_id}")
+        Call<HashMap<String,Object>> save_question(@Path("param") String values,@Path("param") String login_id);
+
+        @GET("/app/ask/save_answer?value={values}&login_id={login_id}&question_id={question_id}")
+        Call<HashMap<String,Object>> save_answer(@Path("param") String values,@Path("param") String login_id,String question_id);
     }
 
 

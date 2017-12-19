@@ -115,7 +115,6 @@ public class VideoActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("case_id", case_id.toString())
                         .method(original.method(), original.body())
                         .build();
 
@@ -134,7 +133,7 @@ public class VideoActivity extends AppCompatActivity {
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
 
-        Call<HashMap<String, Object>> call = service.list("bestCase","video_case");
+        Call<HashMap<String, Object>> call = service.videoCaseFindById(case_id.toString());
 
         call.enqueue(eedaCallback());
     }

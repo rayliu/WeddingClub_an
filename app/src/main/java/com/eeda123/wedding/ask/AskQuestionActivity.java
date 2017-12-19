@@ -130,8 +130,6 @@ public class AskQuestionActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("login_id", login_id)
-                        .header("questionValue", encodeHeadInfo(questionValue.getText().toString()))
                         .method(original.method(), original.body())
                         .build();
 
@@ -149,7 +147,7 @@ public class AskQuestionActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("ask","save_question");
+        Call<HashMap<String, Object>> call = service.save_question(questionValue.getText().toString(),login_id);
 
         call.enqueue(eedaCallback());
     }
