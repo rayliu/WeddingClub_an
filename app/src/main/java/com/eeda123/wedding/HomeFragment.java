@@ -47,6 +47,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 
@@ -256,20 +257,20 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         Call<HashMap<String,Object>> getAskList();
 
         @GET("/app/ask/save_question?value={values}&login_id={login_id}")
-        Call<HashMap<String,Object>> save_question(@Path("values") String values,@Path("login_id") String login_id);
+        Call<HashMap<String,Object>> save_question(@Query("values") String values,@Query("login_id") String login_id);
 
         @GET("/app/ask/save_answer?value={values}&login_id={login_id}&question_id={question_id}")
-        Call<HashMap<String,Object>> save_answer(@Path("values") String values,@Path("login_id") String login_id,@Path("question_id") String question_id);
+        Call<HashMap<String,Object>> save_answer(@Query("values") String values,@Query("login_id") String login_id,@Query("question_id") String question_id);
 
         @GET("/app/consult/save_consult?value={values}&login_id={login_id}&shop_id={shop_id}")
-        Call<HashMap<String,Object>> save_consult(@Path("values") String values,@Path("login_id") String login_id,@Path("shop_id") String shop_id);
+        Call<HashMap<String,Object>> save_consult(@Query("values") String values,@Query("login_id") String login_id,@Query("shop_id") String shop_id);
 
         @GET("/app/login/save_register?invite_code={invite_code}&user_name={user_name}&wedding_date={wedding_date}&pwd={pwd}&mobile={mobile}")
-        Call<HashMap<String,Object>> save_register(@Path("invite_code") String invite_code,@Path("user_name") String user_name,@Path("wedding_date") String wedding_date,
-                                                   @Path("pwd") String pwd,@Path("mobile") String mobile);
+        Call<HashMap<String,Object>> save_register(@Query("invite_code") String invite_code, @Query("user_name") String user_name, @Query("wedding_date") String wedding_date,
+                                                   @Query("pwd") String pwd, @Query("mobile") String mobile);
 
         @GET("/app/login/login?password={password}&mobile={mobile}")
-        Call<HashMap<String,Object>> login(@Path("password") String password,@Path("mobile") String mobile);
+        Call<HashMap<String,Object>> login(@Query("password") String password,@Query("mobile") String mobile);
     }
 
 
