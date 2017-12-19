@@ -45,6 +45,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -231,9 +232,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     }
 
     public interface EedaService {
-        @GET("/app/{type}/{methord}")
+        @GET("/app/{type}/{method}")
+        Call<HashMap<String,Object>> list(@Path("type") String type, @Path("method") String method);
 
-        Call<HashMap<String,Object>> list(@Path("type") String type,@Path("methord") String methord);
+        @GET("/app/category/searchShopByType/{param}")
+        Call<HashMap<String,Object>> getCategoryList(@Path("param") String param);
     }
 
 

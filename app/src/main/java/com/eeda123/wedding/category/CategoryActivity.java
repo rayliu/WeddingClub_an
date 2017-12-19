@@ -27,6 +27,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -194,7 +196,7 @@ public class CategoryActivity extends AppCompatActivity {
                         .addHeader("Connection", "keep-alive")
                         .addHeader("Accept", "*/*")
                         .addHeader("Cookie", "add cookies here")
-                        .header("category_name", EedaUtil.encodeHeadInfo(category_name))
+
                         .method(original.method(), original.body())
                         .build();
 
@@ -212,8 +214,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("category","searchShopByType");
-
+        Call<HashMap<String, Object>> call = service.getCategoryList(category_name);
         call.enqueue(eedaCallback());
     }
 
