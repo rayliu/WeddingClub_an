@@ -47,6 +47,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.diamond;
 
 
 public class ShopActivity extends AppCompatActivity  {
@@ -57,6 +58,10 @@ public class ShopActivity extends AppCompatActivity  {
     @BindView(R.id.shopName) TextView shopName;
     @BindView(R.id.categoryName) TextView categoryName;
     @BindView(R.id.address) TextView address;
+    @BindView(R.id.influence) TextView mInfluence;
+    @BindView(R.id.diamond) ImageView mDiamond;
+    @BindView(R.id.hui) ImageView mHui;
+    @BindView(R.id.cu) ImageView mCu;
 
     @BindView(R.id.info_line1) LinearLayout info_line1;
     @BindView(R.id.info_line2) LinearLayout info_line2;
@@ -197,6 +202,24 @@ public class ShopActivity extends AppCompatActivity  {
             String category_name = null;
             String c_address = null;
             String about = null;
+            String diomand = "";
+            String hui = "";
+            String influence = "";
+            String cu = "";
+
+            if( list.get("INFLUENCE") != null){
+                influence = list.get("INFLUENCE").toString();
+            }
+            if( list.get("DIOMAND") != null){
+                diomand = list.get("DIOMAND").toString();
+            }
+            if( list.get("HUI") != null){
+                hui = list.get("HUI").toString();
+            }
+            if( list.get("CU") != null){
+                cu = list.get("CU").toString();
+            }
+
             if(list.get("COMPANY_NAME") != null){
                 shop_name = list.get("COMPANY_NAME").toString();
             }
@@ -218,6 +241,16 @@ public class ShopActivity extends AppCompatActivity  {
             shopName.setText(shop_name);
             categoryName.setText(category_name);
             address.setText(c_address);
+            mInfluence.setText(influence);
+            if(!"Y".equals(diamond)){
+                mDiamond.setVisibility(View.INVISIBLE);
+            }
+            if(!"Y".equals(cu)){
+                mCu.setVisibility(View.INVISIBLE);
+            }
+            if(!"Y".equals(hui)){
+                mHui.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
