@@ -1,9 +1,5 @@
 package com.eeda123.wedding.myProject;
 
-import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
-
-import java.util.List;
-
 /**
  * Created by a13570610691 on 2017/3/22.
  */
@@ -51,23 +47,22 @@ public class MyProjectItemModel {
     private int count;
     private String show;
 
-
-
-    public List<MyProjectItem2Model> getProjectModels2() {
-        return projectModels2;
+    public int getTotal() {
+        return total;
     }
 
-    public void setProjectModels2(List<MyProjectItem2Model> projectModels2) {
-        this.projectModels2 = projectModels2;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
-    private List<MyProjectItem2Model> projectModels2;
+    private int total;
 
-    public MyProjectItemModel( String seq ,String title, int count,List<MyProjectItem2Model> projectModels2){
+
+    public MyProjectItemModel( String seq ,String title, int count,int total){
         this.seq = seq;
         this.title = title;
         this.count = count;
-        this.projectModels2 = projectModels2;
+        this.total = total;
     }
 
 }

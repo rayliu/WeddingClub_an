@@ -29,8 +29,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/project_title_bg"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:id="@+id/item_linear">
 
                     <TextView
                         android:id="@+id/tvSeq"
@@ -58,7 +58,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.68"
-                        android:text="1/10"
+                        android:text="0"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:id="@+id/tvee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.68"
+                        android:text="/"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:id="@+id/tvTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.68"
+                        android:text="10"
                         android:textColor="@color/accent"
                         android:textSize="18sp"/>
 

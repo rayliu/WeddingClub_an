@@ -2,6 +2,8 @@
 
 package com.eeda123.wedding.myProject;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -102,8 +104,12 @@ public class MyProjectFragment extends Fragment {
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
 
+                //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
+                        Activity.MODE_PRIVATE);
+
                 Request request = original.newBuilder()
-                        .header("question_id", "")
+                        .header("login_id", sharedPreferences.getString("login_id", ""))
                         .method(original.method(), original.body())
                         .build();
 
@@ -137,22 +143,28 @@ public class MyProjectFragment extends Fragment {
                 HashMap<String,Object> json = response.body();
                 ArrayList<Map> orderdata =  (ArrayList<Map>)json.get("ORDERLIST");
                 for (Map<String ,Object> map : orderdata){
-                    String seq = map.get("ID").toString();
+                    Long seq = ((Double)map.get("ID")).longValue();
                     String title = map.get("PROJECT").toString();
-                    int size = ((ArrayList<Map>)map.get("ITEM_LIST")).size();
+                    int size = ((ArrayList<Map>)map.get("CHECK_ITEM")).size();
+                    int total = ((ArrayList<Map>)map.get("ITEM_LIST")).size();
 
                     mItems2 = new ArrayList<MyProjectItem2Model>();
                     ArrayList<Map> itemList2 = (ArrayList<Map>)map.get("ITEM_LIST");
                     for (Map<String ,String> map2 : itemList2){
+                        Long item_id = ((Double)map.get("ID")).longValue();
                         String item_name = map2.get("ITEM_NAME");
                         String complete_date = null;
+                        String is_check = null;
                         if(map2.get("COMPLETE_DATE") != null){
                             complete_date = map2.get("COMPLETE_DATE");
                         }
-                        mItems2.add(new MyProjectItem2Model(item_name,complete_date));
+                        if(map2.get("IS_CHECK") != null){
+                            is_check = map2.get("IS_CHECK");
+                        }
+                        mItems2.add(new MyProjectItem2Model(is_check,item_id,item_name,complete_date));
                     }
 
-                    mItems.add(new MyProjectItemModel(seq ,title, size,mItems2));
+                    mItems.add(new MyProjectItemModel(seq.toString() ,title, size,total));
 
                     MyProjectItem2ArrayAdapter mAdapter2 =  new MyProjectItem2ArrayAdapter(mItems2, getActivity());
                     adapter2ArrayList.add(mAdapter2);
@@ -167,9 +179,6 @@ public class MyProjectFragment extends Fragment {
                     mAdapter.notifyDataSetChanged();
                 }
             }
-
-
-
 
             @Override
             public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
@@ -193,4 +202,6 @@ public class MyProjectFragment extends Fragment {
         sortByProject.setTextColor(ContextCompat.getColor(view.getContext(), R.color.base));
         sortByTime.setTextColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary));
     }
+
+
 }

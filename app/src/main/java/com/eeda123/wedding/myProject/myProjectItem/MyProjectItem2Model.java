@@ -25,7 +25,29 @@ public class MyProjectItem2Model {
 
     private String complete_date;
 
-    public MyProjectItem2Model(String item_name, String complete_date){
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    private Long id;
+
+    public String getIs_check() {
+        return is_check;
+    }
+
+    public void setIs_check(String is_check) {
+        this.is_check = is_check;
+    }
+
+    private String is_check;
+
+    public MyProjectItem2Model(String is_check,Long id ,String item_name, String complete_date){
+        this.is_check = is_check;
+        this.id = id;
         this.item_name = item_name;
         this.complete_date = complete_date;
     }
