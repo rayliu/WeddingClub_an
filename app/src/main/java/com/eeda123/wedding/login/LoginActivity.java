@@ -200,8 +200,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("password", EedaUtil.encodeHeadInfo(password.getText().toString()))
-                        .header("mobile", EedaUtil.encodeHeadInfo(mobile.getText().toString()))
                         .method(original.method(), original.body())
                         .build();
 
@@ -219,7 +217,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("login","login");
+        Call<HashMap<String, Object>> call = service.login(password.getText().toString(),mobile.getText().toString());
 
         call.enqueue(eedaCallback());
     }

@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.util.EedaUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -134,12 +133,6 @@ public class ConsultActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("shop_id", shop_id.toString())
-                        .header("login_id", login_id)
-                        .header("remark", EedaUtil.encodeHeadInfo(remark.getText().toString()))
-                        .header("user_name", EedaUtil.encodeHeadInfo(userName.getText().toString()))
-                        .header("mobile", EedaUtil.encodeHeadInfo(mobile.getText().toString()))
-                        .header("wedding_date", EedaUtil.encodeHeadInfo(weddingDate.getText().toString()))
                         .method(original.method(), original.body())
                         .build();
 
@@ -158,7 +151,7 @@ public class ConsultActivity extends AppCompatActivity {
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
 
-        Call<HashMap<String, Object>> call = service.list("consult","save_consult");
+        Call<HashMap<String, Object>> call = service.save_consult(remark.getText().toString(),login_id,shop_id.toString());
 
         call.enqueue(eedaCallback());
     }

@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.util.EedaUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -177,11 +176,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("invite_code", EedaUtil.encodeHeadInfo(inviteCode.getText().toString()))
-                        .header("user_name", EedaUtil.encodeHeadInfo(name.getText().toString()))
-                        .header("wedding_date", EedaUtil.encodeHeadInfo(weddingDate.getText().toString()))
-                        .header("pwd", EedaUtil.encodeHeadInfo(pwd.getText().toString()))
-                        .header("mobile", EedaUtil.encodeHeadInfo(mobile.getText().toString()))
                         .method(original.method(), original.body())
                         .build();
 
@@ -199,7 +193,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("login","save_register");
+        Call<HashMap<String, Object>> call = service.save_register(inviteCode.getText().toString(),name.getText().toString(),
+                weddingDate.getText().toString(),pwd.getText().toString(),mobile.getText().toString());
 
         call.enqueue(eedaCallback());
     }
