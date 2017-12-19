@@ -147,7 +147,6 @@ public class ShopActivity extends AppCompatActivity  {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("shop_id", shop_id.toString())
                         .method(original.method(), original.body())
                         .build();
 
@@ -163,9 +162,10 @@ public class ShopActivity extends AppCompatActivity  {
                 .client(client)
                 .build();
 
+
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("shop","shopList");
+        Call<HashMap<String, Object>> call = service.getShopList(shop_id.toString());
 
         call.enqueue(eedaCallback());
     }

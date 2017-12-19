@@ -45,7 +45,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -237,6 +236,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         @GET("/app/category/searchShopByType/{param}")
         Call<HashMap<String,Object>> getCategoryList(@Path("param") String param);
+
+        @GET("/app/shop/shopList/{param}")
+        Call<HashMap<String,Object>> getShopList(@Path("param") String param);
     }
 
 
