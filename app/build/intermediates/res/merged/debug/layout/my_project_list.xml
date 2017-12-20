@@ -26,11 +26,11 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/item_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/project_title_bg"
-                    android:padding="5dp"
-                    android:id="@+id/item_linear">
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/tvSeq"
@@ -61,6 +61,7 @@
                         android:text="0"
                         android:textColor="@color/accent"
                         android:textSize="18sp"/>
+
                     <TextView
                         android:id="@+id/tvee"
                         android:layout_width="wrap_content"
@@ -69,6 +70,7 @@
                         android:text="/"
                         android:textColor="@color/accent"
                         android:textSize="18sp"/>
+
                     <TextView
                         android:id="@+id/tvTotal"
                         android:layout_width="wrap_content"
@@ -99,10 +101,11 @@
                     android:visibility="visible">
 
                     <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_recycler_view2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:listitem="@layout/my_project_list_item"
-                        android:id="@+id/list_recycler_view2"/>
+                        android:focusable="false"
+                        tools:listitem="@layout/my_project_list_item"/>
                 </LinearLayout>
             </LinearLayout>
 

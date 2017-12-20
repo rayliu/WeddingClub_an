@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.view;
 
 public class MyProjectFragment extends Fragment {
     private RecyclerView mListRecyclerView;
@@ -56,6 +59,12 @@ public class MyProjectFragment extends Fragment {
     TextView sortByProject;
     @BindView(R.id.sortByTime) TextView sortByTime;
 
+    ExpandableListView expandableListView;
+    ExpandableListAdapter expandableListAdapter;
+    List<String> expandableListTitle;
+    HashMap<String, List<String>> expandableListDetail;
+
+
     public static MyProjectFragment newInstance() {
         MyProjectFragment fragment = new MyProjectFragment();
         return fragment;
@@ -69,16 +78,6 @@ public class MyProjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_project, container, false);
-        mListRecyclerView = (RecyclerView) view
-                .findViewById(R.id.list_recycler_view);
-        mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-//        View view2 = inflater.inflate(R.layout.my_project_list, container, false);
-//        mListRecyclerView2 = (RecyclerView) view2
-//                .findViewById(R.id.list_recycler_view2);
-//        mListRecyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         getData();
 
@@ -89,27 +88,82 @@ public class MyProjectFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
     }
 
+    private void initExpandList() {
 
+
+//        expandableListDetail = ExpandableListDataPump.getData();
+//
+//        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
+        expandableListAdapter = new CustomExpandableListAdapter(this.getContext(), mItems, this.getActivity());
+        expandableListView.setAdapter(expandableListAdapter);
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                //showExpandMsg(groupPosition);
+            }
+        });
+
+        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                //showCollapseMsg(groupPosition);
+
+            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                //showChildClickMsg(groupPosition, childPosition);
+                return false;
+            }
+        });
+    }
+
+    private void showExpandMsg(int groupPosition) {
+        Toast.makeText(this.getActivity().getApplicationContext(),
+                mItems.get(groupPosition).getTitle() + " List Expanded.",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void showCollapseMsg(int groupPosition) {
+        Toast.makeText(this.getActivity().getApplicationContext(),
+                mItems.get(groupPosition).getTitle() + " List Collapsed.",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void showChildClickMsg(int groupPosition, int childPosition) {
+        Toast.makeText(
+                this.getActivity().getApplicationContext(),
+                mItems.get(groupPosition).getTitle()
+                        + " -> "
+                        + mItems.get(groupPosition).mItems2List.get(childPosition).getItem_name(), Toast.LENGTH_SHORT
+        ).show();
+    }
 
     private void getData() {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
 
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        final String userId = sharedPreferences.getString("login_id", "");
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
-
-                //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
-                        Activity.MODE_PRIVATE);
-
                 Request request = original.newBuilder()
-                        .header("login_id", sharedPreferences.getString("login_id", ""))
+                        .header("login_id", userId)
                         .method(original.method(), original.body())
                         .build();
 
@@ -127,7 +181,7 @@ public class MyProjectFragment extends Fragment {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("myProject","orderData");
+        Call<HashMap<String, Object>> call = service.getProjectDataByGroup(userId);
 
         call.enqueue(eedaCallback());
     }
@@ -145,6 +199,8 @@ public class MyProjectFragment extends Fragment {
                 for (Map<String ,Object> map : orderdata){
                     Long seq = ((Double)map.get("ID")).longValue();
                     String title = map.get("PROJECT").toString();
+
+
                     int size = ((ArrayList<Map>)map.get("CHECK_ITEM")).size();
                     int total = ((ArrayList<Map>)map.get("ITEM_LIST")).size();
 
@@ -164,20 +220,16 @@ public class MyProjectFragment extends Fragment {
                         mItems2.add(new MyProjectItem2Model(is_check,item_id,item_name,complete_date));
                     }
 
-                    mItems.add(new MyProjectItemModel(seq.toString() ,title, size,total));
+                    mItems.add(new MyProjectItemModel(seq.toString(), title, size, total, mItems2));
 
                     MyProjectItem2ArrayAdapter mAdapter2 =  new MyProjectItem2ArrayAdapter(mItems2, getActivity());
                     adapter2ArrayList.add(mAdapter2);
                 }
 
-                if (mAdapter == null) {
-                    mAdapter = new MyProjectItemArrayAdapter(mItems, getActivity());
-                    mAdapter.setItem2ArrayAdapterList(adapter2ArrayList);
-                    mListRecyclerView.setAdapter(mAdapter);
-                } else {
-                    mAdapter.setItems(mItems);
-                    mAdapter.notifyDataSetChanged();
-                }
+
+
+                //数据回来后才刷新ExpandList
+                initExpandList();
             }
 
             @Override

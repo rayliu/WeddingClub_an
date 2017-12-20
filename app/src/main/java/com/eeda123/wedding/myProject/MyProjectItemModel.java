@@ -1,12 +1,17 @@
 package com.eeda123.wedding.myProject;
 
+import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by a13570610691 on 2017/3/22.
  */
 
 public class MyProjectItemModel {
-
-
+    List<MyProjectItem2Model> mItems2List ;
 
     public String getShow() {
         return show;
@@ -58,11 +63,12 @@ public class MyProjectItemModel {
     private int total;
 
 
-    public MyProjectItemModel( String seq ,String title, int count,int total){
+    public MyProjectItemModel( String seq ,String title, int count,int total, List<MyProjectItem2Model> mItems2List){
         this.seq = seq;
         this.title = title;
         this.count = count;
         this.total = total;
+        this.mItems2List = mItems2List;
     }
 
 }

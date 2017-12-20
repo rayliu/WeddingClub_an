@@ -21,6 +21,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -183,12 +184,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Toast.makeText(getBaseContext(), "密码不能为空", Toast.LENGTH_LONG).show();
             return;
         }
-
-        login();
+        String  encoding = Base64.encodeToString((mobile_text+":"+password_text).getBytes(), Base64.NO_WRAP);
+        login(encoding);
     }
 
 
-    private void login() {
+    private void login(final String key) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
@@ -200,6 +201,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
+                        .header("Authorization", "Basic " + key)
                         .method(original.method(), original.body())
                         .build();
 
@@ -217,7 +219,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.login(password.getText().toString(),mobile.getText().toString());
+        Call<HashMap<String, Object>> call = service.login();
 
         call.enqueue(eedaCallback());
     }

@@ -232,6 +232,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     }
 
     public interface EedaService {
+        @GET("/app/signIn")
+        Call<HashMap<String, Object>> login();
+
         @GET("/app/{type}/{method}")
         Call<HashMap<String,Object>> list(@Path("type") String type, @Path("method") String method);
 
@@ -271,6 +274,15 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         @GET("/app/login/login?password={password}&mobile={mobile}")
         Call<HashMap<String,Object>> login(@Query("password") String password,@Query("mobile") String mobile);
+        
+        @GET("/app/myProject/orderData/{param}")
+        Call<HashMap<String,Object>> getProjectDataByGroup(@Path("param") String param);
+
+        @GET("/app/myProject/save_date/{param}")
+        Call<HashMap<String,Object>> saveProjectDate(@Path("param") String param);
+
+        @GET("/app/myProject/save_check/{param}")
+        Call<HashMap<String,Object>> saveProjectCheck(@Path("param") String param);
     }
 
 

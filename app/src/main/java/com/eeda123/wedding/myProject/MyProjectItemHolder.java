@@ -3,10 +3,17 @@ package com.eeda123.wedding.myProject;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eeda123.wedding.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -30,6 +37,8 @@ public class MyProjectItemHolder extends RecyclerView.ViewHolder implements View
 
     private int expandedPosition = -1;
 
+
+
     public MyProjectItemHolder(MyProjectItemArrayAdapter adapter, View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
@@ -49,17 +58,7 @@ public class MyProjectItemHolder extends RecyclerView.ViewHolder implements View
                 itemView.findViewById(R.id.expandArea);
         total = (TextView)
                 itemView.findViewById(R.id.tvTotal);
-//        itemName = (CheckBox)
-//                itemView.findViewById(R.id.item_name);
-//        completeDate = (TextView)
-//                itemView.findViewById(R.id.complete_date);
-//        LinearLayout item_linear = (LinearLayout)itemView.findViewById(R.id.item_linear);
-//        item_linear.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onClickView(v);
-//            }
-//        });
+
 
 
 
