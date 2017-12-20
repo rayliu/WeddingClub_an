@@ -35,7 +35,6 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.util.EedaUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -233,6 +232,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
                 String  result = json.get("RESULT").toString();
+                Long login_id = ((Double)json.get("LOGIN_ID")).longValue();
 
                 if("true".equals(result)){
                     //实例化SharedPreferences对象（第一步）
@@ -241,7 +241,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     //实例化SharedPreferences.Editor对象（第二步）
                     SharedPreferences.Editor editor = mySharedPreferences.edit();
                     editor.putString("mobile", mobile.getText().toString());
-                    editor.putString("login_id", json.get("LOGIN_ID").toString());
+                    editor.putString("login_id", login_id.toString());
                     editor.putString("user_name", json.get("USER_NAME").toString());
                     editor.putString("wedding_date", json.get("WEDDING_DATE").toString());
                     //提交当前数据
