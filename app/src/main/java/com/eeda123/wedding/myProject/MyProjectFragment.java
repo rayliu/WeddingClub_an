@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +43,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
-import static com.eeda123.wedding.R.id.view;
 
 public class MyProjectFragment extends Fragment {
     private RecyclerView mListRecyclerView;
@@ -206,16 +204,16 @@ public class MyProjectFragment extends Fragment {
 
                     mItems2 = new ArrayList<MyProjectItem2Model>();
                     ArrayList<Map> itemList2 = (ArrayList<Map>)map.get("ITEM_LIST");
-                    for (Map<String ,String> map2 : itemList2){
-                        Long item_id = ((Double)map.get("ID")).longValue();
-                        String item_name = map2.get("ITEM_NAME");
+                    for (Map<String ,Object> map2 : itemList2){
+                        Long item_id = ((Double)map2.get("ID")).longValue();
+                        String item_name = map2.get("ITEM_NAME").toString();
                         String complete_date = null;
                         String is_check = null;
-                        if(map2.get("COMPLETE_DATE") != null){
-                            complete_date = map2.get("COMPLETE_DATE");
+                        if(map2.get("NEW_COMPLETE_DATE") != null){
+                            complete_date = map2.get("NEW_COMPLETE_DATE").toString();
                         }
                         if(map2.get("IS_CHECK") != null){
-                            is_check = map2.get("IS_CHECK");
+                            is_check = map2.get("IS_CHECK").toString();
                         }
                         mItems2.add(new MyProjectItem2Model(is_check,item_id,item_name,complete_date));
                     }

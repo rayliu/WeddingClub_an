@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,25 +17,20 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.category.CategoryActivity;
 import com.eeda123.wedding.login.LoginActivity;
-import com.eeda123.wedding.login.RegisterActivity;
 import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -51,10 +44,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.ContentValues.TAG;
-import static android.view.View.Y;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
-import static com.eeda123.wedding.R.id.listTitle;
-import static com.eeda123.wedding.R.id.slider;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -95,24 +85,39 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         }
         CheckBox item_name = (CheckBox) convertView
                 .findViewById(R.id.item_name);
-
+        if("Y".equals(item2Model.getIs_check())){
+            item_name.setChecked(true);
+            if(TextUtils.isEmpty(item2Model.getComplete_date())){
+                TextView completeDate = (TextView) convertView
+                        .findViewById(R.id.complete_date);
+                completeDate.setText(item2Model.getComplete_date());
+            }
+        }
 
         item_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                @Override
                public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                    String userId= getUserId();
-                   if(!TextUtils.isEmpty(userId)){
-                       String param = userId + "-" + item2Model.getId();
-                       if(isChecked){
-                            param += "-Y";
-                       }else{
-                           param += "-N";
-                       }
-                       saveCheck(param);
+                   String item_id = item2Model.getId().toString();
+                   String is_check = null;
+                   String date = item2Model.getComplete_date()==null?"":item2Model.getComplete_date();
+
+                   if(isChecked){
+                       is_check = "Y";
+                       item2Model.setIs_check("Y");
+                   }else{
+                       is_check = "N";
+                       item2Model.setIs_check("N");
                    }
+                   HomeFragment.EedaService service = initRetroCall();
+                   Call<HashMap<String, Object>> call = service.saveProjectCheck(userId,item_id,is_check,date);
+
+                   call.enqueue(eedaCallback(activity));
                }
            }
         );
+
+
         //处理选择日期
         final TextView completeDate = (TextView)
                 convertView.findViewById(R.id.complete_date);
@@ -166,12 +171,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         return login_id;
     }
 
-    private void saveCheck(String param){
-        HomeFragment.EedaService service = initRetroCall();
-        Call<HashMap<String, Object>> call = service.saveProjectCheck(param);
 
-        call.enqueue(eedaCallback(activity));
-    }
 
     private void saveDate(MyProjectItem2Model item2Model){
         String userId= getUserId();
@@ -180,8 +180,16 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
         HomeFragment.EedaService service = initRetroCall();
 
-        String param = userId + "-" +item2Model.getId()+"-"+item2Model.getComplete_date();
-        Call<HashMap<String, Object>> call = service.saveProjectDate(param);
+        String item_id = item2Model.getId().toString();
+        String is_check = item2Model.getIs_check();
+        String date = item2Model.getComplete_date()==null?"":item2Model.getComplete_date();
+
+        if(TextUtils.isEmpty(is_check)){
+            is_check = "N";
+            return;
+        }
+
+        Call<HashMap<String, Object>> call = service.saveProjectDate(userId,item_id,is_check,date);
 
         call.enqueue(eedaCallback(activity));
     }

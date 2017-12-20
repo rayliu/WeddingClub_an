@@ -247,8 +247,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         @GET("/app/product/orderData/{param}")
         Call<HashMap<String,Object>> getProductData(@Path("param") String param);
 
-        @GET("/app/bestCase/orderData/{param}")
-        Call<HashMap<String,Object>> getBestCaseData(@Path("param") String param);
+        @GET("/app/bestCase/orderData")
+        Call<HashMap<String,Object>> getBestCaseData();
 
         @GET("/app/bestCase/findById/{param}")
         Call<HashMap<String,Object>> caseFindById(@Path("param") String param);
@@ -258,6 +258,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         @GET("/app/ask/askList")
         Call<HashMap<String,Object>> getAskList();
+
+        @GET("/app/ask/responseList/{question_id}")
+        Call<HashMap<String,Object>> getAnswerList(@Path("question_id") String question_id);
 
         @GET("/app/ask/save_question")
         Call<HashMap<String,Object>> save_question(@Query("values") String values,@Query("login_id") String login_id);
@@ -278,11 +281,13 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         @GET("/app/myProject/orderData/{param}")
         Call<HashMap<String,Object>> getProjectDataByGroup(@Path("param") String param);
 
-        @GET("/app/myProject/save_date/{param}")
-        Call<HashMap<String,Object>> saveProjectDate(@Path("param") String param);
+        @GET("/app/myProject/save_date")
+        Call<HashMap<String,Object>> saveProjectDate(@Query("user_id") String user_id,@Query("item_id") String item_id,
+                                                     @Query("is_check") String is_check,@Query("complete_date") String complete_date);
 
-        @GET("/app/myProject/save_check/{param}")
-        Call<HashMap<String,Object>> saveProjectCheck(@Path("param") String param);
+        @GET("/app/myProject/save_check")
+        Call<HashMap<String,Object>> saveProjectCheck(@Query("user_id") String user_id,@Query("item_id") String item_id,
+                                                      @Query("is_check") String is_check,@Query("complete_date") String complete_date);
     }
 
 

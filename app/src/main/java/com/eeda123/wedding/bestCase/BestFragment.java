@@ -104,7 +104,7 @@ public class BestFragment extends Fragment {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.getBestCaseData(null);
+        Call<HashMap<String, Object>> call = service.getBestCaseData();
 
         call.enqueue(eedaCallback());
     }
