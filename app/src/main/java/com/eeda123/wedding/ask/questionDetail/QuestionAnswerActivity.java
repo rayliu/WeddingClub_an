@@ -131,7 +131,6 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("question_id", question_id.toString())
                         .method(original.method(), original.body())
                         .build();
 
@@ -149,7 +148,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("ask","responseList");
+        Call<HashMap<String, Object>> call = service.getAnswerList(question_id.toString());
 
         call.enqueue(eedaCallback());
     }

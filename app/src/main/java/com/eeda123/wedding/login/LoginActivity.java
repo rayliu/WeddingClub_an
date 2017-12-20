@@ -232,13 +232,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
                 String  result = json.get("RESULT").toString();
-                Long login_id = ((Double)json.get("LOGIN_ID")).longValue();
 
                 if("true".equals(result)){
                     //实例化SharedPreferences对象（第一步）
                     SharedPreferences mySharedPreferences= getSharedPreferences("login_file",
                             Activity.MODE_PRIVATE);
                     //实例化SharedPreferences.Editor对象（第二步）
+                    Long login_id = ((Double)json.get("LOGIN_ID")).longValue();
                     SharedPreferences.Editor editor = mySharedPreferences.edit();
                     editor.putString("mobile", mobile.getText().toString());
                     editor.putString("login_id", login_id.toString());
