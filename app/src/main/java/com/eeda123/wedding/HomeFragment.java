@@ -259,20 +259,20 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         @GET("/app/ask/askList")
         Call<HashMap<String,Object>> getAskList();
 
-        @GET("/app/ask/save_question?value={values}&login_id={login_id}")
+        @GET("/app/ask/save_question")
         Call<HashMap<String,Object>> save_question(@Query("values") String values,@Query("login_id") String login_id);
 
-        @GET("/app/ask/save_answer?value={values}&login_id={login_id}&question_id={question_id}")
+        @GET("/app/ask/save_answer")
         Call<HashMap<String,Object>> save_answer(@Query("values") String values,@Query("login_id") String login_id,@Query("question_id") String question_id);
 
-        @GET("/app/consult/save_consult?value={values}&login_id={login_id}&shop_id={shop_id}")
+        @GET("/app/consult/save_consult")
         Call<HashMap<String,Object>> save_consult(@Query("values") String values,@Query("login_id") String login_id,@Query("shop_id") String shop_id);
 
-        @GET("/app/login/save_register?invite_code={invite_code}&user_name={user_name}&wedding_date={wedding_date}&pwd={pwd}&mobile={mobile}")
+        @GET("/app/login/save_register")
         Call<HashMap<String,Object>> save_register(@Query("invite_code") String invite_code, @Query("user_name") String user_name, @Query("wedding_date") String wedding_date,
                                                    @Query("pwd") String pwd, @Query("mobile") String mobile);
 
-        @GET("/app/login/login?password={password}&mobile={mobile}")
+        @GET("/app/login/login")
         Call<HashMap<String,Object>> login(@Query("password") String password,@Query("mobile") String mobile);
         
         @GET("/app/myProject/orderData/{param}")
