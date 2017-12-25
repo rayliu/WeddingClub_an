@@ -208,13 +208,15 @@ public class MyProjectFragment extends Fragment {
                         Long item_id = ((Double)map2.get("ID")).longValue();
                         String item_name = map2.get("ITEM_NAME").toString();
                         String complete_date = null;
-                        String is_check = null;
+                        String is_check = "N";
+
                         if(map2.get("NEW_COMPLETE_DATE") != null){
                             complete_date = map2.get("NEW_COMPLETE_DATE").toString();
                         }
                         if(map2.get("IS_CHECK") != null){
                             is_check = map2.get("IS_CHECK").toString();
                         }
+
                         mItems2.add(new MyProjectItem2Model(is_check,item_id,item_name,complete_date));
                     }
 

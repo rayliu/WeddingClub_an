@@ -231,28 +231,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
-                String  result = json.get("RESULT").toString();
+                if(json != null){
+                    String  result = json.get("RESULT").toString();
 
-                if("true".equals(result)){
-                    //实例化SharedPreferences对象（第一步）
-                    SharedPreferences mySharedPreferences= getSharedPreferences("login_file",
-                            Activity.MODE_PRIVATE);
-                    //实例化SharedPreferences.Editor对象（第二步）
-                    Long login_id = ((Double)json.get("LOGIN_ID")).longValue();
-                    SharedPreferences.Editor editor = mySharedPreferences.edit();
-                    editor.putString("mobile", mobile.getText().toString());
-                    editor.putString("login_id", login_id.toString());
-                    editor.putString("user_name", json.get("USER_NAME").toString());
-                    editor.putString("wedding_date", json.get("WEDDING_DATE").toString());
-                    //提交当前数据
-                    editor.commit();
+                    if("true".equals(result)){
+                        //实例化SharedPreferences对象（第一步）
+                        SharedPreferences mySharedPreferences= getSharedPreferences("login_file",
+                                Activity.MODE_PRIVATE);
+                        //实例化SharedPreferences.Editor对象（第二步）
+                        Long login_id = ((Double)json.get("LOGIN_ID")).longValue();
+                        SharedPreferences.Editor editor = mySharedPreferences.edit();
+                        editor.putString("mobile", mobile.getText().toString());
+                        editor.putString("login_id", login_id.toString());
+                        editor.putString("user_name", json.get("USER_NAME").toString());
+                        editor.putString("wedding_date", json.get("WEDDING_DATE").toString());
+                        //提交当前数据
+                        editor.commit();
 
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(intent);
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        startActivity(intent);
+                    }else{
+                        String  errMsg = json.get("ERRMSG").toString();
+                        Toast.makeText(getBaseContext(), errMsg, Toast.LENGTH_LONG).show();
+                    }
                 }else{
-                    String  errMsg = json.get("ERRMSG").toString();
-                    Toast.makeText(getBaseContext(), errMsg, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "操作失败", Toast.LENGTH_LONG).show();
                 }
+
             }
 
             @Override

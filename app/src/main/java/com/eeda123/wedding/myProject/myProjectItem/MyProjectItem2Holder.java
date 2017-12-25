@@ -40,8 +40,8 @@ public class MyProjectItem2Holder extends RecyclerView.ViewHolder implements Vie
             itemName.setChecked(false);
         }
 
-        itemName.setText(model.getItem_name());
-        completeDate.setText(model.getComplete_date());
+//        itemName.setText(model.getItem_name());
+//        completeDate.setText(model.getComplete_date());
     }
 
 

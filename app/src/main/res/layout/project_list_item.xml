@@ -15,11 +15,16 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/item_name"
-        android:layout_weight="0.18"
-        android:text="婚期体检"
+        android:id="@+id/is_check"
         android:textSize="18sp"
         android:textColor="?attr/colorPrimary"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_name"
+        android:layout_weight="0.18"
+        android:textColor="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/complete_date"

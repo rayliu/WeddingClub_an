@@ -83,18 +83,22 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.project_list_item, null);
         }
-        CheckBox item_name = (CheckBox) convertView
+        CheckBox is_check = (CheckBox) convertView
+                .findViewById(R.id.is_check);
+        TextView item_name = (TextView) convertView
                 .findViewById(R.id.item_name);
-        if("Y".equals(item2Model.getIs_check())){
-            item_name.setChecked(true);
-            if(TextUtils.isEmpty(item2Model.getComplete_date())){
-                TextView completeDate = (TextView) convertView
-                        .findViewById(R.id.complete_date);
-                completeDate.setText(item2Model.getComplete_date());
-            }
-        }
 
-        item_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//
+//        if("Y".equals(item2Model.getIs_check())){
+//            item_name.setChecked(true);
+//            if(TextUtils.isEmpty(item2Model.getComplete_date())){
+//                TextView completeDate = (TextView) convertView
+//                        .findViewById(R.id.complete_date);
+//                completeDate.setText(item2Model.getComplete_date());
+//            }
+//        }
+
+        is_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                @Override
                public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                    String userId= getUserId();
@@ -145,6 +149,13 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         });
 
         item_name.setText(expandedListText);
+
+        String isCheck = item2Model.getIs_check();
+        if("Y".equals(isCheck)){
+            is_check.setChecked(true);
+        }else{
+            is_check.setChecked(false);
+        }
         String date = item2Model.getComplete_date()==null?"选日期":item2Model.getComplete_date();
         completeDate.setText(date);
 
@@ -185,8 +196,12 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         String date = item2Model.getComplete_date()==null?"":item2Model.getComplete_date();
 
         if(TextUtils.isEmpty(is_check)){
-            is_check = "N";
+            item2Model.setIs_check("N");
             return;
+        }else{
+            if("N".equals(is_check)){
+                return;
+            }
         }
 
         Call<HashMap<String, Object>> call = service.saveProjectDate(userId,item_id,is_check,date);
@@ -231,7 +246,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         return new Callback<HashMap<String,Object>>() {
             @Override
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
-                Toast.makeText(ac.getBaseContext(), "设置成功", Toast.LENGTH_LONG).show();
+                Toast.makeText(ac.getBaseContext(), "设置成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override
