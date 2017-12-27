@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.eeda123.wedding.shop.ShopActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"
+                android:text="        欢迎您使用“婚礼帮”，婚礼帮是一款移动终端APP利用项目管理思维帮助新人获得高品质婚筹资源，轻松地办完200多项的婚礼筹备。婚礼帮在此特别提醒您在接受婚礼帮软件及服务（下称“本软件及服务”）之前，请务必仔细阅读并充分理解同意“婚礼帮”用户服务协议（下称“本协议”），除非您已阅读并接受本协议所有条款，否则您无权下载、安装或使用本软件及服务。您通过确认本协议、对本软件及服务的下载、安装、登陆、访问、查看、发布信息等任何一种行为即视为您已阅读并同意接受本协议各项条款的约束。"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:text="一、本服务条款的确认与接受"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"
+                android:text="1. 您务必保证从婚礼帮指定站点或婚礼帮发行的介质上获得本服务的产品，否则因此可能导致的风险及损失，婚礼帮不承担任何责任。"
+                />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"
+                android:text="2. 本软件及服务的服务对象为具有订立法律约束力的合同的民事行为能力的个人或受法定监护人监护下的无民事行为能力人或是无完全民事行为能力人（未年满18周岁，请在法定监护人的陪同下阅读本协议，并由法定监护人承担相应责任）。否则因此可能导致的风险及损失，婚礼帮不承担任何责任。"
+                />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"
+                android:text="二、使用规范"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="       您在使用本软件及服务时的所有行为，包括但不限于访问、浏览、上传、转载、利用时必须以善意且谨慎的态度行事，不得故意或者过失地损害或者弱化本软件服务所有权人的各类合法权利与利益，不得利用本软件服务以任何方式直接或者间接地从事违反中国法律、国际公约、社会公德以及侵犯他人权利的行为，且应当恪守下述承诺："
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"
+                android:text="1. 除非法律允许或婚礼帮书面许可，您不得从事下列行为："
+                />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="1) 对该软件进行反向工程、反向汇编、反向编译，或者以其他方式尝试发现软件的源代码；"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="2) 对该软件拥有知识产权的内容进行模仿、出租、出借、复制、修改、链接、转载、汇编、发表、出版、建立镜像站点等；"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="3) 通过非婚礼帮开发、授权的第三方软件、插件、外挂、系统，登录或使用本软件及服务，或制作、发布、传播上述工具；"/>
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="4) 其他未经婚礼帮明示授权的行为。"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="如果您实施了前款约定的行为，婚礼帮将保留依法追究法律责任的权利。"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2. 本软件及服务仅供您个人及您的家庭成员间使用，除非经婚礼帮书面许可，您不得进行以下行为："
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="1) 通过以发送垃圾邮件、连锁邮件、垃圾短信、即时消息等方式干扰、骚扰其他用户；"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="2) 通过本软件及服务发布包含广告、宣传、促销等内容的信息；"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="12dp"
+                android:scrollbars="vertical"
+                android:text="3) 其他未经婚礼帮书面许可的行为。"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="3. 遵守与本软件及服务协议以及与之相关的网络服务的协议、规定、程序和惯例等。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="三、知识产权"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="1.婚礼帮网络科技有限公司负责人系本软件及服务的知识产权权利人，本软件及服务的一切著作权、商标权、专利权、商业秘密等知识产权，以及与本软件及服务相关的所有信息内容，包括但不限于文字表述及其组合、图标、图示、图像、图表、色彩、界面设计、版面框架、相关数据、附加程序、电子文档、语音记录等均受中华人民共和国法律法规和相应的国际条约保护，婚礼帮享有上述知识产权。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2.婚礼帮郑重提醒您，请在转载、上载或者下载有关作品时务必尊重该作品的著作权，如发现或收到他人举报您发布的信息违反前述约定或本协议其他约定的，婚礼帮有权进行独立判断并采取技术手段予以删除、屏蔽或断开链接。同时，婚礼帮有权对于用户的行为性质，采取包括但不限于暂停或终止服务，限制、冻结或终止用户账号使用，追究法律责任等措施。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"
+                android:text="3. 除婚礼帮另有明确说明或者中国法律有强制性规定外，本软件及服务用户原创的作品的作者与婚礼帮共同享有版权，其他网站或媒体如需使用须取得婚礼帮的书面授权，未经授权严禁转载或用于其它商业用途。"
+                />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="4.若因您违反本条约定，导致任何第三方损害的，您应当独立承担责任；婚礼帮因此遭受损失的，您也应当一并赔偿。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="5、未经婚礼帮书面同意，您不得为任何商业或非商业目的自行或许可任何第三方实施、利用、转让上述知识产权，婚礼帮保留追究上述行为法律责任的权利。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="四、隐私信息保护"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="1. 在您申请本软件及服务过程中，请保证您填写的信息及时更新，以便婚礼帮更好地为您提供服务。国家法律法规有特殊规定的，您需要填写真实的身份信息。若您填写的信息不完整或不准确，则可能无法使用本软件服务或在使用过程中受到限制，对此婚礼帮不承担责任。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2. 婚礼帮与用户共同致力于用户信息的保护，未经您的同意，婚礼帮不会向婚礼帮以外的任何公司、组织和个人披露您的个人信息，但法律法规另有规定的除外。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="3. 您同意并许可婚礼帮对您提交的信息（包括但不限于文字、图片、肖像、姓名等）进行使用，婚礼帮并可通过本软件服务中第三方提供的服务向您本人、您选择的其他用户展示。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="4. 为更好地保护您的个人信息，您应尽快、充分了解本软件及服务的相关功能、规则和设置。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="5. 您应对通过本软件及服务获悉、接收或可接触到的包括但不限于其他用户在内的任何人的个人信息予以充分尊重，否则，由此产生的后果由您自行承担；婚礼帮若因此遭受损失的，将保留依法追究您法律责任的权利。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="五、第三方产品和服务"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="婚礼帮有权向您定期或不定期的推送相关的品牌、产品及促销信息。本软件及服务可能包含第三方提供的产品或服务。当您使用第三方提供的产品或服务时，可能会另有相关的协议或规则，您同样应当认真阅读并遵守；如您在使用第三方产品或服务时发生任何纠纷，请您与第三方直接联系处理，婚礼帮不承担任何责任。婚礼帮不对第三方提供的产品或服务提供客服支持，若您需要获取支持，请与第三方直接沟通。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView64"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="六、数据信息储存"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView63"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="1. 婚礼帮使用云储存技术保护用户数据信息，但不对您在本软件及服务中相关数据的删除或储存失败负责。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView62"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2. 婚礼帮有权根据实际情况自行决定在服务器上对您在本软件服务中的数据的最长储存期限、为单个用户分配的最大存储使用空间等。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView61"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="3. 如果您的服务被终止或取消，婚礼帮可以从服务器上永久地删除您的数据。服务终止或取消后，婚礼帮没有向您返还数据或赔偿损失的义务。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView60"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="七、信息发布的内容"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView59"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="1. 您可以在本软件服务平台上发布和共享信息，但您必须保证拥有这些信息的合法权利或已经得到权利人的授权。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView58"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2. 您清楚地理解，您的分享设置即表明您同意向他人公开并许可他人对您所发布的内容有复制和传播的权利，且将导致您发布的内容在更多地方展示，并被更多人浏览，且您无法控制其传播，您可以通过改变相关设置来变更您的许可。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="3. 婚礼帮特别提醒您注意，鉴于本软件服务具有相关分享功能，相关设置会允许使用本服务的其他用户浏览、转发等，请您注意个人信息分享的范围，由此引起的一切后果，婚礼帮不承担任何责任。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="八、风险与免责"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="您理解并同意，本软件服务因下列状况无法正常运作时，婚礼帮不承担损害赔偿责任，该状况包含但不限于："
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView54"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="1. 因台风、地震、海啸、洪水、停电、战争、恐怖袭击等不可抗力的因素，造成本公司系统障碍不能执行业务的。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2. 包含但不限于黑客攻击、电信部门技术调整或故障、网站升级、计算机或手机病毒、您的关机、系统不稳定等原因而造成的服务中断、延迟以及用户隐私的泄露。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="3. 您因第三方如电信部门的通讯线路故障、技术问题、网络、电脑故障、系统不稳定性及其他各种不可抗力原因而遭受的一切损失。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView72"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="4. 婚礼帮不保证本软件服务在操作上不会中断或没有错误，不保证本服务能满足您的所有要求，且不承担由此造成的一切后果。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView71"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="基于互联网的开放性和社交网络服务的传播特殊性，婚礼帮特别提醒您谨慎注意以下风险："
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView70"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="1. 本软件服务具有分享功能，您应当对其他用户使用本服务所发布的内容进行独立判断并承担因依赖该内容而引起的所有风险，包括但不限于因对内容的正确性、完整性或实用性的依赖而产生的风险以及因您个人信息被其他用户获知而带来的风险。您了解并确认，婚礼帮不对本服务用户之间的纠纷承担任何责任。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView69"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2. 您在使用本软件服务过程中所发布的内容有可能会被第三方复制、转载、修改或做其他用途，脱离您的预期和控制，您必须充分意识此类风险的存在，婚礼帮对由此产生的纠纷不予负责。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView68"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="3. 请您务必注意妥善保护在使用本软件服务时透露的任何涉及财产、本服务帐户及密码等重要信息，否则，由此带来的损失由您自行承担。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView67"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="九、其它"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textView66"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="1. 婚礼帮可能为不同的终端设备开发不同的软件版本，您应当根据实际情况选择下载合适的版本进行安装。如果您从未经婚礼帮授权的第三方获取本软件或与本软件名称相同的安装程序，婚礼帮无法保证该软件能够正常使用，并对因此给您造成的损失不予负责。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView65"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="2. 为了增进用户体验、完善服务内容，婚礼帮将不时提供软件更新（这些更新可能会采取软件替换、修改、功能强化、版本升级等形式）。为了改善用户体验，并保证服务的安全性和功能的一致性，婚礼帮有权不经向您特别通知而对软件进行更新，或者对软件的部分功能效果进行改变或限制。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView84"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="3. 软件新版本发布后，旧版软件可能无法使用。婚礼帮不保证旧版软件继续可用及相应的客户服务，请您随时核对并下载最新版本。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView83"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="4. 您使用本软件及服务即视为您已阅读并同意受本协议的约束。婚礼帮有权在必要时修改本协议条款。您已经在本软件的最新版本中查阅最新的协议条款。本协议条款变更后，如果您继续使用本软件及服务，即视为您已接受修改后的协议。如果您不接受修改后的协议，应当停止使用本软件及服务。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView82"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="5. 婚礼帮可能不断发布的关于本服务的相关协议、业务规则等内容。上述内容一经正式发布，即为本协议不可分割的组成部分，您同样应当遵守。上述内容与本协议存在冲突的，以本协议为准。您对前述任何使用规则、协议的接受，即视为您对本协议全部的接受。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView81"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="6. 本协议签订地为广东省珠海市香洲区。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView80"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="7. 争议处理本协议的成立、生效、履行、解释及纠纷解决，适用中华人民共和国大陆地区法律。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="8. 若您在使用本服务时和婚礼帮之间发生任何纠纷或争议，首先应友好协商解决；协商不成的，您同意将纠纷或争议应向珠海市香洲区人民法院提起诉讼，产品的最终解释权属于婚礼帮。"
+                android:textAlignment="viewStart"
+                />
+
+            <TextView
+                android:id="@+id/textView78"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:scrollbars="vertical"
+                android:text="9. 本协议条款无论因何种原因部分无效或不可执行，其余条款仍有效，对双方具有约束力。"
+                android:textAlignment="viewStart"
+                />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

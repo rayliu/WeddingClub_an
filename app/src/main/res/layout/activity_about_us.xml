@@ -17,23 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        android:text="TextView"
-        tools:text="现在网络的繁盛时代，光文字是不能满足人们的胃口的，图片，flash，音频，视频就成为浏览网页的主流显示，在手机上也一样。在手机上显示从网络端获取的数据显示，大家很自然的想起两种方式，一种就是webview，一种就是TextView。当然webView直接显示html页面就行了，我主要说的TextView显示html内容。首先，说下TextView到底支持那些标签呢，通过对源码的查看，发现Textview可以解析一部分html标签，如"/>
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="到这里就基本OK了，不过因为在我的Demo中，是在一个Activity中显示了两个Fragment，左边的是新闻列表，右边展示新闻详情，然后出现了一个问题：显示了一个比较长的新闻，然后把新闻内容拖到最后，在切换新闻条目后，展示新闻内容的TextView无内容显示，需要触摸一下TextView区域才能显示，处理办法："/>
-
-    <Button
-        android:id="@+id/saveAskBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
-        android:text="提交"
-        android:textColor="@color/accent"
+        android:text="结婚大事古往今来都是一件很繁琐的事情，婚礼来临之际成亲双方里里外外都忙得不可开交，结婚也是一件浩大的工程，丝毫不亚于一个神十升天，因此，婚礼帮以“婚礼策划师”的丰富经验帮助新人，做新人的婚礼管家，让婚礼大事变得轻松愉快。婚礼帮是一款具有智慧的移动终端APP，利用项目管理思维帮助新人筹备200多项的婚礼事项。新人可以通过手机，IPAD等，随时随地管理进度，获得信息，在线淘婚品、挑酒店、选婚庆、学习经验、咨询求助等，实现一站式管理婚礼平台。"
         android:textSize="18sp"/>
+
+
 </LinearLayout>
 

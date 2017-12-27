@@ -35,11 +35,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.questionValue;
 
 public class ServiceTermsActivity extends AppCompatActivity {
-    @BindView(R.id.questionValue)
-    TextView questionValue;
-
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
     @BindView(R.id.cityChange)
@@ -53,7 +51,7 @@ public class ServiceTermsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ask_question);
+        setContentView(R.layout.activity_service_terms);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -79,153 +77,6 @@ public class ServiceTermsActivity extends AppCompatActivity {
     public void onBack_arrowClick(View view) {
         finish();
     }
-
-    @OnClick(R.id.saveAskBtn) void onSaveBtnClick() {
-        //非空校验
-        String mValue = questionValue.getText().toString();
-        if(TextUtils.isEmpty(mValue)){
-            Toast.makeText(getBaseContext(),"内容不能为空", Toast.LENGTH_LONG).show();
-            return ;
-        }else{
-            saveData();
-        }
-    }
-
-    @OnLongClick(R.id.saveAskBtn) boolean onSaveBtnLongClick() {
-        //TODO implement
-        return true;
-    }
-
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu);
-////        inflater.inflate(R.menu.activity_ask_question, menu);
-//    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home://TODO: 返回按钮的默认id, 这里有问题
-                finish();
-            default:
-                finish();
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void saveData() {
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .create();
-
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-
-                Request request = original.newBuilder()
-                        .header("login_id", login_id)
-                        .header("questionValue", encodeHeadInfo(questionValue.getText().toString()))
-                        .method(original.method(), original.body())
-                        .build();
-
-                return chain.proceed(request);
-            }
-        });
-
-        OkHttpClient client = httpClient.build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(HOST_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
-
-        HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
-
-        Call<HashMap<String, Object>> call = service.list("ask","save_question");
-
-        call.enqueue(eedaCallback());
-    }
-
-    private String encodeHeadInfo( String headInfo ) {
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0, length = headInfo.length(); i < length; i++) {
-            char c = headInfo.charAt(i);
-            if (c <= '\u001f' || c >= '\u007f') {
-                stringBuffer.append( String.format ("\\u%04x", (int)c) );
-            } else {
-                stringBuffer.append(c);
-            }
-        }
-        return stringBuffer.toString();
-    }
-
-
-    @NonNull
-    private Callback<HashMap<String,Object>> eedaCallback() {
-        return new Callback<HashMap<String,Object>>() {
-            @Override
-            public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
-                // The network call was a success and we got a response
-                HashMap<String,Object> json = response.body();
-                String  result = json.get("RESULT").toString();
-
-                if("true".equals(result)){
-                    Intent intent = new Intent();
-                    intent.putExtra("parent_page", "addQuestion");
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }else{
-                    Toast.makeText(getBaseContext(),"操作失败，稍后请重试", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
-                // the network call was a failure
-                Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
-
-            }
-        };
-    }
-
-
-//    //post请求
-//    private void loginByAsyncHttpClientPost(String userName, String userPass) {
-//        //创建异步请求对象
-//        AsyncHttpClien client = new AsyncHttpClient();
-//        //输入要请求的url
-//        String url = "http://10.0.1.72:8080/MyDemo/login?";
-//        //String url = "http://www.baidu.com";
-//        //请求的参数对象
-//        RequestParams params = new RequestParams();
-//        //将参数加入到参数对象中
-//        params.put("username",userName);
-//        params.put("userpass",userPass);
-//        //进行post请求
-//        client.post(url, params, new AsyncHttpResponseHandler() {
-//                 //如果成功
-//
-//             public void onSuccess(int i, Header[] headers, byte[] bytes) {
-//                             //i代表状态码
-//                  if (i == 200){
-//                       tv_result.setText(new String(bytes));
-//                  }
-//             }
-//                     //如果失败
-//              @Override
-//              public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-//                             //打印异常信息
-//                  throwable.printStackTrace();
-//              }
-//         });
-//
-//     }
-
-
 
 
 }
