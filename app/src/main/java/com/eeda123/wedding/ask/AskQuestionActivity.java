@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -147,7 +148,7 @@ public class AskQuestionActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.save_question(questionValue.getText().toString(),login_id);
+        Call<HashMap<String, Object>> call = service.save_question(URLEncoder.encode(questionValue.getText().toString()),login_id);
 
         call.enqueue(eedaCallback());
     }

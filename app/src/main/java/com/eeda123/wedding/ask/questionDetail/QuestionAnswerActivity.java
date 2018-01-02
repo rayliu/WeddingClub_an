@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -273,7 +274,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.save_answer(answerValue.getText().toString(),login_id,question_id.toString());
+        Call<HashMap<String, Object>> call = service.save_answer(URLEncoder.encode(answerValue.getText().toString()),login_id,question_id.toString());
 
         call.enqueue(eedaSaveCallback());
     }

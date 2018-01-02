@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Timer;
@@ -151,7 +152,7 @@ public class ConsultActivity extends AppCompatActivity {
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
 
-        Call<HashMap<String, Object>> call = service.save_consult(remark.getText().toString(),login_id,shop_id.toString());
+        Call<HashMap<String, Object>> call = service.save_consult(URLEncoder.encode(remark.getText().toString()),login_id,shop_id.toString());
 
         call.enqueue(eedaCallback());
     }

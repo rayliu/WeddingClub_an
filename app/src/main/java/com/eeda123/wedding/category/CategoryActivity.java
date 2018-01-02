@@ -22,13 +22,10 @@ import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.shop.ShopActivity;
-import com.eeda123.wedding.util.EedaUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

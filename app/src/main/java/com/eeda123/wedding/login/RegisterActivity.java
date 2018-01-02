@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Timer;
@@ -193,8 +194,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.save_register(inviteCode.getText().toString(),name.getText().toString(),
-                weddingDate.getText().toString(),pwd.getText().toString(),mobile.getText().toString());
+        Call<HashMap<String, Object>> call = service.save_register(URLEncoder.encode(inviteCode.getText().toString()),URLEncoder.encode(name.getText().toString()),
+                URLEncoder.encode(weddingDate.getText().toString()),URLEncoder.encode(pwd.getText().toString()),mobile.getText().toString());
 
         call.enqueue(eedaCallback());
     }
