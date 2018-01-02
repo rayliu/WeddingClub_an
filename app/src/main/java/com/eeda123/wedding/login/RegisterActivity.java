@@ -2,12 +2,14 @@ package com.eeda123.wedding.login;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,6 +63,8 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView img_back_arrow;
     @BindView(R.id.back_arrow)
     LinearLayout back_arrow;
+    @BindView(R.id.registerBtn)
+    Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +146,9 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+
+        registerBtn.setEnabled(false);
+        registerBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
         saveData();
     }
 
@@ -231,6 +238,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }else{
                     String  errMsg = json.get("ERRMSG").toString();
                     Toast.makeText(getBaseContext(), errMsg, Toast.LENGTH_LONG).show();
+                    registerBtn.setEnabled(true);
+                    registerBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
                 }
 
             }
@@ -240,6 +249,8 @@ public class RegisterActivity extends AppCompatActivity {
                 // the network call was a failure
                 Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
 
+                registerBtn.setEnabled(true);
+                registerBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
             }
         };
     }

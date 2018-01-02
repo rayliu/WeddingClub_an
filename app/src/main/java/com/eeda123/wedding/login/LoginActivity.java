@@ -11,6 +11,7 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -184,6 +185,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return;
         }
         String  encoding = Base64.encodeToString((mobile_text+":"+password_text).getBytes(), Base64.NO_WRAP);
+
+        loginBtn.setEnabled(false);
+        loginBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
         login(encoding);
     }
 
@@ -253,9 +257,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }else{
                         String  errMsg = json.get("ERRMSG").toString();
                         Toast.makeText(getBaseContext(), errMsg, Toast.LENGTH_LONG).show();
+                        loginBtn.setEnabled(true);
+                        loginBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
                     }
                 }else{
                     Toast.makeText(getBaseContext(), "操作失败", Toast.LENGTH_LONG).show();
+                    loginBtn.setEnabled(true);
+                    loginBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
                 }
 
             }
@@ -265,6 +273,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // the network call was a failure
                 Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
 
+                loginBtn.setEnabled(true);
+                loginBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
             }
         };
     }

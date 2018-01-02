@@ -3,6 +3,7 @@ package com.eeda123.wedding.ask.questionDetail;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -74,6 +76,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     @BindView(R.id.back_arrow)
     LinearLayout back_arrow;
     private String login_id;
+    @BindView(R.id.answerBtn)
+    Button answerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,11 +233,15 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             (new Timer()).schedule(task,2000);
         }else{
             //非空校验
+
             String mValue = answerValue.getText().toString();
             if(TextUtils.isEmpty(mValue)){
                 Toast.makeText(getBaseContext(),"内容不能为空", Toast.LENGTH_LONG).show();
                 return ;
             }else{
+                answerBtn.setEnabled(false);
+                answerBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
+
                 saveData();
             }
         }
@@ -293,13 +301,16 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                     answerValue.setText("");
                     listRecyclerView.smoothScrollToPosition(0);
                 }
+                answerBtn.setEnabled(true);
+                answerBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
             }
 
             @Override
             public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
                 // the network call was a failure
                 Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
-
+                answerBtn.setEnabled(true);
+                answerBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
             }
         };
     }

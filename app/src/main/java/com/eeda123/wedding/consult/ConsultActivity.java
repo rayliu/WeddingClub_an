@@ -2,12 +2,14 @@ package com.eeda123.wedding.consult;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,6 +56,8 @@ public class ConsultActivity extends AppCompatActivity {
     @BindView(R.id.project) TextView project;
     @BindView(R.id.create_date) TextView createDate;
     @BindView(R.id.remark) EditText remark;
+    @BindView(R.id.saveBtn)
+    Button saveBtn;
     Long shop_id = null;
     String login_id = null;
 
@@ -177,6 +181,8 @@ public class ConsultActivity extends AppCompatActivity {
                     (new Timer()).schedule(task,3000);
                 }else{
                     Toast.makeText(getBaseContext(), "操作失败，请稍后重试", Toast.LENGTH_LONG).show();
+                    saveBtn.setEnabled(true);
+                    saveBtn.setBackgroundColor(Color.parseColor("#ff33b5e5"));
                 }
             }
 
@@ -184,7 +190,8 @@ public class ConsultActivity extends AppCompatActivity {
             public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
                 // the network call was a failure
                 Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
-
+                saveBtn.setEnabled(true);
+                saveBtn.setBackgroundColor(Color.parseColor("#ff33b5e5"));
             }
         };
     }
@@ -198,9 +205,11 @@ public class ConsultActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(mRemark)){
             Toast.makeText(getBaseContext(), "备注不能为空", Toast.LENGTH_LONG).show();
             return;
+        }else{
+            saveBtn.setEnabled(false);
+            saveBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
+            saveData();
         }
-
-        saveData();
     }
 
     /**

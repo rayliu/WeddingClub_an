@@ -1,6 +1,7 @@
 package com.eeda123.wedding.ask;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -50,7 +51,12 @@ public class AskQuestionActivity extends AppCompatActivity {
     ImageView img_back_arrow;
     @BindView(R.id.back_arrow)
     LinearLayout back_arrow;
+    @BindView(R.id.saveAskBtn)
+    Button saveAskBtn;
+
+
     private String login_id = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,14 +94,14 @@ public class AskQuestionActivity extends AppCompatActivity {
 
     @OnClick(R.id.saveAskBtn) void onSaveBtnClick() {
         //非空校验
-        Button saveBtn = (Button)findViewById(R.id.saveAskBtn);
-        saveBtn.setEnabled(false);
-
         String mValue = questionValue.getText().toString();
         if(TextUtils.isEmpty(mValue)){
             Toast.makeText(getBaseContext(),"内容不能为空", Toast.LENGTH_LONG).show();
             return ;
         }else{
+            saveAskBtn.setEnabled(false);
+            saveAskBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
+
             saveData();
         }
     }
@@ -187,6 +193,8 @@ public class AskQuestionActivity extends AppCompatActivity {
                     finish();
                 }else{
                     Toast.makeText(getBaseContext(),"操作失败，稍后请重试", Toast.LENGTH_LONG).show();
+                    saveAskBtn.setEnabled(true);
+                    saveAskBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
                 }
             }
 
@@ -194,6 +202,8 @@ public class AskQuestionActivity extends AppCompatActivity {
             public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
                 // the network call was a failure
                 Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
+                saveAskBtn.setEnabled(true);
+                saveAskBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
 
             }
         };
