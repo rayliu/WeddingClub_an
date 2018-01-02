@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -87,6 +88,9 @@ public class AskQuestionActivity extends AppCompatActivity {
 
     @OnClick(R.id.saveAskBtn) void onSaveBtnClick() {
         //非空校验
+        Button saveBtn = (Button)findViewById(R.id.saveAskBtn);
+        saveBtn.setEnabled(false);
+
         String mValue = questionValue.getText().toString();
         if(TextUtils.isEmpty(mValue)){
             Toast.makeText(getBaseContext(),"内容不能为空", Toast.LENGTH_LONG).show();
