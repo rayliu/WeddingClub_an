@@ -210,38 +210,6 @@ public class AskQuestionActivity extends AppCompatActivity {
     }
 
 
-//    //post请求
-//    private void loginByAsyncHttpClientPost(String userName, String userPass) {
-//        //创建异步请求对象
-//        AsyncHttpClien client = new AsyncHttpClient();
-//        //输入要请求的url
-//        String url = "http://10.0.1.72:8080/MyDemo/login?";
-//        //String url = "http://www.baidu.com";
-//        //请求的参数对象
-//        RequestParams params = new RequestParams();
-//        //将参数加入到参数对象中
-//        params.put("username",userName);
-//        params.put("userpass",userPass);
-//        //进行post请求
-//        client.post(url, params, new AsyncHttpResponseHandler() {
-//                 //如果成功
-//
-//             public void onSuccess(int i, Header[] headers, byte[] bytes) {
-//                             //i代表状态码
-//                  if (i == 200){
-//                       tv_result.setText(new String(bytes));
-//                  }
-//             }
-//                     //如果失败
-//              @Override
-//              public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-//                             //打印异常信息
-//                  throwable.printStackTrace();
-//              }
-//         });
-//
-//     }
-
 
 
 

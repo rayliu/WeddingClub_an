@@ -57,6 +57,8 @@ public class AskFragment extends Fragment {
         return fragment;
     }
 
+
+
     public static Intent newIntent(Context context, Long questionId, String title, String create_time, String count) {
         Intent intent = new Intent(context, QuestionAnswerActivity.class);
         Bundle bundle = new Bundle();
@@ -82,11 +84,12 @@ public class AskFragment extends Fragment {
         getData();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
-    public void onResume(Bundle savedInstanceState){
         getData();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
