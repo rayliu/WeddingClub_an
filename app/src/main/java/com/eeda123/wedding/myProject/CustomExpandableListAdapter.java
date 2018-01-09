@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
@@ -55,10 +57,19 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     private String strCompleteDate;
 
+    Handler handler; //用于刷新 UI 的总数   http://blog.csdn.net/arylo/article/details/8711769
+
     public CustomExpandableListAdapter(Context context, List<MyProjectItemModel> expandableListModelList, FragmentActivity activity) {
         this.context = context;
         this.expandableListModelList = expandableListModelList;
         this.activity = activity;
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                notifyDataSetChanged();
+                super.handleMessage(msg);
+            }
+        };
     }
 
     @Override
@@ -74,7 +85,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int listPosition, final int expandedListPosition,
+    public View getChildView(final int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
         final MyProjectItem2Model item2Model = (MyProjectItem2Model)getChild(listPosition, expandedListPosition);
         final String expandedListText = item2Model.getItem_name();//(String) getChild(listPosition, expandedListPosition);
@@ -88,31 +99,27 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         TextView item_name = (TextView) convertView
                 .findViewById(R.id.item_name);
 
-//
-//        if("Y".equals(item2Model.getIs_check())){
-//            item_name.setChecked(true);
-//            if(TextUtils.isEmpty(item2Model.getComplete_date())){
-//                TextView completeDate = (TextView) convertView
-//                        .findViewById(R.id.complete_date);
-//                completeDate.setText(item2Model.getComplete_date());
-//            }
-//        }
-
-        is_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        final MyProjectItemModel groupModel = getGroup(listPosition);
+        is_check.setOnClickListener(new View.OnClickListener() {
                @Override
-               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+               public void onClick(View view) {
                    String userId= getUserId();
                    String item_id = item2Model.getId().toString();
                    String is_check = null;
                    String date = item2Model.getComplete_date()==null?"":item2Model.getComplete_date();
 
+                   boolean isChecked =  "Y".equals(item2Model.getIs_check());
                    if(isChecked){
-                       is_check = "Y";
-                       item2Model.setIs_check("Y");
-                   }else{
                        is_check = "N";
-                       item2Model.setIs_check("N");
+                       item2Model.setIs_check(is_check);
+                       groupModel.setCount(groupModel.getCount()-1);
+
+                   }else{
+                       is_check = "Y";
+                       item2Model.setIs_check(is_check);
+                       groupModel.setCount(groupModel.getCount()+1);
                    }
+                   handler.sendMessage(new Message());
                    HomeFragment.EedaService service = initRetroCall();
                    Call<HashMap<String, Object>> call = service.saveProjectCheck(userId,item_id,is_check,date);
 

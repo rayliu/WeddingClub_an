@@ -20,11 +20,12 @@
         android:textColor="?attr/colorPrimary"/>
 
     <TextView
+        android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/item_name"
         android:layout_weight="0.18"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/complete_date"
@@ -34,7 +35,7 @@
         android:text="2017-10-10"
         android:textAlignment="textEnd"
         android:textColor="@color/colorPrimary"
-        android:textSize="18sp"/>
+        />
 </LinearLayout>
 
 </LinearLayout>
