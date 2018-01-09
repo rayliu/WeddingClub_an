@@ -60,6 +60,8 @@ public class CaseItemActivity extends AppCompatActivity {
 
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
+    @BindView(R.id.influence)
+    TextView influence;
     @BindView(R.id.cityChange)
     LinearLayout cityChange;
     @BindView(R.id.img_back_arrow)
@@ -180,11 +182,15 @@ public class CaseItemActivity extends AppCompatActivity {
 
     private void shopData(HashMap<String,Object> json ){
         ArrayList<Map> shop =  (ArrayList<Map>)json.get("SHOP");
-        String shop_name_value = null;
-        String shop_logo_value = null;
-        String category_value = null;
+        String shop_name_value = "";
+        String shop_logo_value = "";
+        String category_value = "";
+        String influence_value = "";
         if(shop.get(0).get("CREATOR") != null){
             shop_id = shop.get(0).get("CREATOR").toString();
+        }
+        if(shop.get(0).get("INFLUENCE") != null){
+            influence_value = shop.get(0).get("INFLUENCE").toString();
         }
         if(shop.get(0).get("C_NAME") != null){
             shop_name_value = shop.get(0).get("C_NAME").toString();
@@ -201,6 +207,7 @@ public class CaseItemActivity extends AppCompatActivity {
                 .into(shop_logo);
         shop_name.setText(shop_name_value);
         category.setText("类别：" + category_value);
+        influence.setText("影响力：" + influence_value);
     }
 
     private void caseData(HashMap<String,Object> json ){

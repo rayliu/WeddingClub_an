@@ -241,6 +241,12 @@ public class MyProjectFragment extends Fragment {
         };
     }
 
+    public void onResume(){
+        super.onResume();
+
+        getData();
+    }
+
 
     @OnClick({R.id.sortByProject})
     public void onSortProjectClick(View view) {

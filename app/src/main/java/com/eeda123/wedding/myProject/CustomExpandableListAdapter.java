@@ -246,7 +246,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         return new Callback<HashMap<String,Object>>() {
             @Override
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
-                Toast.makeText(ac.getBaseContext(), "设置成功", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ac.getBaseContext(), "设置成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override

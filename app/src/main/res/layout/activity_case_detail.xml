@@ -26,8 +26,8 @@
 
                 <ImageView
                     android:id="@+id/shop_logo"
-                    android:layout_width="86dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     app:srcCompat="@drawable/bg"/>
 
@@ -50,7 +50,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/influence"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
