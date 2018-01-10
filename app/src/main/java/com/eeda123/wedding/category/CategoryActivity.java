@@ -251,9 +251,9 @@ public class CategoryActivity extends AppCompatActivity {
             String company_name = "";
             String influence = "";
             String category_name = "";
-            String diomand = "";
-            String hui = "";
-            String cu = "";
+            String diamond = "N";
+            String hui = "N";
+            String cu = "N";
             String create_time = "";
             String logo = "";
             if( list.get("SHOP_ID") != null){
@@ -262,8 +262,8 @@ public class CategoryActivity extends AppCompatActivity {
             if( list.get("INFLUENCE") != null){
                 influence = list.get("INFLUENCE").toString();
             }
-            if( list.get("DIOMAND") != null){
-                diomand = list.get("DIOMAND").toString();
+            if( list.get("DIAMOND") != null){
+                diamond = list.get("DIAMOND").toString();
             }
             if( list.get("HUI") != null){
                 hui = list.get("HUI").toString();
@@ -285,7 +285,7 @@ public class CategoryActivity extends AppCompatActivity {
             }
 
             mItems.add(new CategoryItemModel(shop_id, company_name, create_time, 2, MainActivity.HOST_URL+"upload/"+logo,category_name,
-                    cu,hui,diomand,influence
+                    cu,hui,diamond,influence
             ));
         }
 

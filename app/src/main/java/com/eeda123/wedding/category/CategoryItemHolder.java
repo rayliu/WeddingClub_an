@@ -66,14 +66,14 @@ public class CategoryItemHolder extends RecyclerView.ViewHolder implements View.
         //mDesc1.setText(categoryItemModel.getStrCreateTime());
         mDesc2.setText("影响力：" + influence);
         mDesc3.setText("类别：" + String.valueOf(categoryItemModel.getCategoryName()));
-        if(!"Y".equals(diamond)){
-            mDiamond.setVisibility(View.INVISIBLE);
+        if("Y".equals(diamond)){
+            mDiamond.setVisibility(View.VISIBLE);
         }
-        if(!"Y".equals(cu)){
-            mCu.setVisibility(View.INVISIBLE);
+        if("Y".equals(cu)){
+            mCu.setVisibility(View.VISIBLE);
         }
-        if(!"Y".equals(hui)){
-            mhui.setVisibility(View.INVISIBLE);
+        if("Y".equals(hui)){
+            mhui.setVisibility(View.VISIBLE);
         }
 
     }
