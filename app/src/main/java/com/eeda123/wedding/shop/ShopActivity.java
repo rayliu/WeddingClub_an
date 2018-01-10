@@ -202,7 +202,7 @@ public class ShopActivity extends AppCompatActivity  {
             String category_name = null;
             String c_address = null;
             String about = null;
-            String diomand = "";
+            String diomandFlag = "N";
             String hui = "";
             String influence = "";
             String cu = "";
@@ -210,8 +210,8 @@ public class ShopActivity extends AppCompatActivity  {
             if( list.get("INFLUENCE") != null){
                 influence = list.get("INFLUENCE").toString();
             }
-            if( list.get("DIOMAND") != null){
-                diomand = list.get("DIOMAND").toString();
+            if( list.get("DIAMOND") != null){
+                diomandFlag = list.get("DIAMOND").toString();
             }
             if( list.get("HUI") != null){
                 hui = list.get("HUI").toString();
@@ -242,14 +242,14 @@ public class ShopActivity extends AppCompatActivity  {
             categoryName.setText(category_name);
             address.setText(c_address);
             mInfluence.setText(influence);
-            if(!"Y".equals(diamond)){
-                mDiamond.setVisibility(View.INVISIBLE);
+            if("Y".equals(diomandFlag)){
+                mDiamond.setVisibility(View.VISIBLE);
             }
-            if(!"Y".equals(cu)){
-                mCu.setVisibility(View.INVISIBLE);
+            if("Y".equals(cu)){
+                mCu.setVisibility(View.VISIBLE);
             }
-            if(!"Y".equals(hui)){
-                mHui.setVisibility(View.INVISIBLE);
+            if("Y".equals(hui)){
+                mHui.setVisibility(View.VISIBLE);
             }
         }
     }
