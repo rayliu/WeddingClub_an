@@ -291,6 +291,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         @GET("/app/product/get_more/{param}")
         Call<HashMap<String,Object>> getMore(@Path("param") String param);
+
+        @GET("/app/bestCase/get_more_case")
+        Call<HashMap<String,Object>> getMoreCase(@Query("shop_id") String shop_id,@Query("type") String type);
     }
 
 
@@ -319,7 +322,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @OnClick(R.id.c3_btn) void onC3BtnClick() {
         //分类页面  婚策套餐
-        goCategory("婚策套餐");
+        goCategory("婚礼策划");
     }
 
     @OnClick(R.id.c4_btn) void onC4BtnClick() {

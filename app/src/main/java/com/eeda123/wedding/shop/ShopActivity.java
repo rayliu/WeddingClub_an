@@ -23,6 +23,7 @@ import com.eeda123.wedding.bestCase.bestCaseItem.CaseItemActivity;
 import com.eeda123.wedding.consult.ConsultActivity;
 import com.eeda123.wedding.login.LoginActivity;
 import com.eeda123.wedding.product.ProductActivity;
+import com.eeda123.wedding.shop.moreCase.MoreCaseActivity;
 import com.eeda123.wedding.shop.moreDesc.MoreActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -485,18 +486,18 @@ public class ShopActivity extends AppCompatActivity  {
 
     @OnClick({R.id.case_more})
     public void onCaseMoreClick(View view) {
-        Intent intent = new Intent(this, MoreActivity.class);
+        Intent intent = new Intent(this, MoreCaseActivity.class);
         intent.putExtra("shop_id",shop_id);
-        intent.putExtra("from_page","from_page");
+        intent.putExtra("from_page","case");
         startActivity(intent);
     }
 
 
     @OnClick({R.id.video_more})
     public void onVideoMoreClick(View view) {
-        Intent intent = new Intent(this, MoreActivity.class);
+        Intent intent = new Intent(this, MoreCaseActivity.class);
         intent.putExtra("shop_id",shop_id);
-        intent.putExtra("from_page","from_page");
+        intent.putExtra("from_page","video");
         startActivity(intent);
     }
 
