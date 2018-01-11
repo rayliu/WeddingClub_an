@@ -68,6 +68,8 @@
         </activity>
         <activity android:name=".shop.VideoActivity">
         </activity>
+        <activity android:name=".shop.moreDesc.MoreActivity">
+        </activity>
 
         <activity android:name=".config.FeedbackActivity"></activity>
         <activity android:name=".config.AboutUsActivity"></activity>

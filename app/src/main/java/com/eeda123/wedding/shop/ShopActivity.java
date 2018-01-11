@@ -23,6 +23,7 @@ import com.eeda123.wedding.bestCase.bestCaseItem.CaseItemActivity;
 import com.eeda123.wedding.consult.ConsultActivity;
 import com.eeda123.wedding.login.LoginActivity;
 import com.eeda123.wedding.product.ProductActivity;
+import com.eeda123.wedding.shop.moreDesc.MoreActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -47,7 +48,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
-import static com.eeda123.wedding.R.id.diamond;
 
 
 public class ShopActivity extends AppCompatActivity  {
@@ -86,6 +86,9 @@ public class ShopActivity extends AppCompatActivity  {
     @BindView(R.id.video1) ImageView video1;
     @BindView(R.id.video2) ImageView video2;
     @BindView(R.id.video3) ImageView video3;
+    @BindView(R.id.prod_more) TextView prod_more;
+    @BindView(R.id.case_more) TextView case_more;
+    @BindView(R.id.video_more) TextView video_more;
 
 
     @BindView(R.id.action_bar_title)
@@ -470,6 +473,31 @@ public class ShopActivity extends AppCompatActivity  {
             intent.putExtra("category",categoryName.getText());
             startActivity(intent);
         }
+    }
+
+    @OnClick({R.id.prod_more})
+    public void onProdMoreClick(View view) {
+        Intent intent = new Intent(this, MoreActivity.class);
+        intent.putExtra("shop_id",shop_id);
+        intent.putExtra("from_page","prod_more");
+        startActivity(intent);
+    }
+
+    @OnClick({R.id.case_more})
+    public void onCaseMoreClick(View view) {
+        Intent intent = new Intent(this, MoreActivity.class);
+        intent.putExtra("shop_id",shop_id);
+        intent.putExtra("from_page","from_page");
+        startActivity(intent);
+    }
+
+
+    @OnClick({R.id.video_more})
+    public void onVideoMoreClick(View view) {
+        Intent intent = new Intent(this, MoreActivity.class);
+        intent.putExtra("shop_id",shop_id);
+        intent.putExtra("from_page","from_page");
+        startActivity(intent);
     }
 
 
