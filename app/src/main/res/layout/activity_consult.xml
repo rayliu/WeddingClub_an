@@ -201,9 +201,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="155dp"
                     android:background="@color/accent"
+                    android:gravity="top|left"
                     android:ems="10"
                     android:hint="输入内容。。。"
-                    android:inputType="textMultiLine"/>
+                    android:inputType="textMultiLine"
+                    android:textSize="18sp"
+                    android:padding="5dp"/>
 
             </LinearLayout>
             <Button

@@ -47,6 +47,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.cu;
+import static com.eeda123.wedding.R.id.hui;
 import static com.eeda123.wedding.R.id.webView;
 
 
@@ -67,6 +69,10 @@ public class VideoActivity extends AppCompatActivity {
     @BindView(R.id.shop_logo) ImageView shopLogo;
     @BindView(R.id.category_name) TextView categoryName;
     @BindView(R.id.title) TextView title;
+    @BindView(R.id.diamond) ImageView mDiamond;
+    @BindView(hui) ImageView mHui;
+    @BindView(cu) ImageView mCu;
+
 
     private Long case_id;
     private Long shop_id;
@@ -153,6 +159,9 @@ public class VideoActivity extends AppCompatActivity {
                 String c_title = null;
                 String c_video_url = null;
                 String c_shop_logo = null;
+                String diomandFlag = "N";
+                String hui = "";
+                String cu = "";
 
                 if(shopList.get(0).get("C_NAME") != null){
                     c_shop_name = shopList.get(0).get("C_NAME").toString();
@@ -173,11 +182,31 @@ public class VideoActivity extends AppCompatActivity {
                     c_shop_logo  = shopList.get(0).get("LOGO").toString();
                 }
 
+                if( shopList.get(0).get("DIAMOND") != null){
+                    diomandFlag = shopList.get(0).get("DIAMOND").toString();
+                }
+                if( shopList.get(0).get("HUI") != null){
+                    hui = shopList.get(0).get("HUI").toString();
+                }
+                if( shopList.get(0).get("CU") != null){
+                    cu = shopList.get(0).get("CU").toString();
+                }
+
                 Picasso.with(getBaseContext()).load(MainActivity.HOST_URL+"upload/"+c_shop_logo)
                         .into(shopLogo);
                 shopName.setText(c_shop_name);
                 categoryName.setText("类别："+c_category_name);
                 title.setText(c_title);
+
+                if("Y".equals(diomandFlag)){
+                    mDiamond.setVisibility(View.VISIBLE);
+                }
+                if("Y".equals(cu)){
+                    mCu.setVisibility(View.VISIBLE);
+                }
+                if("Y".equals(hui)) {
+                    mHui.setVisibility(View.VISIBLE);
+                }
 
                 webview = (WebView) findViewById(webView);
                 webview.setWebViewClient(new WebViewClient());

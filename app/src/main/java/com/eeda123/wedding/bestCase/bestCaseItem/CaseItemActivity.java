@@ -46,6 +46,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.cu;
+import static com.eeda123.wedding.R.id.hui;
 
 
 public class CaseItemActivity extends AppCompatActivity {
@@ -54,6 +56,9 @@ public class CaseItemActivity extends AppCompatActivity {
     @BindView(R.id.category) TextView category;
     @BindView(R.id.case_recycler_view)
     RecyclerView listRecyclerView;
+    @BindView(R.id.diamond) ImageView mDiamond;
+    @BindView(hui) ImageView mHui;
+    @BindView(cu) ImageView mCu;
 
     List<CaseItemModel> mItems ;
     private CaseItemArrayAdapter mAdapter;
@@ -186,6 +191,9 @@ public class CaseItemActivity extends AppCompatActivity {
         String shop_logo_value = "";
         String category_value = "";
         String influence_value = "";
+        String diomandFlag = "N";
+        String hui = "";
+        String cu = "";
         if(shop.get(0).get("CREATOR") != null){
             shop_id = shop.get(0).get("CREATOR").toString();
         }
@@ -202,12 +210,32 @@ public class CaseItemActivity extends AppCompatActivity {
             category_value = shop.get(0).get("CATEGORY_NAME").toString();
         }
 
+        if( shop.get(0).get("DIAMOND") != null){
+            diomandFlag = shop.get(0).get("DIAMOND").toString();
+        }
+        if( shop.get(0).get("HUI") != null){
+            hui = shop.get(0).get("HUI").toString();
+        }
+        if( shop.get(0).get("CU") != null){
+            cu = shop.get(0).get("CU").toString();
+        }
+
         Picasso.with(this)
                 .load(MainActivity.HOST_URL+"upload/" + shop_logo_value)
                 .into(shop_logo);
         shop_name.setText(shop_name_value);
         category.setText("类别：" + category_value);
         influence.setText("影响力：" + influence_value);
+
+        if("Y".equals(diomandFlag)){
+            mDiamond.setVisibility(View.VISIBLE);
+        }
+        if("Y".equals(cu)){
+            mCu.setVisibility(View.VISIBLE);
+        }
+        if("Y".equals(hui)){
+            mHui.setVisibility(View.VISIBLE);
+        }
     }
 
     private void caseData(HashMap<String,Object> json ){
