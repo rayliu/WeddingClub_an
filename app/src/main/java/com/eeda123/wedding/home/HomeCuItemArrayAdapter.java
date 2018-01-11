@@ -20,17 +20,13 @@
 
 package com.eeda123.wedding.home;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.category.CategoryItemHolder;
-import com.eeda123.wedding.category.CategoryItemModel;
 
 import java.util.List;
 
@@ -41,10 +37,10 @@ import java.util.List;
  */
 
 public class HomeCuItemArrayAdapter extends RecyclerView.Adapter<HomeItemHolder> {
-    private Activity activity;
+    private FragmentActivity activity;
     private List<HomeCuItemModel> models;
 
-    public HomeCuItemArrayAdapter(List<HomeCuItemModel> models, Activity context) {
+    public HomeCuItemArrayAdapter(List<HomeCuItemModel> models, FragmentActivity context) {
         this.activity = context;
         this.models = models;
     }
@@ -60,7 +56,7 @@ public class HomeCuItemArrayAdapter extends RecyclerView.Adapter<HomeItemHolder>
     @Override
     public void onBindViewHolder(HomeItemHolder holder, int position) {
         HomeCuItemModel item = models.get(position);
-        holder.bindItem(item);
+        holder.bindItem(item,activity);
     }
 
     @Override

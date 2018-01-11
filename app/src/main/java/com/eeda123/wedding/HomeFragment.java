@@ -205,16 +205,41 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private void buildCuList(ArrayList<Map> cuList) {
         mItems = new LinkedList<HomeCuItemModel>();
         for(Map<String, Object> list: cuList){
-            Long userId = ((Double)list.get("USER_ID")).longValue();
-            String type = "["+list.get("TRADE_TYPE").toString()+"]";
-            String compnay_name = list.get("COMPNAY_NAME").toString();
-            String begin_date = list.get("BEGIN_DATE").toString();
-            String end_date = list.get("END_DATE").toString();
-            String title = list.get("TITLE").toString();
-            String content = list.get("CONTENT").toString();
+            Long userId = null;
+            String type = "";
+            String compnay_name = "";
+            String begin_date = "";
+            String end_date = "";
+            String title = "";
+            String content = "";
+            String cover = "";
+            if(list.get("USER_ID") != null){
+                userId = ((Double)list.get("USER_ID")).longValue();
+            }
+            if(list.get("TRADE_TYPE") != null){
+                type = "["+list.get("TRADE_TYPE").toString()+"]";
+            }
+            if(list.get("COVER") != null){
+                cover = list.get("COVER").toString();
+            }
+            if(list.get("COMPNAY_NAME") != null){
+                compnay_name = list.get("COMPNAY_NAME").toString();
+            }
+            if(list.get("BEGIN_DATE") != null){
+                begin_date = list.get("BEGIN_DATE").toString();
+            }
+            if(list.get("END_DATE") != null){
+                end_date = list.get("END_DATE").toString();
+            }
+            if(list.get("TITLE") != null){
+                title = list.get("TITLE").toString();
+            }
+            if(list.get("CONTENT") != null){
+                content = list.get("CONTENT").toString();
+            }
 
 
-            HomeCuItemModel model = new HomeCuItemModel(type, " "+compnay_name+":"+begin_date+"~"+end_date+"促销活动:"+ title, userId);
+            HomeCuItemModel model = new HomeCuItemModel(type, " "+compnay_name+":"+begin_date+"~"+end_date+"促销活动:"+ title, userId,cover);
 
             mItems.add(model);
         }

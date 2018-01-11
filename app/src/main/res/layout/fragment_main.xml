@@ -77,7 +77,7 @@
                         android:drawableTop="@drawable/main_menu_icon3"
                         android:fontFamily="sans-serif-condensed"
                         android:paddingTop="10dp"
-                        android:text="婚策套餐"
+                        android:text="婚礼策划"
                         android:textColor="@color/base"
                         android:textSize="16sp"/>
 

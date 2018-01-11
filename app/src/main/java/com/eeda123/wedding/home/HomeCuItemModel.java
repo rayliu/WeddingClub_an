@@ -18,12 +18,6 @@ public class HomeCuItemModel {
 
     private Long userId;
 
-    public HomeCuItemModel(String strType, String strDesc,Long userId){
-        this.strType = strType;
-        this.strDesc = strDesc;
-        this.userId = userId;
-    }
-
     public String getStrType() {
         return strType;
     }
@@ -40,7 +34,22 @@ public class HomeCuItemModel {
         this.strDesc = strDesc;
     }
 
+    public String getCover() {
+        return cover;
+    }
 
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    private String cover;
+
+    public HomeCuItemModel(String strType, String strDesc,Long userId,String cover){
+        this.strType = strType;
+        this.strDesc = strDesc;
+        this.userId = userId;
+        this.cover = cover;
+    }
 
 
 
