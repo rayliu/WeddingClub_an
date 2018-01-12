@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2ArrayAdapter;
 import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,11 +44,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 public class MyProjectFragment extends Fragment {
-    private RecyclerView mListRecyclerView;
-    private RecyclerView mListRecyclerView2;
+    @BindView(R.id.list_recycler_view)
+    RecyclerView mListRecyclerView;
+
     private MyProjectItemArrayAdapter mAdapter;
     //private MyProjectItem2ArrayAdapter mAdapter2;
-    private ArrayList<MyProjectItem2ArrayAdapter> adapter2ArrayList = new ArrayList<MyProjectItem2ArrayAdapter>();
+//    private ArrayList<MyProjectItem2ArrayAdapter> adapter2ArrayList = new ArrayList<MyProjectItem2ArrayAdapter>();
     List<MyProjectItemModel> mItems ;
     List<MyProjectItem2Model> mItems2 ;
 
@@ -222,8 +222,8 @@ public class MyProjectFragment extends Fragment {
 
                     mItems.add(new MyProjectItemModel(seq.toString(), title, size, total, mItems2));
 
-                    MyProjectItem2ArrayAdapter mAdapter2 =  new MyProjectItem2ArrayAdapter(mItems2, getActivity());
-                    adapter2ArrayList.add(mAdapter2);
+//                    MyProjectItem2ArrayAdapter mAdapter2 =  new MyProjectItem2ArrayAdapter(mItems2, getActivity());
+//                    adapter2ArrayList.add(mAdapter2);
                 }
 
 
@@ -250,15 +250,18 @@ public class MyProjectFragment extends Fragment {
 
     @OnClick({R.id.sortByProject})
     public void onSortProjectClick(View view) {
-
         sortByProject.setTextColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary));
         sortByTime.setTextColor(ContextCompat.getColor(view.getContext(), R.color.base));
+        expandableListView.setVisibility(View.VISIBLE);
+        mListRecyclerView.setVisibility(View.INVISIBLE);
     }
 
     @OnClick({R.id.sortByTime})
     public void onSortTimeClick(View view) {
         sortByProject.setTextColor(ContextCompat.getColor(view.getContext(), R.color.base));
         sortByTime.setTextColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary));
+        expandableListView.setVisibility(View.INVISIBLE);
+        mListRecyclerView.setVisibility(View.VISIBLE);
     }
 
 

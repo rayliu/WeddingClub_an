@@ -63,7 +63,16 @@
             android:divider="@android:color/darker_gray"
             android:dividerHeight="0.5dp"
             android:groupIndicator="@null"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </RelativeLayout>

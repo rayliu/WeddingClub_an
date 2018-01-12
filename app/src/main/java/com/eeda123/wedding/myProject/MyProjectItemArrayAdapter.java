@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eeda123.wedding.R;
-import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,6 @@ import java.util.List;
 public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectItemHolder> {
     private List<MyProjectItemModel> mAskItemModels;
     private FragmentActivity activity;
-    private ArrayList<MyProjectItem2ArrayAdapter> adapter2ArrayList;
     public MyProjectItemArrayAdapter(List<MyProjectItemModel> askItemModels, FragmentActivity activity) {
         this.mAskItemModels = askItemModels;
         this.activity = activity;
@@ -32,7 +30,7 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
     public MyProjectItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
         View view = layoutInflater
-                .inflate(R.layout.my_project_list, parent, false);
+                .inflate(R.layout.project_list_item_by_time, parent, false);
         return new MyProjectItemHolder(this, view);
     }
 
@@ -40,9 +38,6 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
     public void onBindViewHolder(MyProjectItemHolder holder, int position) {
         MyProjectItemModel askItem = mAskItemModels.get(position);
         holder.bindAskItem(askItem, position);
-
-        holder.mListRecyclerView2.setAdapter(adapter2ArrayList.get(position));
-        holder.mListRecyclerView2.setLayoutManager(new LinearLayoutManager(activity));
     }
 
     @Override
@@ -50,11 +45,4 @@ public class MyProjectItemArrayAdapter extends RecyclerView.Adapter<MyProjectIte
         return mAskItemModels.size();
     }
 
-    public void setItems(List<MyProjectItemModel> mAskItemModels) {
-        this.mAskItemModels = mAskItemModels;
-    }
-
-    public void setItem2ArrayAdapterList(ArrayList<MyProjectItem2ArrayAdapter> adapter2ArrayList){
-        this.adapter2ArrayList = adapter2ArrayList;
-    }
 }
