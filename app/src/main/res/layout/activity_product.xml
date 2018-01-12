@@ -141,7 +141,6 @@
                             android:id="@+id/cu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="[促]  此商品正进行促销活动"
                             android:textAlignment="center"
                             android:textColor="@android:color/holo_blue_dark"/>
 

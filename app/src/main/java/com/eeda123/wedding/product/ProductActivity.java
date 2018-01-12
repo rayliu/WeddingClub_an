@@ -231,13 +231,13 @@ public class ProductActivity extends AppCompatActivity {
             }
 
             if("Y".equals(cu)){
-                mCu.setText("[促]  此商品正进行促销活动");
+                mCu.setText("[促] 此商品正进行促销活动");
                 mCu_desc.setText(cu_desc);
             }else{
                 mCu.setText("[促] 暂无促销活动");
             }
             if("Y".equals(hui)){
-                mHui.setText("[惠]  通过婚礼帮可享"+hui_discount+"折优惠");
+                mHui.setText("[惠] 通过婚礼帮可享"+hui_discount+"折优惠");
 
             }else{
                 mHui.setText("[惠] 暂无优惠活动");

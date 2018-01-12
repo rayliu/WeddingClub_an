@@ -53,6 +53,7 @@ public class MoreCaseHolder extends RecyclerView.ViewHolder implements View.OnCl
             if("case".equals(type)){
                 Intent intent = new Intent(v.getContext(), CaseItemActivity.class);
                 intent.putExtra("case_id", case_id);
+                intent.putExtra("from_page","case");
                 context.startActivity(intent);
             }else{
                 Intent intent = new Intent(v.getContext(), VideoActivity.class);

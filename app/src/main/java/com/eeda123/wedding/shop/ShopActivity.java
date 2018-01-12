@@ -373,6 +373,8 @@ public class ShopActivity extends AppCompatActivity  {
     @OnClick({R.id.info_line2})
     public void onShopClick(View view) {
         Intent intent = new Intent(this, ShopInfoActivity.class);
+        intent.putExtra("shop_id",shop_id);
+        intent.putExtra("from_page","introduce");
         startActivity(intent);
     }
 
