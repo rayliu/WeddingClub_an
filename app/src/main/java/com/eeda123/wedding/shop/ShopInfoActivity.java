@@ -1,9 +1,13 @@
  package com.eeda123.wedding.shop;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +17,8 @@ import android.widget.Toast;
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
+import com.eeda123.wedding.consult.ConsultActivity;
+import com.eeda123.wedding.login.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -21,6 +27,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 import static com.eeda123.wedding.R.id.shop_logo;
+import static com.eeda123.wedding.R.id.shop_name;
 
  public class ShopInfoActivity extends AppCompatActivity {
 
@@ -49,7 +58,7 @@ import static com.eeda123.wedding.R.id.shop_logo;
     LinearLayout back_arrow;
 
      @BindView(shop_logo) ImageView mShop_logo;
-     @BindView(R.id.shop_name) TextView mShop_name;
+     @BindView(shop_name) TextView mShop_name;
      @BindView(R.id.category) TextView mCategory;
      @BindView(R.id.about) TextView mAbout;
      @BindView(R.id.influence) TextView mInfluence;
@@ -159,7 +168,7 @@ import static com.eeda123.wedding.R.id.shop_logo;
              String cu = "";
 
              if( list.get("INFLUENCE") != null){
-                 influence = list.get("INFLUENCE").toString();
+                 influence = "影响力："+list.get("INFLUENCE").toString();
              }
              if( list.get("DIAMOND") != null){
                  diomandFlag = list.get("DIAMOND").toString();
@@ -175,7 +184,7 @@ import static com.eeda123.wedding.R.id.shop_logo;
                  shop_name = list.get("COMPANY_NAME").toString();
              }
              if(list.get("CATEGORY_NAME") != null){
-                 category_name = list.get("CATEGORY_NAME").toString();
+                 category_name = "类别："+list.get("CATEGORY_NAME").toString();
              }
              String logo = list.get("LOGO").toString();
 
@@ -203,6 +212,34 @@ import static com.eeda123.wedding.R.id.shop_logo;
      }
 
 
+     @OnClick({R.id.consult})
+     public void onConsultClick(View view) {
+         //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+         SharedPreferences sharedPreferences = getSharedPreferences("login_file",
+                 Activity.MODE_PRIVATE);
+         // 使用getString方法获得value，注意第2个参数是value的默认值
+         String login_id = sharedPreferences.getString("login_id", "");
+         String mobile = sharedPreferences.getString("mobile", "");
+         String user_name = sharedPreferences.getString("user_name", "");
+         String wedding_date = sharedPreferences.getString("wedding_date", "");
+         if (TextUtils.isEmpty(login_id)) {
+             Toast.makeText(this, "您未登录，请前往登录", Toast.LENGTH_LONG).show();
+             TimerTask task = new TimerTask() {
+                 @Override
+                 public void run() {
+                     Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                     startActivity(intent);
+                 }
+             };
+             (new Timer()).schedule(task, 2000);
+         } else {
+             Intent intent = new Intent(this, ConsultActivity.class);
+             intent.putExtra("shop_id", shop_id);
+             intent.putExtra("shop_name", mShop_name.getText());
+             intent.putExtra("category", mCategory.getText());
+             startActivity(intent);
+         }
+     }
 
 
      @OnClick({R.id.back_arrow})

@@ -422,20 +422,24 @@ public class ShopActivity extends AppCompatActivity  {
     @OnClick({R.id.case1, R.id.case2, R.id.case3})
     public void onCase_Click(View view) {
         Long case_id = (Long)view.getTag();
-        Intent intent = new Intent(this, CaseItemActivity.class);
-        intent.putExtra("case_id",case_id);
-        intent.putExtra("from_page","case");
-        this.startActivity(intent);
+        if(case_id != null){
+            Intent intent = new Intent(this, CaseItemActivity.class);
+            intent.putExtra("case_id",case_id);
+            intent.putExtra("from_page","case");
+            this.startActivity(intent);
+        }
     }
 
 
     @OnClick({R.id.video1, R.id.video2, R.id.video3})
     public void onVideoClick(View view) {
         Long case_id = (Long)view.getTag();
-        Intent intent = new Intent(this, VideoActivity.class);
-        intent.putExtra("from_page","video");
-        intent.putExtra("case_id",case_id);
-        this.startActivity(intent);
+        if(case_id != null){
+            Intent intent = new Intent(this, VideoActivity.class);
+            intent.putExtra("from_page","video");
+            intent.putExtra("case_id",case_id);
+            this.startActivity(intent);
+        }
     }
 
     @Override

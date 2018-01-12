@@ -75,7 +75,8 @@
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/diamond_mask"
                         android:id="@+id/diamond"
-                        android:layout_weight="0.55"/>
+                        android:layout_weight="0.55"
+                        android:visibility="invisible"/>
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -88,14 +89,16 @@
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/hui_mask"
                             android:id="@+id/cu"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:visibility="invisible"/>
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/cu_mask"
                             android:id="@+id/hui"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:visibility="invisible"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -127,7 +130,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/consult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
