@@ -46,7 +46,8 @@
                     android:layout_weight="1"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:textStyle="normal|bold"/>
 
             </LinearLayout>
 
@@ -98,7 +99,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/bg_red_color_pressed"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/huidiv">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -106,13 +108,13 @@
                         android:layout_weight="1"
                         android:backgroundTint="@color/bg_red_color_pressed"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:padding="10dp"
+                        android:id="@+id/hui_linear">
 
                         <TextView
-                            android:id="@+id/textView19"
+                            android:id="@+id/hui"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="[惠]  通过婚礼帮可享9折优惠"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"/>
 
@@ -124,17 +126,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/mine_follower_bg"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/cuLinear">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:padding="10dp"
+                        android:id="@+id/cu_linear">
 
                         <TextView
-                            android:id="@+id/textView19"
+                            android:id="@+id/cu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="[促]  此商品正进行促销活动"
@@ -155,21 +159,15 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:padding="10dp"
+                        android:weightSum="1">
 
                         <TextView
-                            android:id="@+id/textView19"
+                            android:id="@+id/cu_desc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="此商品正进行促销活动 此商品正进行促销活动此商品正进行促销活动"
                             />
 
-                        <TextView
-                            android:id="@+id/textView18"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="此商品正进行促销活动 此商品正进行促销活动"
-                            />
                     </LinearLayout>
 
                 </LinearLayout>

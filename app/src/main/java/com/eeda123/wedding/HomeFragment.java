@@ -207,7 +207,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         for(Map<String, Object> list: cuList){
             Long userId = null;
             String type = "";
-            String compnay_name = "";
+            String company_name = "";
             String begin_date = "";
             String end_date = "";
             String title = "";
@@ -222,8 +222,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             if(list.get("COVER") != null){
                 cover = list.get("COVER").toString();
             }
-            if(list.get("COMPNAY_NAME") != null){
-                compnay_name = list.get("COMPNAY_NAME").toString();
+            if(list.get("COMPANY_NAME") != null){
+                company_name = list.get("COMPANY_NAME").toString();
             }
             if(list.get("BEGIN_DATE") != null){
                 begin_date = list.get("BEGIN_DATE").toString();
@@ -239,7 +239,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             }
 
 
-            HomeCuItemModel model = new HomeCuItemModel(type, " "+compnay_name+":"+begin_date+"~"+end_date+"促销活动:"+ title, userId,cover);
+            HomeCuItemModel model = new HomeCuItemModel(type, " "+company_name+":"+begin_date+"~"+end_date+"促销活动:"+ title, userId,MainActivity.HOST_URL+"upload/"+cover);
 
             mItems.add(model);
         }

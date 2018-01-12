@@ -55,6 +55,9 @@ public class ProductActivity extends AppCompatActivity {
     @BindView(R.id.content) TextView content;
     @BindView(R.id.price) TextView price;
     @BindView(R.id.unit) TextView unit;
+    @BindView(R.id.cu) TextView mCu;
+    @BindView(R.id.hui) TextView mHui;
+    @BindView(R.id.cu_desc) TextView mCu_desc;
     @BindView(R.id.prod_recycler_view)
     RecyclerView listRecyclerView;
     List<ProductItemModel> mItems ;
@@ -174,12 +177,16 @@ public class ProductActivity extends AppCompatActivity {
     private void prodcutData(HashMap<String,Object> json ){
         ArrayList<Map> productList =  (ArrayList<Map>)json.get("PRODUCT");
         for(Map<String, Object> map: productList) {
-            String p_name = null;
-            String p_price_type = null;
-            String p_price = null;
-            String p_unit = null;
-            String p_content = null;
-            String p_cover = null;
+            String p_name = "";
+            String p_price_type = "";
+            String p_price = "";
+            String p_unit = "";
+            String p_content = "";
+            String p_cover = "";
+            String hui = "";
+            String cu = "";
+            String cu_desc = "";
+            String hui_discount = "";
 
             if (map.get("SHOP_NAME") != null) {
                 shop_name = map.get("SHOP_NAME").toString();
@@ -208,6 +215,34 @@ public class ProductActivity extends AppCompatActivity {
             if (map.get("COVER") != null) {
                 p_cover = map.get("COVER").toString();
             }
+
+
+            if( map.get("HUI") != null){
+                hui = map.get("HUI").toString();
+            }
+            if( map.get("CU") != null){
+                cu = map.get("CU").toString();
+            }
+            if( map.get("HUI_DISCOUNT") != null){
+                hui_discount = map.get("HUI_DISCOUNT").toString();
+            }
+            if( map.get("CU_DESC") != null){
+                cu_desc = map.get("CU_DESC").toString();
+            }
+
+            if("Y".equals(cu)){
+                mCu.setText("[促]  此商品正进行促销活动");
+                mCu_desc.setText(cu_desc);
+            }else{
+                mCu.setText("[促] 暂无促销活动");
+            }
+            if("Y".equals(hui)){
+                mHui.setText("[惠]  通过婚礼帮可享"+hui_discount+"折优惠");
+
+            }else{
+                mHui.setText("[惠] 暂无优惠活动");
+            }
+
 
             Picasso.with(this)
                     .load(MainActivity.HOST_URL+"upload/" + p_cover)
