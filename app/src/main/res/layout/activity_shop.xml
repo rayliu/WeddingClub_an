@@ -17,6 +17,7 @@
             android:id="@+id/activity_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
             android:orientation="vertical"
             android:paddingLeft="10dp">
 
@@ -172,8 +173,8 @@
                         android:id="@+id/imageView14"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        app:srcCompat="@drawable/righticon"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/righticon"/>
 
                 </LinearLayout>
 
