@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +78,7 @@ public class MyProjectFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_project, container, false);
 
-        getData();
+        getData("byProject");
 
         return view;
     }
@@ -147,7 +148,7 @@ public class MyProjectFragment extends Fragment {
         ).show();
     }
 
-    private void getData() {
+    private void getData(String type) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
@@ -179,7 +180,7 @@ public class MyProjectFragment extends Fragment {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.getProjectDataByGroup(userId);
+        Call<HashMap<String, Object>> call = service.getProjectDataByGroup(URLEncoder.encode(userId),URLEncoder.encode(type));
 
         call.enqueue(eedaCallback());
     }
@@ -244,7 +245,7 @@ public class MyProjectFragment extends Fragment {
     public void onResume(){
         super.onResume();
 
-        getData();
+       // getData();
     }
 
 
@@ -254,14 +255,19 @@ public class MyProjectFragment extends Fragment {
         sortByTime.setTextColor(ContextCompat.getColor(view.getContext(), R.color.base));
         expandableListView.setVisibility(View.VISIBLE);
         mListRecyclerView.setVisibility(View.INVISIBLE);
+
+        getData("byProject");
     }
 
     @OnClick({R.id.sortByTime})
     public void onSortTimeClick(View view) {
         sortByProject.setTextColor(ContextCompat.getColor(view.getContext(), R.color.base));
         sortByTime.setTextColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary));
-        expandableListView.setVisibility(View.INVISIBLE);
-        mListRecyclerView.setVisibility(View.VISIBLE);
+//        expandableListView.setVisibility(View.INVISIBLE);
+//        mListRecyclerView.setVisibility(View.VISIBLE);
+
+        getData("byTime");
+
     }
 
 
