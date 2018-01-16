@@ -258,7 +258,7 @@
 
                     <ImageView
                         android:id="@+id/product1"
-                        android:layout_width="102dp"
+                        android:layout_width="100dp"
                         android:layout_height="82dp"
                         android:layout_weight=".6"
                         android:scaleType="centerCrop"
@@ -319,7 +319,7 @@
 
                     <ImageView
                         android:id="@+id/product2"
-                        android:layout_width="102dp"
+                        android:layout_width="100dp"
                         android:layout_height="82dp"
                         android:layout_weight="0.60"
                         android:scaleType="centerCrop"
@@ -381,7 +381,7 @@
 
                     <ImageView
                         android:id="@+id/product3"
-                        android:layout_width="102dp"
+                        android:layout_width="100dp"
                         android:layout_height="82dp"
                         android:layout_weight="0.60"
                         android:scaleType="centerCrop"
