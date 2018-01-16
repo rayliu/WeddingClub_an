@@ -200,8 +200,8 @@ public class CaseItemActivity extends AppCompatActivity {
         if(shop.get(0).get("INFLUENCE") != null){
             influence_value = shop.get(0).get("INFLUENCE").toString();
         }
-        if(shop.get(0).get("C_NAME") != null){
-            shop_name_value = shop.get(0).get("C_NAME").toString();
+        if(shop.get(0).get("COMPANY_NAME") != null){
+            shop_name_value = shop.get(0).get("COMPANY_NAME").toString();
         }
         if(shop.get(0).get("LOGO") != null){
             shop_logo_value = shop.get(0).get("LOGO").toString();
