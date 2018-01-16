@@ -23,7 +23,7 @@
             >
 
             <ImageView
-                android:layout_width="76dp"
+                android:layout_width="46dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="8dp"
@@ -41,7 +41,8 @@
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.35"/>
+                    android:layout_weight="0.35"
+                    android:textStyle="normal|bold"/>
 
                 <TextView
                     android:id="@+id/create_time"
