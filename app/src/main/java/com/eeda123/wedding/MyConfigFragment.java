@@ -14,8 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eeda123.wedding.login.LoginActivity;
 import com.leon.lib.settingview.LSettingItem;
 import com.squareup.picasso.Picasso;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +71,10 @@ public class MyConfigFragment extends Fragment {
         feedbackItem.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
             public void click(boolean isChecked) {
-                onFeedbackClick();
+                String userId= getUserId();
+                if(!TextUtils.isEmpty(userId)) {
+                    onFeedbackClick();
+                }
             }
         });
 
@@ -169,4 +176,26 @@ public class MyConfigFragment extends Fragment {
         Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.login.LoginActivity.class);
         startActivity(intent);
     }
+
+
+    private String getUserId() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        String mobile = sharedPreferences.getString("mobile", "");
+        String login_id = sharedPreferences.getString("login_id", "");
+        if(TextUtils.isEmpty(login_id)){
+            Toast.makeText(getActivity(), "您未登录，请前往登录", Toast.LENGTH_LONG).show();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(intent);
+                }
+            };
+            (new Timer()).schedule(task,2000);
+        }
+        return login_id;
+    }
+
 }

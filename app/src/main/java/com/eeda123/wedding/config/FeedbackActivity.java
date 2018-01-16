@@ -1,6 +1,7 @@
 package com.eeda123.wedding.config;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -48,7 +50,6 @@ public class FeedbackActivity extends AppCompatActivity {
     ImageView img_back_arrow;
     @BindView(R.id.back_arrow)
     LinearLayout back_arrow;
-    private String login_id = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class FeedbackActivity extends AppCompatActivity {
     @OnClick(R.id.saveAskBtn) void onSaveBtnClick() {
         //非空校验
         String mValue = questionValue.getText().toString();
-        if(TextUtils.isEmpty(mValue)){
+        if(TextUtils.isEmpty(mValue.trim())){
             Toast.makeText(getBaseContext(),"内容不能为空", Toast.LENGTH_LONG).show();
             return ;
         }else{
@@ -97,11 +98,6 @@ public class FeedbackActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu);
-////        inflater.inflate(R.menu.activity_ask_question, menu);
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,8 +122,6 @@ public class FeedbackActivity extends AppCompatActivity {
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("login_id", login_id)
-                        .header("questionValue", encodeHeadInfo(questionValue.getText().toString()))
                         .method(original.method(), original.body())
                         .build();
 
@@ -144,24 +138,16 @@ public class FeedbackActivity extends AppCompatActivity {
                 .build();
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        String login_id = sharedPreferences.getString("login_id", "");
 
-        Call<HashMap<String, Object>> call = service.list("ask","save_question");
+        Call<HashMap<String, Object>> call = service.save_feedback(URLEncoder.encode(login_id), URLEncoder.encode(questionValue.getText().toString()));
 
         call.enqueue(eedaCallback());
     }
 
-    private String encodeHeadInfo( String headInfo ) {
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0, length = headInfo.length(); i < length; i++) {
-            char c = headInfo.charAt(i);
-            if (c <= '\u001f' || c >= '\u007f') {
-                stringBuffer.append( String.format ("\\u%04x", (int)c) );
-            } else {
-                stringBuffer.append(c);
-            }
-        }
-        return stringBuffer.toString();
-    }
 
 
     @NonNull
@@ -174,9 +160,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 String  result = json.get("RESULT").toString();
 
                 if("true".equals(result)){
-                    Intent intent = new Intent();
-                    intent.putExtra("parent_page", "addQuestion");
-                    setResult(RESULT_OK, intent);
+                    Toast.makeText(getBaseContext(),"感谢您的反馈", Toast.LENGTH_LONG).show();
                     finish();
                 }else{
                     Toast.makeText(getBaseContext(),"操作失败，稍后请重试", Toast.LENGTH_LONG).show();
