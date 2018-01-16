@@ -79,6 +79,10 @@ public class ShopActivity extends AppCompatActivity  {
     @BindView(R.id.prod_line1) LinearLayout prod_line1;
     @BindView(R.id.prod_line2) LinearLayout prod_line2;
     @BindView(R.id.prod_line3) LinearLayout prod_line3;
+
+    @BindView(R.id.cu1) ImageView mCu1;
+    @BindView(R.id.cu2) ImageView mCu2;
+    @BindView(R.id.cu3) ImageView mCu3;
     //case
     @BindView(R.id.case1) ImageView case1;
     @BindView(R.id.case2) ImageView case2;
@@ -251,6 +255,9 @@ public class ShopActivity extends AppCompatActivity  {
             }
             if("Y".equals(cu)){
                 mCu.setVisibility(View.VISIBLE);
+                mCu1.setVisibility(View.VISIBLE);
+                mCu2.setVisibility(View.VISIBLE);
+                mCu3.setVisibility(View.VISIBLE);
             }
             if("Y".equals(hui)){
                 mHui.setVisibility(View.VISIBLE);

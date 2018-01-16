@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,10 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +61,7 @@ public class MyProjectFragment extends Fragment {
     @BindView(R.id.sortByProject)
     TextView sortByProject;
     @BindView(R.id.sortByTime) TextView sortByTime;
+    @BindView(R.id.count_down) TextView countdown;
 
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
@@ -77,10 +82,44 @@ public class MyProjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_project, container, false);
+        ButterKnife.bind(this, view);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        String wedding_date = sharedPreferences.getString("wedding_date", "");
+        if(!TextUtils.isEmpty(wedding_date)){
+            try{
+                SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd");
+                String date = formatter.format(new java.util.Date());
+                Date d1 = formatter.parse(wedding_date);
+                Date d2 = formatter.parse(date);
+                if(d1.getTime() - d2.getTime() >0){
+                    countdown.setText("婚期倒计时"+ daysBetween(d1,d2) +"天");
+                }
+            }catch (Exception e){
+                e.getMessage();
+            }
+        }
 
         getData("byProject");
 
         return view;
+    }
+
+
+    public static int daysBetween(Date smdate,Date bdate) throws Exception
+    {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        smdate=sdf.parse(sdf.format(smdate));
+        bdate=sdf.parse(sdf.format(bdate));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(smdate);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(bdate);
+        long time2 = cal.getTimeInMillis();
+        long between_days=(time1 - time2)/(1000*3600*24);
+
+        return Integer.parseInt(String.valueOf(between_days));
     }
 
     @Override
@@ -198,7 +237,6 @@ public class MyProjectFragment extends Fragment {
                 for (Map<String ,Object> map : orderdata){
                     String seq = map.get("INDEX").toString();
                     String title = map.get("PROJECT").toString();
-
 
                     int size = ((ArrayList<Map>)map.get("CHECK_ITEM")).size();
                     int total = ((ArrayList<Map>)map.get("ITEM_LIST")).size();

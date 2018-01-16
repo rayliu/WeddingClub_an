@@ -11,13 +11,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/count_down"
+            android:text="fdfdff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/project_header"
             android:padding="5dp"
-            android:text=" 倒计时56天"
             android:textColor="@color/accent"
             android:textSize="18sp"/>
 

@@ -76,6 +76,7 @@ public class MoreActivity extends AppCompatActivity {
 
     private Long shop_id;
     private String from_page;
+    private String cu1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,6 +216,7 @@ public class MoreActivity extends AppCompatActivity {
         }
         if( shop.get(0).get("CU") != null){
             cu = shop.get(0).get("CU").toString();
+            cu1 = cu;
         }
 
         Picasso.with(this)
@@ -258,7 +260,7 @@ public class MoreActivity extends AppCompatActivity {
                 price = list.get("PRICE").toString();
             }
 
-            mItems.add(new MoreModel(id,MainActivity.HOST_URL+"upload/"+cover,name,price));
+            mItems.add(new MoreModel(id,MainActivity.HOST_URL+"upload/"+cover,name,price,cu1));
         }
 
         if (mAdapter == null) {

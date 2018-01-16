@@ -287,10 +287,11 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView13"
+                        android:id="@+id/cu1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         android:scaleType="center"
                         app:srcCompat="@drawable/cu_mask"/>
 
@@ -347,10 +348,11 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView13"
+                        android:id="@+id/cu2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         android:scaleType="center"
                         app:srcCompat="@drawable/cu_mask"/>
 
@@ -408,11 +410,12 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView13"
+                        android:id="@+id/cu3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:scaleType="center"
+                        android:visibility="invisible"
                         app:srcCompat="@drawable/cu_mask"/>
 
                     <ImageView
@@ -466,7 +469,7 @@
                     <ImageView
                         android:id="@+id/case1"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="220dp"
                         android:layout_weight="0.60"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/bg"/>
@@ -487,7 +490,7 @@
                     <ImageView
                         android:id="@+id/case2"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="220dp"
                         android:layout_weight="0.60"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/bg"/>
@@ -508,7 +511,7 @@
                     <ImageView
                         android:id="@+id/case3"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="220dp"
                         android:layout_weight="0.60"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/bg"/>
@@ -556,7 +559,7 @@
                     <ImageView
                         android:id="@+id/video1"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="220dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/bg"/>
 
@@ -576,7 +579,7 @@
                     <ImageView
                         android:id="@+id/video2"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="220dp"
                         android:layout_weight="0.60"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/bg"/>
@@ -597,7 +600,7 @@
                     <ImageView
                         android:id="@+id/video3"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="220dp"
                         android:layout_weight="0.60"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/bg"/>

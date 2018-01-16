@@ -24,12 +24,14 @@ public class MoreHolder extends RecyclerView.ViewHolder implements View.OnClickL
     private TextView name;
     private TextView price;
     private TextView id;
+    private ImageView cu1;
 
     public MoreHolder(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
 
         cover = (ImageView) itemView.findViewById(R.id.cover);
+        cu1 = (ImageView) itemView.findViewById(R.id.cu1);
         name = (TextView) itemView.findViewById(R.id.name);
         price = (TextView) itemView.findViewById(R.id.price);
     }
@@ -40,11 +42,16 @@ public class MoreHolder extends RecyclerView.ViewHolder implements View.OnClickL
         String mcover = mCaseItemModel.getCover();
         String mname = mCaseItemModel.getName();
         String mprice = mCaseItemModel.getPrice();
+        String mcu1 = mCaseItemModel.getCu();
         Picasso.with(activity)
                 .load(mcover)
                 .into(cover);
         name.setText(mname);
         price.setText(mprice);
+
+        if("Y".equals(mcu1)){
+            cu1.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
