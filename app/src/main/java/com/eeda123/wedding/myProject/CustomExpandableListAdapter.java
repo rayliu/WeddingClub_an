@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,6 +103,9 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                @Override
                public void onClick(View view) {
                    String userId= getUserId();
+                   if(TextUtils.isEmpty(userId)){
+                       return;
+                   }
                    String item_id = item2Model.getId().toString();
                    String is_check = null;
                    String date = item2Model.getComplete_date()==null?"":item2Model.getComplete_date();

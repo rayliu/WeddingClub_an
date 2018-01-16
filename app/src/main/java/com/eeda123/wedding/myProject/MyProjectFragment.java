@@ -196,7 +196,7 @@ public class MyProjectFragment extends Fragment {
                 HashMap<String,Object> json = response.body();
                 ArrayList<Map> orderdata =  (ArrayList<Map>)json.get("ORDERLIST");
                 for (Map<String ,Object> map : orderdata){
-                    Long seq = ((Double)map.get("ID")).longValue();
+                    String seq = map.get("INDEX").toString();
                     String title = map.get("PROJECT").toString();
 
 
