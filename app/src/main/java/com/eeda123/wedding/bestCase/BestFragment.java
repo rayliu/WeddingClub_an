@@ -117,7 +117,9 @@ public class BestFragment extends Fragment {
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
-
+                if(json == null) {
+                    return;
+                }
 
                 ArrayList<Map> caseList =  (ArrayList<Map>)json.get("CASELIST");
                 LinkedList<String> url_maps = new LinkedList<String>();

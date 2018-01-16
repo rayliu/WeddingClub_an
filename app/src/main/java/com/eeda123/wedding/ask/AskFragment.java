@@ -154,6 +154,9 @@ public class AskFragment extends Fragment {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
                 //is_login = json.get("IS_LOGIN").toString();
+                if(json == null) {
+                    return;
+                }
 
 
                 askList(json);

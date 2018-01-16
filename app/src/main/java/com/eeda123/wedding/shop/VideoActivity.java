@@ -152,6 +152,9 @@ public class VideoActivity extends AppCompatActivity {
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
+                if(json == null) {
+                    return;
+                }
                 ArrayList<Map> shopList =  (ArrayList<Map>)json.get("DATA");
 
                 String c_shop_name = null;

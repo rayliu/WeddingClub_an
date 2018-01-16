@@ -157,7 +157,11 @@ public class FeedbackActivity extends AppCompatActivity {
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
-                String  result = json.get("RESULT").toString();
+                if(json == null) {
+                    return;
+                }
+
+                String  result = (String)json.get("RESULT");
 
                 if("true".equals(result)){
                     Toast.makeText(getBaseContext(),"感谢您的反馈", Toast.LENGTH_LONG).show();

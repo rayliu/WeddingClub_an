@@ -142,6 +142,9 @@ import static com.eeda123.wedding.R.id.shop_name;
              public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                  // The network call was a success and we got a response
                  HashMap<String,Object> json = response.body();
+                 if(json == null) {
+                     return;
+                 }
                  shopList(json);
              }
 

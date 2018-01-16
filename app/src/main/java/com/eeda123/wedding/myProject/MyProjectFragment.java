@@ -233,6 +233,9 @@ public class MyProjectFragment extends Fragment {
                 // The network call was a success and we got a response
                 mItems = new ArrayList<MyProjectItemModel>();
                 HashMap<String,Object> json = response.body();
+                if(json == null) {
+                    return;
+                }
                 ArrayList<Map> orderdata =  (ArrayList<Map>)json.get("ORDERLIST");
                 for (Map<String ,Object> map : orderdata){
                     String seq = map.get("INDEX").toString();

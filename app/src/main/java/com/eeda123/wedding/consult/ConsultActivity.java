@@ -169,6 +169,9 @@ public class ConsultActivity extends AppCompatActivity {
             public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
                 // The network call was a success and we got a response
                 HashMap<String,Object> json = response.body();
+                if(json == null) {
+                    return;
+                }
                 String result = json.get("RESULT").toString();
                 if("true".equals(result)){
                     Toast.makeText(getBaseContext(), "问题已提交,等待商家联系", Toast.LENGTH_LONG).show();

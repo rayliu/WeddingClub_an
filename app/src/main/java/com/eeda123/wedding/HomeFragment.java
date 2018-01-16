@@ -157,6 +157,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 // The network call was a success and we got a response
                 Log.d(TAG, "server contacted at: " + call.request().url());
                 HashMap<String,Object> json = response.body();
+                if(json == null) {
+                    return;
+                }
                 /**
                  *  横幅广告
                  */
