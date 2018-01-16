@@ -21,6 +21,7 @@ import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.consult.ConsultActivity;
 import com.eeda123.wedding.login.LoginActivity;
+import com.eeda123.wedding.shop.ShopInfoActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -318,6 +319,14 @@ public class ProductActivity extends AppCompatActivity {
             intent.putExtra("category",category_name);
             startActivity(intent);
         }
+    }
+
+    @OnClick({R.id.shop_info})
+    public void onShopClick(View view) {
+        Intent intent = new Intent(this, ShopInfoActivity.class);
+        intent.putExtra("shop_id",shop_id);
+        intent.putExtra("from_page","introduce");
+        startActivity(intent);
     }
 
 
