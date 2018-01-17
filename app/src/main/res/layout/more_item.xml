@@ -18,9 +18,9 @@
 
         <ImageView
             android:id="@+id/cover"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.83"
+            android:layout_weight="0.81"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/bg"/>
 

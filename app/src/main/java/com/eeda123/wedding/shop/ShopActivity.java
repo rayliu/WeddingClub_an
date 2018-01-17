@@ -79,6 +79,7 @@ public class ShopActivity extends AppCompatActivity  {
     @BindView(R.id.prod_line1) LinearLayout prod_line1;
     @BindView(R.id.prod_line2) LinearLayout prod_line2;
     @BindView(R.id.prod_line3) LinearLayout prod_line3;
+    @BindView(R.id.prod_more_line) LinearLayout prod_more_line;
 
     @BindView(R.id.cu1) ImageView mCu1;
     @BindView(R.id.cu2) ImageView mCu2;
@@ -87,13 +88,21 @@ public class ShopActivity extends AppCompatActivity  {
     @BindView(R.id.case1) ImageView case1;
     @BindView(R.id.case2) ImageView case2;
     @BindView(R.id.case3) ImageView case3;
+    @BindView(R.id.case_line1) LinearLayout case_line1;
+    @BindView(R.id.case_line2) LinearLayout case_line2;
+    @BindView(R.id.case_line3) LinearLayout case_line3;
+    @BindView(R.id.case_more_line) LinearLayout case_more_line;
     //videl
     @BindView(R.id.video1) ImageView video1;
     @BindView(R.id.video2) ImageView video2;
     @BindView(R.id.video3) ImageView video3;
+    @BindView(R.id.video_line1) LinearLayout video_line1;
+    @BindView(R.id.video_line2) LinearLayout video_line2;
+    @BindView(R.id.video_line3) LinearLayout video_line3;
     @BindView(R.id.prod_more) TextView prod_more;
     @BindView(R.id.case_more) TextView case_more;
     @BindView(R.id.video_more) TextView video_more;
+    @BindView(R.id.video_more_line) LinearLayout video_more_line;
 
 
     @BindView(R.id.action_bar_title)
@@ -294,6 +303,8 @@ public class ShopActivity extends AppCompatActivity  {
             }
 
             if(index == 1){
+                prod_more_line.setVisibility(View.VISIBLE);
+                prod_line1.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                                     .into(product1);
                 prod_name1.setText(product_name);
@@ -301,6 +312,7 @@ public class ShopActivity extends AppCompatActivity  {
                 prod_price1.setText(product_price+" 元");
             }
             if(index == 2){
+                prod_line2.setVisibility(View.VISIBLE);
                 prod_name2.setTag(product_id);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(product2);
@@ -308,6 +320,7 @@ public class ShopActivity extends AppCompatActivity  {
                 prod_price2.setText(product_price+" 元");
             }
             if(index == 3){
+                prod_line3.setVisibility(View.VISIBLE);
                 prod_name3.setTag(product_id);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(product3);
@@ -331,16 +344,20 @@ public class ShopActivity extends AppCompatActivity  {
 
 
             if(index == 1){
+                case_more_line.setVisibility(View.VISIBLE);
+                case_line1.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case1);
                 case1.setTag(case_id);
             }
             if(index == 2){
+                case_line2.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case2);
                 case2.setTag(case_id);
             }
             if(index == 3){
+                case_line3.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(case3);
                 case3.setTag(case_id);
@@ -361,16 +378,20 @@ public class ShopActivity extends AppCompatActivity  {
             }
 
             if(index == 1){
+                video_more_line.setVisibility(View.VISIBLE);
+                video_line1.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video1);
                 video1.setTag(video_id);
             }
             if(index == 2){
+                video_line2.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video2);
                 video2.setTag(video_id);
             }
             if(index == 3){
+                video_line3.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(video3);
                 video3.setTag(video_id);
