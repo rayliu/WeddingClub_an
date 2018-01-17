@@ -39,22 +39,15 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="4.30"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/shopName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
+                        android:layout_height="45dp"
                         android:textSize="18sp"/>
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

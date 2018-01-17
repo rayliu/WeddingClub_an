@@ -47,8 +47,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
-import static com.eeda123.wedding.R.id.cu;
-import static com.eeda123.wedding.R.id.hui;
 import static com.eeda123.wedding.R.id.webView;
 
 
@@ -70,8 +68,9 @@ public class VideoActivity extends AppCompatActivity {
     @BindView(R.id.category_name) TextView categoryName;
     @BindView(R.id.title) TextView title;
     @BindView(R.id.diamond) ImageView mDiamond;
-    @BindView(hui) ImageView mHui;
-    @BindView(cu) ImageView mCu;
+    @BindView(R.id.hui) ImageView mHui;
+    @BindView(R.id.influence) TextView mInfluence;
+    @BindView(R.id.cu) ImageView mCu;
 
 
     private Long case_id;
@@ -157,32 +156,42 @@ public class VideoActivity extends AppCompatActivity {
                 }
                 ArrayList<Map> shopList =  (ArrayList<Map>)json.get("DATA");
 
-                String c_shop_name = null;
-                String c_category_name = null;
-                String c_title = null;
-                String c_video_url = null;
-                String c_shop_logo = null;
+                String c_shop_name = "";
+                String c_category_name = "";
+                String c_title = "";
+                String c_video_url = "";
+                String c_influence = "";
+                String c_shop_logo = "";
                 String diomandFlag = "N";
                 String hui = "";
                 String cu = "";
 
-                if(shopList.get(0).get("C_NAME") != null){
-                    c_shop_name = shopList.get(0).get("C_NAME").toString();
+                if(shopList.get(0).get("COMPANY_NAME") != null){
+                    c_shop_name = shopList.get(0).get("COMPANY_NAME").toString();
+                    shopName.setText(c_shop_name);
                 }
                 if(shopList.get(0).get("CREATOR") != null){
                     shop_id = ((Double)shopList.get(0).get("CREATOR")).longValue();
                 }
                 if(shopList.get(0).get("CATEGORY_NAME") != null){
                     c_category_name = shopList.get(0).get("CATEGORY_NAME").toString();
+                    categoryName.setText("类别："+c_category_name);
+                }
+                if(shopList.get(0).get("INFLUENCE") != null){
+                    c_influence = shopList.get(0).get("INFLUENCE").toString();
+                    mInfluence.setText("影响力："+c_influence);
                 }
                 if(shopList.get(0).get("TITLE") != null){
                     c_title = shopList.get(0).get("TITLE").toString();
+                    title.setText(c_title);
                 }
                 if(shopList.get(0).get("VIDEO_URL") != null){
                     c_video_url = shopList.get(0).get("VIDEO_URL").toString();
                 }
                 if(shopList.get(0).get("LOGO") != null){
                     c_shop_logo  = shopList.get(0).get("LOGO").toString();
+                    Picasso.with(getBaseContext()).load(MainActivity.HOST_URL+"upload/"+c_shop_logo)
+                            .into(shopLogo);
                 }
 
                 if( shopList.get(0).get("DIAMOND") != null){
@@ -194,12 +203,6 @@ public class VideoActivity extends AppCompatActivity {
                 if( shopList.get(0).get("CU") != null){
                     cu = shopList.get(0).get("CU").toString();
                 }
-
-                Picasso.with(getBaseContext()).load(MainActivity.HOST_URL+"upload/"+c_shop_logo)
-                        .into(shopLogo);
-                shopName.setText(c_shop_name);
-                categoryName.setText("类别："+c_category_name);
-                title.setText(c_title);
 
                 if("Y".equals(diomandFlag)){
                     mDiamond.setVisibility(View.VISIBLE);
