@@ -206,6 +206,7 @@
                     android:hint="输入内容。。。"
                     android:inputType="textMultiLine"
                     android:textSize="18sp"
+                    android:focusable="false"
                     android:padding="5dp"/>
 
             </LinearLayout>

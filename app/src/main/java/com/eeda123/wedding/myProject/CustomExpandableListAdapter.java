@@ -335,5 +335,4 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     int day = Integer.parseInt(d.format(new java.util.Date()));
 
 
-
 }

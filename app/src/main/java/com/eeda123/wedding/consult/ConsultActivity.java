@@ -119,6 +119,7 @@ public class ConsultActivity extends AppCompatActivity {
         project.setText(category);
         createDate.setText(date);
         mobile.setText(login_mobile);
+
     }
 
     @OnClick({R.id.back_arrow})
@@ -206,7 +207,7 @@ public class ConsultActivity extends AppCompatActivity {
         String mRemark = remark.getText().toString();
 
         if(TextUtils.isEmpty(mRemark)){
-            Toast.makeText(getBaseContext(), "备注不能为空", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "您未登录，请前往登录", Toast.LENGTH_LONG).show();
             return;
         }else{
             saveBtn.setEnabled(false);

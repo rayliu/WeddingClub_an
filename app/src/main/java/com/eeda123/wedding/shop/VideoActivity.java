@@ -166,42 +166,44 @@ public class VideoActivity extends AppCompatActivity {
                 String hui = "";
                 String cu = "";
 
-                if(shopList.get(0).get("COMPANY_NAME") != null){
-                    c_shop_name = shopList.get(0).get("COMPANY_NAME").toString();
-                    shopName.setText(c_shop_name);
-                }
-                if(shopList.get(0).get("CREATOR") != null){
-                    shop_id = ((Double)shopList.get(0).get("CREATOR")).longValue();
-                }
-                if(shopList.get(0).get("CATEGORY_NAME") != null){
-                    c_category_name = shopList.get(0).get("CATEGORY_NAME").toString();
-                    categoryName.setText("类别："+c_category_name);
-                }
-                if(shopList.get(0).get("INFLUENCE") != null){
-                    c_influence = shopList.get(0).get("INFLUENCE").toString();
-                    mInfluence.setText("影响力："+c_influence);
-                }
-                if(shopList.get(0).get("TITLE") != null){
-                    c_title = shopList.get(0).get("TITLE").toString();
-                    title.setText(c_title);
-                }
-                if(shopList.get(0).get("VIDEO_URL") != null){
-                    c_video_url = shopList.get(0).get("VIDEO_URL").toString();
-                }
-                if(shopList.get(0).get("LOGO") != null){
-                    c_shop_logo  = shopList.get(0).get("LOGO").toString();
-                    Picasso.with(getBaseContext()).load(MainActivity.HOST_URL+"upload/"+c_shop_logo)
-                            .into(shopLogo);
-                }
+                for(Map map : shopList) {
+                    if (map.get("COMPANY_NAME") != null) {
+                        c_shop_name = map.get("COMPANY_NAME").toString();
+                        shopName.setText(c_shop_name);
+                    }
+                    if (map.get("SHOP_ID") != null) {
+                        shop_id = ((Double) map.get("SHOP_ID")).longValue();
+                    }
+                    if (map.get("CATEGORY_NAME") != null) {
+                        c_category_name = map.get("CATEGORY_NAME").toString();
+                        categoryName.setText("类别：" + c_category_name);
+                    }
+                    if (map.get("INFLUENCE") != null) {
+                        c_influence = map.get("INFLUENCE").toString();
+                        mInfluence.setText("影响力：" + c_influence);
+                    }
+                    if (map.get("TITLE") != null) {
+                        c_title = map.get("TITLE").toString();
+                        title.setText(c_title);
+                    }
+                    if (map.get("VIDEO_URL") != null) {
+                        c_video_url = map.get("VIDEO_URL").toString();
+                    }
+                    if (map.get("LOGO") != null) {
+                        c_shop_logo = map.get("LOGO").toString();
+                        Picasso.with(getBaseContext()).load(MainActivity.HOST_URL + "upload/" + c_shop_logo)
+                                .into(shopLogo);
+                    }
 
-                if( shopList.get(0).get("DIAMOND") != null){
-                    diomandFlag = shopList.get(0).get("DIAMOND").toString();
-                }
-                if( shopList.get(0).get("HUI") != null){
-                    hui = shopList.get(0).get("HUI").toString();
-                }
-                if( shopList.get(0).get("CU") != null){
-                    cu = shopList.get(0).get("CU").toString();
+                    if (map.get("DIAMOND") != null) {
+                        diomandFlag = map.get("DIAMOND").toString();
+                    }
+                    if (map.get("HUI") != null) {
+                        hui = map.get("HUI").toString();
+                    }
+                    if (map.get("CU") != null) {
+                        cu = map.get("CU").toString();
+                    }
                 }
 
                 if("Y".equals(diomandFlag)){

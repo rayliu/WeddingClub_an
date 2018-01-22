@@ -198,28 +198,31 @@ public class MoreActivity extends AppCompatActivity {
         String diomandFlag = "N";
         String hui = "";
         String cu = "";
-        if(shop.get(0).get("INFLUENCE") != null){
-            influence_value = shop.get(0).get("INFLUENCE").toString();
-        }
-        if(shop.get(0).get("COMPANY_NAME") != null){
-            shop_name_value = shop.get(0).get("COMPANY_NAME").toString();
-        }
-        if(shop.get(0).get("LOGO") != null){
-            shop_logo_value = shop.get(0).get("LOGO").toString();
-        }
-        if(shop.get(0).get("CATEGORY_NAME") != null){
-            category_value = shop.get(0).get("CATEGORY_NAME").toString();
-        }
 
-        if( shop.get(0).get("DIAMOND") != null){
-            diomandFlag = shop.get(0).get("DIAMOND").toString();
-        }
-        if( shop.get(0).get("HUI") != null){
-            hui = shop.get(0).get("HUI").toString();
-        }
-        if( shop.get(0).get("CU") != null){
-            cu = shop.get(0).get("CU").toString();
-            cu1 = cu;
+        for(Map map : shop) {
+            if (map.get("INFLUENCE") != null) {
+                influence_value = map.get("INFLUENCE").toString();
+            }
+            if (map.get("COMPANY_NAME") != null) {
+                shop_name_value = map.get("COMPANY_NAME").toString();
+            }
+            if (map.get("LOGO") != null) {
+                shop_logo_value = map.get("LOGO").toString();
+            }
+            if (map.get("CATEGORY_NAME") != null) {
+                category_value = map.get("CATEGORY_NAME").toString();
+            }
+
+            if (map.get("DIAMOND") != null) {
+                diomandFlag = map.get("DIAMOND").toString();
+            }
+            if (map.get("HUI") != null) {
+                hui = map.get("HUI").toString();
+            }
+            if (map.get("CU") != null) {
+                cu = map.get("CU").toString();
+                cu1 = cu;
+            }
         }
 
         Picasso.with(this)
