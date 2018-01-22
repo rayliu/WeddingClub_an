@@ -182,7 +182,7 @@ public class ConsultActivity extends AppCompatActivity {
                             finish();
                         }
                     };
-                    (new Timer()).schedule(task,3000);
+                    (new Timer()).schedule(task,2000);
                 }else{
                     Toast.makeText(getBaseContext(), "操作失败，请稍后重试", Toast.LENGTH_LONG).show();
                     saveBtn.setEnabled(true);
