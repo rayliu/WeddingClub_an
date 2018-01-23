@@ -65,7 +65,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
     EditText mobile_code;
 
 
-
+    private  String code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,9 +156,11 @@ public class ForgetPwdActivity extends AppCompatActivity {
                 if("send_code".equals(type)){
                     Boolean result =(Boolean) json.get("RESULT");
                     if(result){
+                        code =(String) json.get("CODE");
                         Toast.makeText(getBaseContext(), "发送成功", Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(getBaseContext(), "发送失败", Toast.LENGTH_LONG).show();
+                        String errMsg =(String) json.get("ERRMSG");
+                        Toast.makeText(getBaseContext(), errMsg, Toast.LENGTH_LONG).show();
                     }
                     send_btn.setEnabled(true);
                     send_btn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
@@ -203,6 +205,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
 
         if(!TextUtils.isEmpty(mobileStr)) {
             if(isMobile(mobileStr)){
+                code = null;
                 action("send_code");
                 mobile.setEnabled(false);
             }else{
@@ -229,6 +232,11 @@ public class ForgetPwdActivity extends AppCompatActivity {
 
         if(!pwdStr.equals(rePwdStr)){
             Toast.makeText(getBaseContext(), "两次密码填写不相同", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(!mobile_codeStr.equals(code)){
+            Toast.makeText(getBaseContext(), "手机验证码不正确", Toast.LENGTH_LONG).show();
             return;
         }
 
