@@ -8,7 +8,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 25
         versionName '2.0'
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         versionCode 2
     }
     buildTypes {
@@ -17,7 +17,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     productFlavors {
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
     }
 }
 
@@ -29,11 +45,10 @@ dependencies {
     // Load Images
     // GSON with Retrofit
     //首页滚动条 https://github.com/daimajia/AndroidImageSlider
-    //compile "com.android.support:support-v4:+"
     //compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
+
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
@@ -51,4 +66,13 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     provided 'org.greenrobot:greendao-generator:3.2.0'
+    //接收阿里云 移动推送
+    //compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.j256.ormlite:ormlite-core:4.48'
+    compile 'com.j256.ormlite:ormlite-android:4.48'
+    compile 'com.aliyun.ams:alicloud-android-push:3.0.11@aar'
+    compile 'com.aliyun.ams:alicloud-android-utdid:1.1.5.3'
+    compile 'com.aliyun.ams:alicloud-android-ut:5.0.0'
+    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.3@aar'
 }
