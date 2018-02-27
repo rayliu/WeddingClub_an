@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,9 @@ public class ConsultActivity extends AppCompatActivity {
     Button saveBtn;
     Long shop_id = null;
     String login_id = null;
+
+    @BindView(R.id.login_form)
+    ScrollView scrollView;
 
 
     @BindView(R.id.action_bar_title)
@@ -214,6 +218,11 @@ public class ConsultActivity extends AppCompatActivity {
             saveBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
             saveData();
         }
+    }
+
+
+    @OnClick(R.id.remark) void onFocusBtnClick() {
+        scrollView.smoothScrollTo(0,300);//绑定数据后, 滚动回顶部
     }
 
     /**
