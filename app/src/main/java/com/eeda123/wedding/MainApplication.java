@@ -7,9 +7,6 @@ import android.util.Log;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
-import com.alibaba.sdk.android.push.register.GcmRegister;
-import com.alibaba.sdk.android.push.register.HuaWeiRegister;
-import com.alibaba.sdk.android.push.register.MiPushRegister;
 
 /**
  * Created by a13570610691 on 2018/2/5.
@@ -18,6 +15,8 @@ import com.alibaba.sdk.android.push.register.MiPushRegister;
 public class MainApplication extends Application {
     private static final String TAG = "Init";
     private static MainActivity mainActivity = null;
+
+    public static String deviceId ;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,7 +33,7 @@ public class MainApplication extends Application {
             @Override
             public void onSuccess(String response) {
                 Log.i(TAG, "init cloudchannel success");
-
+                deviceId = pushService.getDeviceId();
             }
 
             @Override

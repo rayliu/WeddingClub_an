@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.eeda123.wedding.MyImageDialog;
 import com.eeda123.wedding.R;
 import com.squareup.picasso.Picasso;
 
@@ -38,8 +39,12 @@ public class ProductItemHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-//        Context context = v.getContext();
-//        Intent intent = CategoryActivity.newIntent(context,mProductItemModel.getShopId());;
-//        context.startActivity(intent);
+        //Toast.makeText(v.getContext(), "图片"+mProductItemModel.getProduct_photo(), Toast.LENGTH_LONG).show();
+
+        v.setDrawingCacheEnabled(true);
+        MyImageDialog myImageDialog = new MyImageDialog(v.getContext(),0,0,0,v.getDrawingCache(),mProductItemModel.getProduct_photo());
+        myImageDialog.show();
     }
+
+
 }
