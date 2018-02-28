@@ -197,7 +197,7 @@
                     android:paddingRight="5dp"
                     android:text=""
                     android:textAlignment="viewStart"
-                    android:textSize="18sp"/>
+                    android:textStyle="normal|bold"/>
             </LinearLayout>
 
             <LinearLayout

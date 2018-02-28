@@ -36,19 +36,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:weightSum="1">
 
                     <TextView
                         android:id="@+id/shop_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"/>
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_weight="1.29"
+                        android:textStyle="normal|bold"/>
 
                     <TextView
                         android:id="@+id/influence"
