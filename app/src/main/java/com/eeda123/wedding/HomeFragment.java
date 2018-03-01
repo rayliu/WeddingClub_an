@@ -2,6 +2,7 @@
 
 package com.eeda123.wedding;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +52,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.msg.MyMessageReceiver.REC_TAG;
 
 public class HomeFragment extends Fragment implements BaseSliderView.OnSliderClickListener{
     public static final String TAG = "CallInstances";
@@ -79,6 +82,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String deviceID = getIMEI(this.getContext());
+        Log.i(REC_TAG,deviceID);
     }
 
     @Override
@@ -262,7 +267,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     public interface EedaService {
         @GET("/app/signIn")
-        Call<HashMap<String, Object>> login();
+        Call<HashMap<String, Object>> login(@Query("deviceId") String deviceId);
 
         @GET("/app/{type}/{method}")
         Call<HashMap<String,Object>> list(@Path("type") String type, @Path("method") String method);
@@ -308,7 +313,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                                                    @Query("pwd") String pwd, @Query("mobile") String mobile);
 
         @GET("/app/login/login")
-        Call<HashMap<String,Object>> login(@Query("password") String password,@Query("mobile") String mobile);
+        Call<HashMap<String,Object>> login(@Query("password") String password,@Query("mobile") String mobile,@Query("deviceId") String deviceId);
         
         @GET("/app/myProject/orderData")
         Call<HashMap<String,Object>> getProjectDataByGroup(@Query("login_id") String login_id,@Query("type") String type);
@@ -399,7 +404,12 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         startActivity(intent);
     }
 
+    public static String getIMEI(Context context) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
+        String imei = telephonyManager.getDeviceId();
 
+        return imei;
+    }
 
 
 }

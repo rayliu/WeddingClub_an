@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
+import com.eeda123.wedding.MainApplication;
 import com.eeda123.wedding.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -222,7 +223,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.login();
+        Call<HashMap<String, Object>> call = service.login(MainApplication.deviceId);
 
         call.enqueue(eedaCallback());
     }
