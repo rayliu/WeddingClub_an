@@ -32,10 +32,9 @@
         android:layout_width="114dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
-        android:text="2017-10-10"
         android:textAlignment="textEnd"
         android:textColor="@color/colorPrimary"
-        />
+        android:elevation="1dp"/>
 </LinearLayout>
 
 </LinearLayout>

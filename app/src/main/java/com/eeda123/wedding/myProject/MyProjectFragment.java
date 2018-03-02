@@ -251,6 +251,8 @@ public class MyProjectFragment extends Fragment {
                         String item_name = map2.get("ITEM_NAME").toString();
                         String complete_date = null;
                         String is_check = "N";
+                        String download_flag = "N";
+                        String file_name = "";
 
                         if(map2.get("NEW_COMPLETE_DATE") != null){
                             complete_date = map2.get("NEW_COMPLETE_DATE").toString();
@@ -258,8 +260,14 @@ public class MyProjectFragment extends Fragment {
                         if(map2.get("IS_CHECK") != null){
                             is_check = map2.get("IS_CHECK").toString();
                         }
+                        if(map2.get("DOWNLOAD_FLAG") != null){
+                            download_flag = map2.get("DOWNLOAD_FLAG").toString();
+                        }
+                        if(map2.get("FILE_NAME") != null){
+                            file_name = map2.get("FILE_NAME").toString();
+                        }
 
-                        mItems2.add(new MyProjectItem2Model(is_check,item_id,item_name,complete_date));
+                        mItems2.add(new MyProjectItem2Model(is_check,item_id,item_name,complete_date,download_flag, file_name));
                     }
 
                     mItems.add(new MyProjectItemModel(seq.toString(), title, size, total, mItems2));

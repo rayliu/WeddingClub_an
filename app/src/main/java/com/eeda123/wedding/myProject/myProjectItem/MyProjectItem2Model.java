@@ -45,11 +45,34 @@ public class MyProjectItem2Model {
 
     private String is_check;
 
-    public MyProjectItem2Model(String is_check,Long id ,String item_name, String complete_date){
+
+    public String getDownload_flag() {
+        return download_flag;
+    }
+
+    public void setDownload_flag(String download_flag) {
+        this.download_flag = download_flag;
+    }
+
+    private String download_flag;
+
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
+    }
+
+    private String file_name;
+
+    public MyProjectItem2Model(String is_check,Long id ,String item_name, String complete_date, String download_flag, String file_name){
         this.is_check = is_check;
         this.id = id;
         this.item_name = item_name;
         this.complete_date = complete_date;
+        this.download_flag = download_flag;
+        this.file_name = file_name;
     }
 
 }

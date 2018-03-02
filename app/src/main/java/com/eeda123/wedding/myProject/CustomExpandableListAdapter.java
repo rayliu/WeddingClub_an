@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eeda123.wedding.HomeFragment;
+import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.login.LoginActivity;
 import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
@@ -134,25 +136,33 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         //处理选择日期
         final TextView completeDate = (TextView)
                 convertView.findViewById(R.id.complete_date);
+
         completeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String userId= getUserId();
-                if(!TextUtils.isEmpty(userId)) {
-                    new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                              int dayOfMonth) {
-                            CustomExpandableListAdapter.this.year = year;
-                            month = monthOfYear + 1;
-                            day = dayOfMonth;
-                            String dateStr = year + "/" + month + "/" + day;
-                            completeDate.setText(dateStr);
-                            item2Model.setComplete_date(dateStr);
-                            saveDate(item2Model);
-                        }
-                    }, year, month - 1, day).show();
+                String textValue = completeDate.getText().toString();
+                if(!"资料下载".equals(textValue)){
+                    String userId= getUserId();
+                    if(!TextUtils.isEmpty(userId)) {
+                        new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                                  int dayOfMonth) {
+                                CustomExpandableListAdapter.this.year = year;
+                                month = monthOfYear + 1;
+                                day = dayOfMonth;
+                                String dateStr = year + "/" + month + "/" + day;
+                                completeDate.setText(dateStr);
+                                item2Model.setComplete_date(dateStr);
+                                saveDate(item2Model);
+                            }
+                        }, year, month - 1, day).show();
+                    }
+                }else{
+                    String file = MainActivity.HOST_URL+"download/file/"+item2Model.getFile_name();
+                    final Uri uri = Uri.parse(file);
+                    final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                    v.getContext().startActivity(it);
                 }
             }
         });
@@ -165,8 +175,16 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         }else{
             is_check.setChecked(false);
         }
-        String date = item2Model.getComplete_date()==null?"选日期":item2Model.getComplete_date();
-        completeDate.setText(date);
+        String date = null;
+        if("Y".equals(item2Model.getDownload_flag())){
+            //completeDate.setTextColor(ContextCompat.getColor(context,R.color.black));
+            //completeDate.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
+            date = "资料下载";
+            completeDate.setText(date);
+        }else{
+            date = item2Model.getComplete_date()==null?"选日期":item2Model.getComplete_date();
+            completeDate.setText(date);
+        }
 
         return convertView;
     }
