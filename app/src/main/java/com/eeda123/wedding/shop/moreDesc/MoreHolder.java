@@ -42,15 +42,18 @@ public class MoreHolder extends RecyclerView.ViewHolder implements View.OnClickL
         String mcover = mCaseItemModel.getCover();
         String mname = mCaseItemModel.getName();
         String mprice = mCaseItemModel.getPrice();
-        String mcu1 = mCaseItemModel.getCu();
+        String cu = mCaseItemModel.getCu();
+        String user_cu = mCaseItemModel.getUser_cu();
         Picasso.with(activity)
                 .load(mcover)
                 .into(cover);
         name.setText(mname);
         price.setText(mprice);
 
-        if("Y".equals(mcu1)){
-            cu1.setVisibility(View.VISIBLE);
+        if(!"N".equals(cu)){
+            if("Y".equals(user_cu)){
+                cu1.setVisibility(View.VISIBLE);
+            }
         }
     }
 

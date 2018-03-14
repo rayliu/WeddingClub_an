@@ -253,6 +253,8 @@ public class MoreActivity extends AppCompatActivity {
             String cover = null;
             String name = null;
             String price = null;
+            String cu = null;
+            String user_cu = null;
             if(list.get("ID") != null){
                 id  = ((Double)list.get("ID")).longValue();
             }
@@ -265,8 +267,14 @@ public class MoreActivity extends AppCompatActivity {
             if(list.get("PRICE") != null){
                 price = list.get("PRICE").toString();
             }
+            if(list.get("CU_FLAG") != null){
+                cu = list.get("CU_FLAG").toString();
+            }
+            if(list.get("USER_CU") != null){
+                user_cu = list.get("USER_CU").toString();
+            }
 
-            mItems.add(new MoreModel(id,MainActivity.HOST_URL+"upload/"+cover,name,price,cu1));
+            mItems.add(new MoreModel(id,MainActivity.HOST_URL+"upload/"+cover,name,price,cu,user_cu));
         }
 
         if (mAdapter == null) {

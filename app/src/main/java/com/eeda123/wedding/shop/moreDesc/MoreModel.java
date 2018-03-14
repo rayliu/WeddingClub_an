@@ -53,12 +53,23 @@ public class MoreModel {
 
     private String cu;
 
-    public MoreModel(Long id ,String cover, String name, String price ,String cu){
+    public String getUser_cu() {
+        return user_cu;
+    }
+
+    public void setUser_cu(String user_cu) {
+        this.user_cu = user_cu;
+    }
+
+    private String user_cu;
+
+    public MoreModel(Long id ,String cover, String name, String price ,String cu , String user_cu){
         this.id = id;
         this.cover = cover;
         this.name = name;
         this.price = price;
         this.cu = cu;
+        this.user_cu = user_cu;
     }
 
 }

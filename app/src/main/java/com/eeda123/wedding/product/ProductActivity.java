@@ -189,6 +189,7 @@ public class ProductActivity extends AppCompatActivity {
             String p_cover = "";
             String hui = "";
             String cu = "";
+            String cu_flag = "";
             String cu_desc = "";
             String hui_discount = "";
 
@@ -227,6 +228,9 @@ public class ProductActivity extends AppCompatActivity {
             if( map.get("CU") != null){
                 cu = map.get("CU").toString();
             }
+            if( map.get("CU_FLAG") != null){
+                cu_flag = map.get("CU_FLAG").toString();
+            }
             if( map.get("HUI_DISCOUNT") != null){
                 hui_discount = map.get("HUI_DISCOUNT").toString();
             }
@@ -235,8 +239,12 @@ public class ProductActivity extends AppCompatActivity {
             }
 
             if("Y".equals(cu)){
-                mCu.setText("[促] 此商品正进行促销活动");
-                mCu_desc.setText(cu_desc);
+                if(!"N".equals(cu_flag)){
+                    mCu.setText("[促] 此商品正进行促销活动");
+                    mCu_desc.setText(cu_desc);
+                }else{
+                    mCu.setText("[促] 暂无促销活动");
+                }
             }else{
                 mCu.setText("[促] 暂无促销活动");
             }

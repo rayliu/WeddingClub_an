@@ -267,9 +267,6 @@ public class ShopActivity extends AppCompatActivity  {
             }
             if("Y".equals(cu)){
                 mCu.setVisibility(View.VISIBLE);
-                mCu1.setVisibility(View.VISIBLE);
-                mCu2.setVisibility(View.VISIBLE);
-                mCu3.setVisibility(View.VISIBLE);
             }
             if("Y".equals(hui)){
                 mHui.setVisibility(View.VISIBLE);
@@ -286,6 +283,8 @@ public class ShopActivity extends AppCompatActivity  {
             String cover = null;
             String product_name = null;
             String product_price = null;
+            String cu_flag = null;
+            String user_cu = null;
             if(list.get("ID") != null){
                 product_id  = ((Double)list.get("ID")).longValue();
             }
@@ -301,6 +300,13 @@ public class ShopActivity extends AppCompatActivity  {
             if(list.get("PRICE") != null){
                 product_price = list.get("PRICE").toString();
             }
+            if(list.get("CU_FLAG") != null){
+                cu_flag = list.get("CU_FLAG").toString();
+            }
+            if(list.get("USER_CU") != null){
+                user_cu = list.get("USER_CU").toString();
+            }
+
 
             if(index == 1){
                 prod_more_line.setVisibility(View.VISIBLE);
@@ -310,6 +316,12 @@ public class ShopActivity extends AppCompatActivity  {
                 prod_name1.setText(product_name);
                 prod_name1.setTag(product_id);
                 prod_price1.setText(product_price+" 元");
+
+                if(!"N".equals(cu_flag)){
+                    if("Y".equals(user_cu)){
+                        mCu1.setVisibility(View.VISIBLE);
+                    }
+                }
             }
             if(index == 2){
                 prod_line2.setVisibility(View.VISIBLE);
@@ -318,6 +330,12 @@ public class ShopActivity extends AppCompatActivity  {
                         .into(product2);
                 prod_name2.setText(product_name);
                 prod_price2.setText(product_price+" 元");
+
+                if(!"N".equals(cu_flag)){
+                    if("Y".equals(user_cu)){
+                        mCu2.setVisibility(View.VISIBLE);
+                    }
+                }
             }
             if(index == 3){
                 prod_line3.setVisibility(View.VISIBLE);
@@ -326,6 +344,12 @@ public class ShopActivity extends AppCompatActivity  {
                         .into(product3);
                 prod_name3.setText(product_name);
                 prod_price3.setText(product_price+" 元");
+
+                if(!"N".equals(cu_flag)){
+                    if("Y".equals(user_cu)){
+                        mCu3.setVisibility(View.VISIBLE);
+                    }
+                }
             }
             index++;
         }
