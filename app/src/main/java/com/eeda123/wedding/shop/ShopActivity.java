@@ -315,7 +315,11 @@ public class ShopActivity extends AppCompatActivity  {
                                     .into(product1);
                 prod_name1.setText(product_name);
                 prod_name1.setTag(product_id);
-                prod_price1.setText(product_price+" 元");
+                if("-1.0".equals(product_price)){
+                    prod_price1.setText("价格面议");
+                }else{
+                    prod_price1.setText(product_price+" 元");
+                }
 
                 if(!"N".equals(cu_flag)){
                     if("Y".equals(user_cu)){
@@ -329,7 +333,11 @@ public class ShopActivity extends AppCompatActivity  {
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(product2);
                 prod_name2.setText(product_name);
-                prod_price2.setText(product_price+" 元");
+                if("-1.0".equals(product_price)){
+                    prod_price2.setText("价格面议");
+                }else{
+                    prod_price2.setText(product_price+" 元");
+                }
 
                 if(!"N".equals(cu_flag)){
                     if("Y".equals(user_cu)){
@@ -343,7 +351,11 @@ public class ShopActivity extends AppCompatActivity  {
                 Picasso.with(this).load(MainActivity.HOST_URL+"upload/"+cover)
                         .into(product3);
                 prod_name3.setText(product_name);
-                prod_price3.setText(product_price+" 元");
+                if("-1.0".equals(product_price)){
+                    prod_price3.setText("价格面议");
+                }else{
+                    prod_price3.setText(product_price+" 元");
+                }
 
                 if(!"N".equals(cu_flag)){
                     if("Y".equals(user_cu)){
