@@ -2,6 +2,7 @@
 
 package com.eeda123.wedding;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,18 +12,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.eeda123.wedding.category.CategoryActivity;
 import com.eeda123.wedding.home.HomeCuItemArrayAdapter;
 import com.eeda123.wedding.home.HomeCuItemModel;
+import com.eeda123.wedding.home.HomeCuItemNewAdapter;
 import com.eeda123.wedding.shop.ShopActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,6 +53,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 public class HomeFragment extends Fragment implements BaseSliderView.OnSliderClickListener{
@@ -61,7 +66,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     private  HomeFragment fragment = this;
 
-    private HomeCuItemArrayAdapter mAdapter;
+//    private HomeCuItemArrayAdapter mAdapter;
+    private HomeCuItemNewAdapter mAdapter;
     List<HomeCuItemModel> mItems ;
 
     @BindView(R.id.cu_list_recycler_view)
@@ -102,6 +108,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         listRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -250,10 +257,60 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 //                setListAdapter(adapter);
 
         if (mAdapter == null) {
-            mAdapter = new HomeCuItemArrayAdapter(mItems, this.getActivity());
+//            mAdapter = new HomeCuItemArrayAdapter(mItems, this.getActivity());
+            mAdapter = new HomeCuItemNewAdapter(R.layout.home_list_cu_item, mItems, this.getActivity());
+
             listRecyclerView.setAdapter(mAdapter);
+
+            mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override public void onLoadMoreRequested() {
+
+                    listRecyclerView.postDelayed(new Runnable() {
+                        int mCurrentCounter = 10;
+                        @Override
+                        public void run() {
+                            Log.d(TAG, "获取更多数据: mCurrentCounter="+mCurrentCounter);
+                            if (mCurrentCounter >= 3) {
+                                //数据全部加载完毕
+                                mAdapter.loadMoreEnd();
+                            } else {
+                                if (true) {
+                                    //成功获取更多数据
+                                    //mAdapter.addData(DataServer.getSampleData(PAGE_SIZE));
+                                    mCurrentCounter = 5;//mAdapter.getData().size();
+                                    mAdapter.loadMoreComplete();
+                                } else {
+                                    //获取更多数据失败
+                                    //isErr = true;
+                                    Toast.makeText(HomeFragment.this.getActivity(), "tests", Toast.LENGTH_LONG).show();
+                                    mAdapter.loadMoreFail();
+
+                                }
+                            }
+                        }
+
+                    }, 1000);
+                }
+            }, listRecyclerView);
+
+            mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    Context context = view.getContext();
+                    Log.d(TAG, "onItemClick: ");
+                    Toast.makeText(HomeFragment.this.getActivity(), "onItemClick" + position, Toast.LENGTH_SHORT).show();
+
+                    HomeCuItemModel model=(HomeCuItemModel)adapter.getItem(position);
+                    Intent intent = new Intent(context, ShopActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("shop_id", model.getUserId());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
         } else {
-            mAdapter.setItems(mItems);
+//            mAdapter.setItems(mItems);
+            mAdapter.addData(mItems);
             mAdapter.notifyDataSetChanged();
         }
         scrollView.smoothScrollTo(0,0);//绑定数据后, 滚动回顶部
