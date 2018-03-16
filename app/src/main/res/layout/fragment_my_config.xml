@@ -63,6 +63,7 @@
             leon:leftText="推送消息"/>
 
         <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/wedding_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             leon:leftText="婚期"/>

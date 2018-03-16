@@ -113,6 +113,7 @@
         </activity>
 
         <activity android:name=".config.FeedbackActivity"></activity>
+        <activity android:name=".config.WeddingDateActivity"></activity>
         <activity android:name=".config.AboutUsActivity"></activity>
         <activity android:name=".config.BizContactActivity"></activity>
         <activity android:name=".config.PolicyActivity"></activity>

@@ -392,6 +392,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         @GET("/app/consult/save_feedback")
         Call<HashMap<String,Object>> save_feedback(@Query("login_id") String login_id,@Query("values") String values);
 
+        @GET("/app/consult/save_wedding_date")
+        Call<HashMap<String,Object>> save_wedding_date(@Query("login_id") String login_id,@Query("values") String values);
+
+
         @GET("/app/bestCase/get_more_case")
         Call<HashMap<String,Object>> getMoreCase(@Query("shop_id") String shop_id,@Query("type") String type);
 

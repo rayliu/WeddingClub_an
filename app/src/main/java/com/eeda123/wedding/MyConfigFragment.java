@@ -67,6 +67,17 @@ public class MyConfigFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        LSettingItem weddingDateItem = (LSettingItem) view.findViewById(R.id.wedding_date);
+        weddingDateItem.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                String userId= getUserId();
+                if(!TextUtils.isEmpty(userId)) {
+                    onDateClick();
+                }
+            }
+        });
+
         LSettingItem feedbackItem = (LSettingItem) view.findViewById(R.id.feedback_item);
         feedbackItem.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
@@ -132,6 +143,11 @@ public class MyConfigFragment extends Fragment {
             login.setVisibility(view.INVISIBLE);
             login.setText("");
         }
+    }
+
+    void onDateClick() {
+        Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.config.WeddingDateActivity.class);
+        startActivity(intent);
     }
 
     void onAboutClick() {
