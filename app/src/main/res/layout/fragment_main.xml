@@ -112,7 +112,7 @@
                         android:drawableTop="@drawable/main_menu_icon5"
                         android:fontFamily="sans-serif-condensed"
                         android:paddingTop="10dp"
-                        android:text="摄像"
+                        android:text="跟拍摄像"
                         android:textColor="@color/base"
                         android:textSize="16sp"/>
 

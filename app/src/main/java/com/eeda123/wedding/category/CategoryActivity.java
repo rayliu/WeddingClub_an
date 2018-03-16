@@ -1,7 +1,9 @@
 package com.eeda123.wedding.category;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +54,7 @@ public class CategoryActivity extends AppCompatActivity {
     private CategoryItemArrayAdapter mAdapter;
     private CategoryMenuItemArrayAdapter menuAdapter;
     List<CategoryItemModel> mItems ;
+    String cityCode = null;
 
     List<CategoryMenuItemModel> menuItems ;
 
@@ -119,8 +123,12 @@ public class CategoryActivity extends AppCompatActivity {
 
         initMenu();
         initPopup();
+
+        SharedPreferences mySharedPreferences = getSharedPreferences("login_file", Activity.MODE_PRIVATE);
+        cityCode = mySharedPreferences.getString("cityCode", "");
         getData();
     }
+
 
     private void initMenu() {
         menuItems = new ArrayList<CategoryMenuItemModel>();
@@ -236,7 +244,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.getCategoryList(category_name);
+        Call<HashMap<String, Object>> call = service.getCategoryList(URLEncoder.encode(category_name),cityCode);
         call.enqueue(eedaCallback());
     }
 

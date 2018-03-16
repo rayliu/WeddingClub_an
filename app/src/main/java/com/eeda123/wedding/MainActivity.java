@@ -2,12 +2,15 @@
 package com.eeda123.wedding;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -26,8 +29,8 @@ import butterknife.OnClick;
 //import com.truiton.bottomnavigation.R;
 
 public class MainActivity extends AppCompatActivity{
-    //public static String HOST_URL = "http://192.168.0.103:8080/";
-    public static String HOST_URL = "http://www.iwedclub.com/";
+    public static String HOST_URL = "http://192.168.0.107:8080/";
+    //public static String HOST_URL = "http://www.iwedclub.com/";
     //   public static String HOST_URL = "www.iwedclub.com/";
     int selectedId = 0;
     private boolean isExit;
@@ -83,6 +86,16 @@ public class MainActivity extends AppCompatActivity{
 //        Intent intent = new Intent(this, LoginActivity.class);
 //        startActivity(intent);
 
+        SharedPreferences mySharedPreferences= getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        String cityName = mySharedPreferences.getString("cityName", "");
+        if(!TextUtils.isEmpty(cityName)){
+            city_name.setText(cityName);
+        }else{
+            city_name.setText("全国");
+        }
+
+
         showHomeFragment();
     }
 
@@ -106,6 +119,7 @@ public class MainActivity extends AppCompatActivity{
         startActivityForResult(intent, 0);
     }
 
+
     //重写onActivityResult方法，用来接收B回传的数据
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -113,7 +127,19 @@ public class MainActivity extends AppCompatActivity{
             case RESULT_OK:
                 Bundle b=data.getExtras(); //data为B中回传的Intent
                 String cityName=b.getString("cityName");//str即为回传的值
+                String cityCode=b.getString("cityCode");//str即为回传的值
                 city_name.setText(cityName);
+
+                //实例化SharedPreferences对象（第一步）
+                SharedPreferences mySharedPreferences= getSharedPreferences("login_file",
+                        Activity.MODE_PRIVATE);
+                //实例化SharedPreferences.Editor对象（第二步）
+                SharedPreferences.Editor editor = mySharedPreferences.edit();
+                editor.putString("cityName", cityName);
+                editor.putString("cityCode", cityCode);
+                //提交当前数据
+                editor.commit();
+
                 break;
             default:
                 break;
@@ -124,7 +150,7 @@ public class MainActivity extends AppCompatActivity{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rbHome:
-                action_bar_title.setText("婚淘品");
+                action_bar_title.setText("淘婚品");
                 showHomeFragment();
                 break;
             case R.id.rbAsk:

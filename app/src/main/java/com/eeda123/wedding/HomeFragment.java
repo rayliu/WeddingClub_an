@@ -2,8 +2,10 @@
 
 package com.eeda123.wedding;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,7 +25,6 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.eeda123.wedding.category.CategoryActivity;
-import com.eeda123.wedding.home.HomeCuItemArrayAdapter;
 import com.eeda123.wedding.home.HomeCuItemModel;
 import com.eeda123.wedding.home.HomeCuItemNewAdapter;
 import com.eeda123.wedding.shop.ShopActivity;
@@ -53,13 +53,13 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
 import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 public class HomeFragment extends Fragment implements BaseSliderView.OnSliderClickListener{
     public static final String TAG = "CallInstances";
     private boolean isRefresh = false;//是否刷新中
     private SwipeRefreshLayout mSwipeLayout;
+    String cityCode = null;
 
     private SliderLayout slider;
     private Button button;
@@ -109,13 +109,21 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         listRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("login_file", Activity.MODE_PRIVATE);
+        cityCode = mySharedPreferences.getString("cityCode", "");
+
+        mAdapter = null;
+        slider.removeAllSliders();
+        getData();
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        getData();
-
     }
 
 
@@ -149,7 +157,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         EedaService service = retrofit.create(EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.list("tao","orderData");
+        Call<HashMap<String, Object>> call = service.list(cityCode);
 
         call.enqueue(eedaCallback(this));
     }
@@ -198,7 +206,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             textSlider = new TextSliderView(getActivity());
             String ad_index = list.get("AD_INDEX").toString();
             Long user_id = ((Double)list.get("USER_ID")).longValue();
-            String product_id = list.get("PRODUCT_ID").toString();
             String photo = list.get("PHOTO").toString();
 
             String url = MainActivity.HOST_URL+"upload/"+photo;
@@ -213,7 +220,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     }
 
     private void buildCuList(ArrayList<Map> cuList) {
+
         mItems = new LinkedList<HomeCuItemModel>();
+        mItems.clear();
         for(Map<String, Object> list: cuList){
             Long userId = null;
             String type = "";
@@ -320,11 +329,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         @GET("/app/signIn")
         Call<HashMap<String, Object>> login(@Query("deviceId") String deviceId);
 
-        @GET("/app/{type}/{method}")
-        Call<HashMap<String,Object>> list(@Path("type") String type, @Path("method") String method);
+        @GET("/app/tao/orderData")
+        Call<HashMap<String,Object>> list(@Query("cityCode") String cityCode);
 
-        @GET("/app/category/searchShopByType/{param}")
-        Call<HashMap<String,Object>> getCategoryList(@Path("param") String param);
+        @GET("/app/category/searchShopByType")
+        Call<HashMap<String,Object>> getCategoryList(@Query("category_name") String category_name,@Query("cityCode") String cityCode);
 
         @GET("/app/shop/shopList/{param}")
         Call<HashMap<String,Object>> getShopList(@Path("param") String param);
@@ -336,7 +345,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         Call<HashMap<String,Object>> getProductData(@Path("param") String param);
 
         @GET("/app/bestCase/orderData")
-        Call<HashMap<String,Object>> getBestCaseData();
+        Call<HashMap<String,Object>> getBestCaseData(@Query("cityCode") String cityCode);
 
         @GET("/app/bestCase/findById/{param}")
         Call<HashMap<String,Object>> caseFindById(@Path("param") String param);
@@ -391,6 +400,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         @GET("/app/login/send_code")
         Call<HashMap<String,Object>> sendCode(@Query("mobile") String mobile);
+
+        @GET("/app/city/getDate")
+        Call<HashMap<String,Object>> getCity(@Query("mobile") String login_id);
     }
 
 
@@ -429,7 +441,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @OnClick(R.id.c5_btn) void onC5BtnClick() {
         //分类页面  摄像
-        goCategory("摄像");
+        goCategory("跟拍摄像");
     }
 
     @OnClick(R.id.c6_btn) void onC6BtnClick() {

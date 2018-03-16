@@ -2,8 +2,10 @@
 
 package com.eeda123.wedding.bestCase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -41,7 +43,7 @@ public class BestFragment extends Fragment {
     private RecyclerView mListRecyclerView;
     private BestItemArrayAdapter mAdapter;
     List<BestCaseModel> mItems ;
-
+    private String cityCode = "";
 
     public static Intent newIntent(Context context, Long caseId) {
         Intent intent = new Intent(context, CaseItemActivity.class);
@@ -69,9 +71,19 @@ public class BestFragment extends Fragment {
                 .findViewById(R.id.list_recycler_view);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        getData();
+        //getData();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("login_file", Activity.MODE_PRIVATE);
+        cityCode = mySharedPreferences.getString("cityCode", "");
+
+        mAdapter = null;
+        getData();
     }
 
 
@@ -104,7 +116,7 @@ public class BestFragment extends Fragment {
 
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
-        Call<HashMap<String, Object>> call = service.getBestCaseData();
+        Call<HashMap<String, Object>> call = service.getBestCaseData(cityCode);
 
         call.enqueue(eedaCallback());
     }

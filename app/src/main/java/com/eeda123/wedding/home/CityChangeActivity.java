@@ -1,9 +1,12 @@
 package com.eeda123.wedding.home;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,8 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +30,16 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.attr.host;
-import static com.eeda123.wedding.R.id.img_back_arrow;
+import static com.eeda123.wedding.MainActivity.HOST_URL;
 
 
 public class CityChangeActivity extends AppCompatActivity {
@@ -72,11 +88,102 @@ public class CityChangeActivity extends AppCompatActivity {
         img_back_arrow.setVisibility(View.VISIBLE);
         action_bar_title.setText("选择城市");
 
-        mItems = new LinkedList<HomeCityModel>();
+//        mItems = new LinkedList<HomeCityModel>();
+//        mItems.add(new HomeCityModel("", "珠海"));
+//        mItems.add(new HomeCityModel("", "中山"));
+//        mItems.add(new HomeCityModel("", "江门"));
+//
+//        if (mAdapter == null) {
+//            mAdapter = new HomeCityArrayAdapter(mItems, this);
+//            listRecyclerView.setAdapter(mAdapter);
+//        } else {
+//            mAdapter.setItems(mItems);
+//            mAdapter.notifyDataSetChanged();
+//        }
+        getData();
 
-        mItems.add(new HomeCityModel("", "珠海"));
-        mItems.add(new HomeCityModel("", "中山"));
-        mItems.add(new HomeCityModel("", "江门"));
+    }
+
+    private void getData() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
+
+                Request request = original.newBuilder()
+                        .method(original.method(), original.body())
+                        .build();
+
+                return chain.proceed(request);
+            }
+        });
+
+        OkHttpClient client = httpClient.build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HOST_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .build();
+
+        HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
+
+        //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
+        SharedPreferences sharedPreferences = getSharedPreferences("login_file",
+                Activity.MODE_PRIVATE);
+        // 使用getString方法获得value，注意第2个参数是value的默认值
+        String login_id = sharedPreferences.getString("login_id", "");
+
+        Call<HashMap<String, Object>> call = service.getCity(login_id);
+
+        call.enqueue(eedaCallback());
+    }
+
+
+    @NonNull
+    private Callback<HashMap<String,Object>> eedaCallback() {
+        return new Callback<HashMap<String,Object>>() {
+            @Override
+            public void onResponse(Call<HashMap<String,Object>> call, Response<HashMap<String,Object>> response) {
+                // The network call was a success and we got a response
+                HashMap<String,Object> json = response.body();
+                if(json == null) {
+                    return;
+                }
+                locData(json);
+            }
+
+            @Override
+            public void onFailure(Call<HashMap<String,Object>> call, Throwable t) {
+                // the network call was a failure
+                Toast.makeText(getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
+
+            }
+        };
+    }
+
+
+    private void locData(HashMap<String,Object> json ){
+        ArrayList<Map> locList = (ArrayList<Map>)json.get("LOCLIST");
+        String city_name = "";
+        String code = "";
+
+        mItems = new LinkedList<HomeCityModel>();
+        mItems.add(new HomeCityModel("", "全国"));
+        for(Map map : locList) {
+            if (map.get("CITY_NAME") != null) {
+                city_name = map.get("CITY_NAME").toString();
+            }
+            if (map.get("CODE") != null) {
+                code = map.get("CODE").toString();
+            }
+            mItems.add(new HomeCityModel(code , city_name));
+        }
 
         if (mAdapter == null) {
             mAdapter = new HomeCityArrayAdapter(mItems, this);
@@ -87,6 +194,9 @@ public class CityChangeActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     @OnClick({R.id.back_arrow, R.id.img_back_arrow})
     public void onBack_arrowClick(View view) {
         finish();
@@ -96,6 +206,8 @@ public class CityChangeActivity extends AppCompatActivity {
 //        Toast.makeText(this,
 //                model.getStrName() + " 被选择!", Toast.LENGTH_SHORT)
 //                .show();
+        //Toast.makeText(getBaseContext(), model.getStrCode()+model.getStrName(), Toast.LENGTH_LONG).show();
+
         Intent intent = new Intent();
         Bundle b = new Bundle();
         intent.putExtra("cityCode", model.getStrCode());
