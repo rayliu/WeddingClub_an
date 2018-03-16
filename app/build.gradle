@@ -81,4 +81,6 @@ dependencies {
 
     //RecyclerAdapter框架
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.35'
+
+    compile 'com.bm.photoview:library:1.4.1'
 }

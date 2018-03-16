@@ -5,13 +5,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.bm.library.PhotoView;
 import com.squareup.picasso.Picasso;
+
+import static com.eeda123.wedding.R.id.view;
 
 /**
  * Created by Administrator on 2018/2/28 0028.
@@ -22,6 +28,9 @@ public class MyImageDialog extends Dialog {
     private String imgUrl;
     private ImageView iv;
     private Bitmap bms;
+
+    private ViewPager mPager;
+
     public MyImageDialog(Context context, boolean cancelable,
                          DialogInterface.OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
@@ -38,21 +47,56 @@ public class MyImageDialog extends Dialog {
     }
 
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         //初始化布局
         View loadingview= LayoutInflater.from(getContext()).inflate(R.layout.imagedialogview,null);
 //        iv=(ImageView) loadingview.findViewById(R.id.imageview_head_big);
 
-        iv = (ImageView) loadingview.findViewById(R.id.imageview_head_big);
+//        iv = (ImageView) loadingview.findViewById(R.id.imageview_head_big);
 
         //iv.setImageBitmap(bms);
-        Picasso.with(loadingview.getContext())
-                .load(imgUrl)
-                .into(iv);
+//        Picasso.with(loadingview.getContext())
+//                .load(imgUrl)
+//                .into(iv);
 
         //设置dialog的布局
         setContentView(loadingview);
         //如果需要放大或者缩小时的动画，可以直接在此出对loadingview或iv操作，在下面SHOW或者dismiss中操作
-        super.onCreate(savedInstanceState);
+
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setPageMargin((int) (this.getContext().getResources().getDisplayMetrics().density * 15));
+        mPager.setAdapter(new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return 3;
+                //return imgsId.length;
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == object;
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                Context c = MyImageDialog.this.getContext();
+                PhotoView view = new PhotoView(c);
+                view.enable();
+                view.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+                Picasso.with(c)
+                        .load(imgUrl)
+                        .into(view);
+                //view.setImageResource(imgsId[position]);
+                container.addView(view);
+                return view;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+            }
+        });
     }
 
     //设置窗口显示
