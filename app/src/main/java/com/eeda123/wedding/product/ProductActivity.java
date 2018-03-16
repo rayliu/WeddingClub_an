@@ -276,6 +276,8 @@ public class ProductActivity extends AppCompatActivity {
     private void prodcutItemData(HashMap<String,Object> json ){
         mItems = new ArrayList<ProductItemModel>();
         ArrayList<Map> prodList =  (ArrayList<Map>)json.get("PRODUCTITEMLIST");
+        int i = 0;
+        ProductItemHolder.imgs = new String[prodList.size()];
         for(Map<String, Object> list: prodList){
             String prod_photo = null;
             if(list.get("PHOTO") != null){
@@ -283,6 +285,9 @@ public class ProductActivity extends AppCompatActivity {
             }
 
             mItems.add(new ProductItemModel(MainActivity.HOST_URL+"upload/"+prod_photo));
+
+            ProductItemHolder.imgs[i] = MainActivity.HOST_URL+"upload/"+prod_photo;
+            i++;
         }
 
         if (mAdapter == null) {
@@ -292,7 +297,6 @@ public class ProductActivity extends AppCompatActivity {
             mAdapter.setItems(mItems);
             mAdapter.notifyDataSetChanged();
         }
-
     }
 
 

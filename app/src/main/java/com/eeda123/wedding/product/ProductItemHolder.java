@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 public class ProductItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private String TAG = "ProductItemHolder";
     private ProductItemModel mProductItemModel;
-
+    public static String[] imgs ;
     private ImageView itemPic;
 
     public ProductItemHolder(View itemView) {
@@ -37,12 +37,13 @@ public class ProductItemHolder extends RecyclerView.ViewHolder implements View.O
 
     }
 
+
     @Override
     public void onClick(View v) {
         //Toast.makeText(v.getContext(), "图片"+mProductItemModel.getProduct_photo(), Toast.LENGTH_LONG).show();
 
         v.setDrawingCacheEnabled(true);
-        MyImageDialog myImageDialog = new MyImageDialog(v.getContext(),0,0,0,v.getDrawingCache(),mProductItemModel.getProduct_photo());
+        MyImageDialog myImageDialog = new MyImageDialog(v.getContext(),0,0,0,v.getDrawingCache(),imgs);
         myImageDialog.show();
     }
 

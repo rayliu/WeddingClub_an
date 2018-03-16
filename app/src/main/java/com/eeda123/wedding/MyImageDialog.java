@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import com.bm.library.PhotoView;
 import com.squareup.picasso.Picasso;
 
-import static com.eeda123.wedding.R.id.view;
-
 /**
  * Created by Administrator on 2018/2/28 0028.
  */
@@ -28,6 +26,7 @@ public class MyImageDialog extends Dialog {
     private String imgUrl;
     private ImageView iv;
     private Bitmap bms;
+    private String[] imgs;
 
     private ViewPager mPager;
 
@@ -36,11 +35,11 @@ public class MyImageDialog extends Dialog {
         super(context, cancelable, cancelListener);
     }
 
-    public MyImageDialog(Context context, int cancelable,int x,int y,Bitmap bm,String url) {
+    public MyImageDialog(Context context, int cancelable,int x,int y,Bitmap bm,String[] imgs ) {
         super(context, cancelable);
-        windowDeploy(x, y);
+        //windowDeploy(x, y);
         bms = bm;
-        imgUrl = url;
+        this.imgs = imgs;
     }
     public MyImageDialog(Context context) {
         super(context);
@@ -64,11 +63,11 @@ public class MyImageDialog extends Dialog {
         //如果需要放大或者缩小时的动画，可以直接在此出对loadingview或iv操作，在下面SHOW或者dismiss中操作
 
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setPageMargin((int) (this.getContext().getResources().getDisplayMetrics().density * 15));
+        mPager.setPageMargin((int) (this.getContext().getResources().getDisplayMetrics().density * 0));
         mPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
-                return 3;
+                return imgs.length;
                 //return imgsId.length;
             }
 
@@ -85,9 +84,8 @@ public class MyImageDialog extends Dialog {
                 view.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
                 Picasso.with(c)
-                        .load(imgUrl)
+                        .load(imgs[position])
                         .into(view);
-                //view.setImageResource(imgsId[position]);
                 container.addView(view);
                 return view;
             }
@@ -109,6 +107,7 @@ public class MyImageDialog extends Dialog {
 
         wl.x = x; //x小于0左移，大于0右移
         wl.y = y; //y小于0上移，大于0下移
+
         //            wl.alpha = 0.6f; //设置透明度
         //            wl.gravity = Gravity.BOTTOM; //设置重力
         window.setAttributes(wl);

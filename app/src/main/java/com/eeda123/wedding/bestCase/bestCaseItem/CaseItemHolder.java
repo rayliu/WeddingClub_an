@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 public class CaseItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private String TAG = "ProductItemHolder";
     private CaseItemModel mCaseItemModel;
-
+    public static String[] imgs ;
     private ImageView itemPic;
 
     public CaseItemHolder(View itemView) {
@@ -40,10 +40,10 @@ public class CaseItemHolder extends RecyclerView.ViewHolder implements View.OnCl
     @Override
     public void onClick(View v) {
 //        Context context = v.getContext();
-//        Intent intent = CategoryActivity.newIntent(context,mProductItemModel.getShopId());;
+//        Intent intent = CategoryActivity.newIntent(context,mProductItemModel.getShopId());
 //        context.startActivity(intent);
         v.setDrawingCacheEnabled(true);
-        MyImageDialog myImageDialog = new MyImageDialog(v.getContext(),0,0,0,v.getDrawingCache(),mCaseItemModel.getCase_photo());
+        MyImageDialog myImageDialog = new MyImageDialog(v.getContext(),0,0,0,v.getDrawingCache(),imgs);
         myImageDialog.show();
     }
 }

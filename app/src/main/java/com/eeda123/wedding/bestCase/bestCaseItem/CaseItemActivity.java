@@ -245,12 +245,17 @@ public class CaseItemActivity extends AppCompatActivity {
     private void caseData(HashMap<String,Object> json ){
         mItems = new ArrayList<CaseItemModel>();
         ArrayList<Map> caseList =  (ArrayList<Map>)json.get("CASELIST");
+
+        CaseItemHolder.imgs = new String[caseList.size()];
+        int i = 0;
         for(Map<String, Object> map: caseList) {
             String item_pic = null;
             if(map.get("PHOTO") != null){
                 item_pic = map.get("PHOTO").toString();
             }
             mItems.add(new CaseItemModel(MainActivity.HOST_URL+"upload/"+item_pic));
+            CaseItemHolder.imgs[i] = MainActivity.HOST_URL+"upload/"+item_pic;
+            i++;
         }
 
         if (mAdapter == null) {
