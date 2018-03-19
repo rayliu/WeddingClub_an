@@ -134,6 +134,7 @@ public class CategoryActivity extends AppCompatActivity {
         menuItems = new ArrayList<CategoryMenuItemModel>();
         menuItems.add(new CategoryMenuItemModel("影楼"));
         menuItems.add(new CategoryMenuItemModel("婚礼策划"));
+        menuItems.add(new CategoryMenuItemModel("跟拍摄影"));
         menuItems.add(new CategoryMenuItemModel("跟拍摄像"));
         menuItems.add(new CategoryMenuItemModel("化妆"));
         menuItems.add(new CategoryMenuItemModel("主持"));
@@ -148,43 +149,43 @@ public class CategoryActivity extends AppCompatActivity {
         menuItems.add(new CategoryMenuItemModel("珠宝"));
         menuItems.add(new CategoryMenuItemModel("酒店"));
 
-        int index = 0;
-        switch(category_name){
-            case "影楼": index=0;
-                break;
-            case "婚礼策划": index=1;
-                break;
-            case "跟拍摄像": index=2;
-                break;
-            case "化妆": index=3;
-                break;
-            case "主持": index=4;
-                break;
-            case "花店": index=5;
-                break;
-            case "婚品": index=6;
-                break;
-            case "婚纱": index=7;
-                break;
-            case "甜品": index=8;
-                break;
-            case "租车": index=9;
-                break;
-            case "礼服": index=10;
-                break;
-            case "蜜月旅行": index=11;
-                break;
-            case "烟酒": index=12;
-                break;
-            case "珠宝": index=13;
-                break;
-            case "酒店": index=14;
-                break;
-
-        }
+//        int index = 0;
+//        switch(category_name){
+//            case "影楼": index=0;
+//                break;
+//            case "婚礼策划": index=1;
+//                break;
+//            case "跟拍摄像": index=2;
+//                break;
+//            case "化妆": index=3;
+//                break;
+//            case "主持": index=4;
+//                break;
+//            case "花店": index=5;
+//                break;
+//            case "婚品": index=6;
+//                break;
+//            case "婚纱": index=7;
+//                break;
+//            case "甜品": index=8;
+//                break;
+//            case "租车": index=9;
+//                break;
+//            case "礼服": index=10;
+//                break;
+//            case "蜜月旅行": index=11;
+//                break;
+//            case "烟酒": index=12;
+//                break;
+//            case "珠宝": index=13;
+//                break;
+//            case "酒店": index=14;
+//                break;
+//
+//        }
         if (menuAdapter == null) {
             menuAdapter = new CategoryMenuItemArrayAdapter(menuItems, this);
-            menuAdapter.clickIndex = index;
+            //menuAdapter.clickIndex = index;
             menuListRecyclerView.setAdapter(menuAdapter);
         } else {
             menuAdapter.setItems(menuItems);
