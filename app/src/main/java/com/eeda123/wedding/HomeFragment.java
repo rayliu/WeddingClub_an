@@ -112,12 +112,18 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     @Override
     public void onResume() {
         super.onResume();
+
         SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("login_file", Activity.MODE_PRIVATE);
         cityCode = mySharedPreferences.getString("cityCode", "");
 
         mAdapter = null;
         slider.removeAllSliders();
         getData();
+
+//        MANService manService = MANServiceProvider.getService();
+//        manService.getMANPageHitHelper().pageAppear(getActivity());
+//        MANAndroid.main(manService, "淘婚品","tao","tao");
+
     }
 
 
@@ -192,7 +198,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 // the network call was a failure
                 Log.d(TAG, "call failed against the url: " + call.request().url());
                 Toast.makeText(getActivity().getBaseContext(), "网络连接失败", Toast.LENGTH_LONG).show();
-
             }
         };
     }
@@ -307,7 +312,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     Context context = view.getContext();
                     Log.d(TAG, "onItemClick: ");
-                    Toast.makeText(HomeFragment.this.getActivity(), "onItemClick" + position, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(HomeFragment.this.getActivity(), "onItemClick" + position, Toast.LENGTH_SHORT).show();
 
                     HomeCuItemModel model=(HomeCuItemModel)adapter.getItem(position);
                     Intent intent = new Intent(context, ShopActivity.class);
@@ -366,7 +371,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         Call<HashMap<String,Object>> save_answer(@Query("values") String values,@Query("login_id") String login_id,@Query("question_id") String question_id);
 
         @GET("/app/consult/save_consult")
-        Call<HashMap<String,Object>> save_consult(@Query("values") String values,@Query("login_id") String login_id,@Query("shop_id") String shop_id);
+        Call<HashMap<String,Object>> save_consult(@Query("values") String values,@Query("project") String project,@Query("login_id") String login_id,@Query("shop_id") String shop_id);
 
         @GET("/app/login/save_register")
         Call<HashMap<String,Object>> save_register(@Query("invite_code") String invite_code, @Query("user_name") String user_name, @Query("wedding_date") String wedding_date,
@@ -395,6 +400,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         @GET("/app/consult/save_wedding_date")
         Call<HashMap<String,Object>> save_wedding_date(@Query("login_id") String login_id,@Query("values") String values);
 
+        @GET("/app/myProject/save_new_project")
+        Call<HashMap<String,Object>> save_new_project(@Query("login_id") String login_id,@Query("values") String values);
 
         @GET("/app/bestCase/get_more_case")
         Call<HashMap<String,Object>> getMoreCase(@Query("shop_id") String shop_id,@Query("type") String type);

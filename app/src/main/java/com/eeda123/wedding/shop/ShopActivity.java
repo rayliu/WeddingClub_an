@@ -544,7 +544,8 @@ public class ShopActivity extends AppCompatActivity  {
             Intent intent = new Intent(this, ConsultActivity.class);
             intent.putExtra("shop_id",shop_id);
             intent.putExtra("shop_name",shopName.getText());
-            intent.putExtra("category",categoryName.getText());
+            intent.putExtra("category", categoryName.getText());
+            intent.putExtra("project","咨询商家");
             startActivity(intent);
         }
     }

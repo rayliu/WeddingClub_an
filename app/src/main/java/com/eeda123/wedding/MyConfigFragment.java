@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.man.MANService;
+import com.alibaba.sdk.android.man.MANServiceProvider;
 import com.eeda123.wedding.login.LoginActivity;
 import com.leon.lib.settingview.LSettingItem;
 import com.squareup.picasso.Picasso;
@@ -181,13 +183,17 @@ public class MyConfigFragment extends Fragment {
     }
 
     public void onLogoutClick() {
-        Toast.makeText(this.getActivity().getApplicationContext(), "我的消息", Toast.LENGTH_SHORT).show();
         //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login_file",
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.commit();
+
+        MANService manService = MANServiceProvider.getService();
+        // 用户注销埋点
+        manService.getMANAnalytics().updateUserAccount("", "");
+        MANAndroid.main(manService, "个人中心","logout","logout");
 
         Intent intent = new Intent(this.getActivity(), com.eeda123.wedding.login.LoginActivity.class);
         startActivity(intent);

@@ -43,7 +43,7 @@
                         android:id="@+id/shop_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.29"
+                        android:layout_weight="1.09"
                         android:textStyle="normal|bold"/>
 
                     <TextView

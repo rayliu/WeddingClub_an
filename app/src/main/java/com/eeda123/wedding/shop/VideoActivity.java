@@ -47,6 +47,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.eeda123.wedding.MainActivity.HOST_URL;
+import static com.eeda123.wedding.R.id.category_name;
 import static com.eeda123.wedding.R.id.webView;
 
 
@@ -75,6 +76,7 @@ public class VideoActivity extends AppCompatActivity {
 
     private Long case_id;
     private Long shop_id;
+    private String category_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +179,7 @@ public class VideoActivity extends AppCompatActivity {
                     if (map.get("CATEGORY_NAME") != null) {
                         c_category_name = map.get("CATEGORY_NAME").toString();
                         categoryName.setText("类别：" + c_category_name);
+                        category_name = c_category_name;
                     }
                     if (map.get("INFLUENCE") != null) {
                         c_influence = map.get("INFLUENCE").toString();
@@ -219,6 +222,7 @@ public class VideoActivity extends AppCompatActivity {
                 webview = (WebView) findViewById(webView);
                 webview.setWebViewClient(new WebViewClient());
                 webview.getSettings().setJavaScriptEnabled(true);
+                webview.getSettings().setDomStorageEnabled(true);
                 webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
                 webview.getSettings().setPluginState(WebSettings.PluginState.ON);
                 webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
@@ -273,7 +277,8 @@ public class VideoActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ConsultActivity.class);
             intent.putExtra("shop_id", shop_id);
             intent.putExtra("shop_name", shopName.getText());
-            intent.putExtra("category", categoryName.getText());
+            intent.putExtra("category", category_name);
+            intent.putExtra("project", "视频-"+title.getText());
             startActivity(intent);
         }
     }

@@ -57,6 +57,7 @@ public class ConsultActivity extends AppCompatActivity {
     @BindView(R.id.project) TextView project;
     @BindView(R.id.create_date) TextView createDate;
     @BindView(R.id.remark) EditText remark;
+    @BindView(R.id.category) TextView category;
     @BindView(R.id.saveBtn)
     Button saveBtn;
     Long shop_id = null;
@@ -103,7 +104,8 @@ public class ConsultActivity extends AppCompatActivity {
         bundle = this.getIntent().getExtras();
         shop_id = bundle.getLong("shop_id");
         String shop_name = bundle.getString("shop_name");
-        String category = bundle.getString("category");
+        String projectValue = bundle.getString("project");
+        String categoryValue = bundle.getString("category");
 
 
         //同样，在读取SharedPreferences数据前要实例化出一个SharedPreferences对象
@@ -120,9 +122,10 @@ public class ConsultActivity extends AppCompatActivity {
         shopName.setText(shop_name);
         userName.setText(user_name);
         weddingDate.setText(wedding_date);
-        project.setText(category);
+        project.setText(projectValue);
         createDate.setText(date);
         mobile.setText(login_mobile);
+        category.setText(categoryValue);
 
     }
 
@@ -161,7 +164,7 @@ public class ConsultActivity extends AppCompatActivity {
         HomeFragment.EedaService service = retrofit.create(HomeFragment.EedaService.class);
 
 
-        Call<HashMap<String, Object>> call = service.save_consult(URLEncoder.encode(remark.getText().toString()),login_id,shop_id.toString());
+        Call<HashMap<String, Object>> call = service.save_consult(URLEncoder.encode(remark.getText().toString()),URLEncoder.encode(project.getText().toString()),login_id,shop_id.toString());
 
         call.enqueue(eedaCallback());
     }
@@ -249,40 +252,4 @@ public class ConsultActivity extends AppCompatActivity {
         return true;
     }
 
-
-
-//    @OnClick({R.id.wedding_date})
-//    public void onWeddingDateClick(View view) {
-//        getDate(view);
-//    }
-//
-//
-//    SimpleDateFormat y = new SimpleDateFormat("yyyy");
-//    int year = Integer.parseInt(y.format(new java.util.Date()));
-//    SimpleDateFormat m = new SimpleDateFormat("MM");
-//    int month = Integer.parseInt(m.format(new java.util.Date()));
-//    SimpleDateFormat d = new SimpleDateFormat("dd");
-//    int day = Integer.parseInt(d.format(new java.util.Date()));
-//
-//    // 点击事件,湖区日期
-//    public void getDate(View v) {
-//
-//        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-//
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int monthOfYear,
-//                                  int dayOfMonth) {
-//                ConsultActivity.this.year = year;
-//                month = monthOfYear+1;
-//                day = dayOfMonth;
-//                showDate();
-//            }
-//        }, year, month-1, day).show();
-//
-//    }
-//
-//    // 显示选择日期
-//    private void showDate() {
-//        weddingDate.setText(year + "/" + month + "/" + day);
-//    }
 }

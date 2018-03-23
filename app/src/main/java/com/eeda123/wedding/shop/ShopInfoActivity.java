@@ -66,6 +66,7 @@ import static com.eeda123.wedding.R.id.shop_name;
      @BindView(R.id.hui) ImageView mHui;
      @BindView(R.id.cu) ImageView mCu;
      Long shop_id = null;
+     private String category_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +164,7 @@ import static com.eeda123.wedding.R.id.shop_name;
          ArrayList<Map> shopList =  (ArrayList<Map>)json.get("SHOPLIST");
          for(Map<String, Object> list: shopList){
              String shop_name = null;
-             String category_name = null;
+             String category_value = null;
              String about = null;
              String diomandFlag = "N";
              String hui = "";
@@ -187,7 +188,8 @@ import static com.eeda123.wedding.R.id.shop_name;
                  shop_name = list.get("COMPANY_NAME").toString();
              }
              if(list.get("CATEGORY_NAME") != null){
-                 category_name = "类别："+list.get("CATEGORY_NAME").toString();
+                 category_value = "类别："+list.get("CATEGORY_NAME").toString();
+                 category_name = list.get("CATEGORY_NAME").toString();
              }
              String logo = list.get("LOGO").toString();
 
@@ -200,7 +202,7 @@ import static com.eeda123.wedding.R.id.shop_name;
                      .into(mShop_logo);
              mAbout.setText(about);
              mShop_name.setText(shop_name);
-             mCategory.setText(category_name);
+             mCategory.setText(category_value);
              mInfluence.setText(influence);
              if("Y".equals(diomandFlag)){
                  mDiamond.setVisibility(View.VISIBLE);
@@ -239,7 +241,8 @@ import static com.eeda123.wedding.R.id.shop_name;
              Intent intent = new Intent(this, ConsultActivity.class);
              intent.putExtra("shop_id", shop_id);
              intent.putExtra("shop_name", mShop_name.getText());
-             intent.putExtra("category", mCategory.getText());
+             intent.putExtra("category", category_name);
+             intent.putExtra("project", "商家介绍咨询");
              startActivity(intent);
          }
      }

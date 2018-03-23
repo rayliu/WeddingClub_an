@@ -77,6 +77,8 @@ public class CaseItemActivity extends AppCompatActivity {
     private Long case_id;
     private String shop_id;
     private String from_page;
+    private String case_name;
+    private String category_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -229,6 +231,7 @@ public class CaseItemActivity extends AppCompatActivity {
                 .into(shop_logo);
         shop_name.setText(shop_name_value);
         category.setText("类别：" + category_value);
+        category_name = category_value;
         influence.setText("影响力：" + influence_value);
 
         if("Y".equals(diomandFlag)){
@@ -253,6 +256,10 @@ public class CaseItemActivity extends AppCompatActivity {
             if(map.get("PHOTO") != null){
                 item_pic = map.get("PHOTO").toString();
             }
+            if(map.get("CASE_NAME") != null){
+                case_name = map.get("CASE_NAME").toString();
+            }
+
             mItems.add(new CaseItemModel(MainActivity.HOST_URL+"upload/"+item_pic));
             CaseItemHolder.imgs[i] = MainActivity.HOST_URL+"upload/"+item_pic;
             i++;
@@ -292,7 +299,8 @@ public class CaseItemActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ConsultActivity.class);
             intent.putExtra("shop_id", shop_id);
             intent.putExtra("shop_name", shop_name.getText());
-            intent.putExtra("category", category.getText());
+            intent.putExtra("category", category_name);
+            intent.putExtra("project", "案例-"+case_name);
             startActivity(intent);
         }
     }

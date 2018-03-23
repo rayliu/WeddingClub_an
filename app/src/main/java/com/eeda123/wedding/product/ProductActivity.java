@@ -75,6 +75,7 @@ public class ProductActivity extends AppCompatActivity {
 
     private Long product_id;
     private Long shop_id;
+    private String product_name;
     private String shop_name;
     private String category_name;
     @Override
@@ -204,6 +205,7 @@ public class ProductActivity extends AppCompatActivity {
             }
             if (map.get("NAME") != null) {
                 p_name = map.get("NAME").toString();
+                product_name = p_name;
             }
             if (map.get("PRICE_TYPE") != null) {
                 p_price_type = map.get("PRICE_TYPE").toString();
@@ -323,12 +325,13 @@ public class ProductActivity extends AppCompatActivity {
         }else{
             Intent intent = new Intent(this, ConsultActivity.class);
             intent.putExtra("shop_id",shop_id);
-            intent.putExtra("mobile",mobile);
-            intent.putExtra("login_id",login_id);
-            intent.putExtra("user_name",user_name);
-            intent.putExtra("wedding_date",wedding_date);
+//            intent.putExtra("mobile",mobile);
+//            intent.putExtra("login_id",login_id);
+//            intent.putExtra("user_name",user_name);
+//            intent.putExtra("wedding_date",wedding_date);
             intent.putExtra("shop_name",shop_name);
-            intent.putExtra("category",category_name);
+            intent.putExtra("category", category_name);
+            intent.putExtra("project","产品-"+product_name);
             startActivity(intent);
         }
     }

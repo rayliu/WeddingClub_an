@@ -77,6 +77,7 @@ public class MoreActivity extends AppCompatActivity {
     private Long shop_id;
     private String from_page;
     private String cu1;
+    private String category_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,13 +112,7 @@ public class MoreActivity extends AppCompatActivity {
         bundle = this.getIntent().getExtras();
         from_page = bundle.getString("from_page");
         shop_id = bundle.getLong("shop_id");
-        String title = "";
-        if("case".equals(from_page)){
-            title = "案例展示";
-        }else{
-            title = "更多";
-        }
-
+        String title = "更多";
         action_bar_title.setText(title);
         getCaseData();
     }
@@ -230,6 +225,7 @@ public class MoreActivity extends AppCompatActivity {
                 .into(shop_logo);
         shop_name.setText(shop_name_value);
         category.setText("类别：" + category_value);
+        category_name = category_value;
         influence.setText("影响力：" + influence_value);
 
         if("Y".equals(diomandFlag)){
@@ -311,7 +307,8 @@ public class MoreActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ConsultActivity.class);
             intent.putExtra("shop_id", shop_id);
             intent.putExtra("shop_name", shop_name.getText());
-            intent.putExtra("category", category.getText());
+            intent.putExtra("category", category_name);
+            intent.putExtra("project","更多产品咨询");
             startActivity(intent);
         }
     }

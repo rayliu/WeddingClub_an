@@ -33,7 +33,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.man.MANService;
+import com.alibaba.sdk.android.man.MANServiceProvider;
 import com.eeda123.wedding.HomeFragment;
+import com.eeda123.wedding.MANAndroid;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.MainApplication;
 import com.eeda123.wedding.R;
@@ -253,6 +256,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         editor.putString("wedding_date", json.get("WEDDING_DATE").toString());
                         //提交当前数据
                         editor.commit();
+
+                        MANService manService = MANServiceProvider.getService();
+                        // 用户登录埋点
+                        manService.getMANAnalytics().updateUserAccount(json.get("USER_NAME").toString(), login_id.toString());
+                        MANAndroid.main(manService, "登录界面","login","login");
 
                         Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(intent);

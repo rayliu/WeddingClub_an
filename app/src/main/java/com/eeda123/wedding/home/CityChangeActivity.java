@@ -210,6 +210,7 @@ public class CityChangeActivity extends AppCompatActivity {
 
         Intent intent = new Intent();
         Bundle b = new Bundle();
+        intent.putExtra("pageName", "city");
         intent.putExtra("cityCode", model.getStrCode());
         intent.putExtra("cityName", model.getStrName());
         intent.putExtras(b);

@@ -76,6 +76,8 @@ public class MoreCaseActivity extends AppCompatActivity {
 
     private Long shop_id;
     private String from_page;
+    private String title = "";
+    private String category_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +112,7 @@ public class MoreCaseActivity extends AppCompatActivity {
         bundle = this.getIntent().getExtras();
         from_page = bundle.getString("from_page");
         shop_id = bundle.getLong("shop_id");
-        String title = "";
+
         if("case".equals(from_page)){
             title = "更多案例";
         }else{
@@ -228,6 +230,7 @@ public class MoreCaseActivity extends AppCompatActivity {
                 .into(shop_logo);
         shop_name.setText(shop_name_value);
         category.setText("类别：" + category_value);
+        category_name = category_value;
         influence.setText("影响力：" + influence_value);
 
         if("Y".equals(diomandFlag)){
@@ -297,7 +300,8 @@ public class MoreCaseActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ConsultActivity.class);
             intent.putExtra("shop_id", shop_id);
             intent.putExtra("shop_name", shop_name.getText());
-            intent.putExtra("category", category.getText());
+            intent.putExtra("category", category_name);
+            intent.putExtra("project", title+"咨询");
             startActivity(intent);
         }
     }

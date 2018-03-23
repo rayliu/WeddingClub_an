@@ -16,7 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.man.MANService;
+import com.alibaba.sdk.android.man.MANServiceProvider;
 import com.eeda123.wedding.HomeFragment;
+import com.eeda123.wedding.MANAndroid;
 import com.eeda123.wedding.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -220,6 +223,9 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 String  result = json.get("RESULT").toString();
                 if("true".equals(result)){
+                    MANService manService = MANServiceProvider.getService();
+                    manService.getMANAnalytics().userRegister(mobile.getText().toString());
+                    MANAndroid.main(manService, "注册页面","register","register");
 
                     Toast.makeText(getBaseContext(), "注册成功，请前往登录", Toast.LENGTH_LONG).show();
 
