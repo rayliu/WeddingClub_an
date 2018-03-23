@@ -1,7 +1,6 @@
 package com.eeda123.wedding.myProject;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +24,7 @@ import com.eeda123.wedding.HomeFragment;
 import com.eeda123.wedding.MainActivity;
 import com.eeda123.wedding.R;
 import com.eeda123.wedding.login.LoginActivity;
+import com.eeda123.wedding.myProject.myProjectItem.AddProjectActivity;
 import com.eeda123.wedding.myProject.myProjectItem.MyProjectItem2Model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -90,6 +89,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         final MyProjectItem2Model item2Model = (MyProjectItem2Model)getChild(listPosition, expandedListPosition);
         final String expandedListText = item2Model.getItem_name();//(String) getChild(listPosition, expandedListPosition);
+        final String download_flag = item2Model.getDownload_flag();
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -99,11 +99,63 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.is_check);
         TextView item_name = (TextView) convertView
                 .findViewById(R.id.item_name);
+        if(!TextUtils.isEmpty(expandedListText)){
+            item_name.setText(expandedListText);
+        }else{
+            //is_check.setVisibility(View.GONE);
+            item_name.setText("+新增自定义项目");
+            item2Model.setItem_name("新增自定义项目");
+        }
+
+        String isCheck = item2Model.getIs_check();
+        if("Y".equals(isCheck)){
+            is_check.setChecked(true);
+        }else{
+            is_check.setChecked(false);
+        }
+
+        final TextView completeDate = (TextView)
+                convertView.findViewById(R.id.complete_date);
+        if("Y".equals(download_flag)){
+            completeDate.setText("资料下载");
+        }else{
+            completeDate.setText(" ");
+        }
+
+        completeDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(item2Model.getFile_name())){
+                    String file = MainActivity.HOST_URL+"download/file/"+item2Model.getFile_name();
+                    final Uri uri = Uri.parse(file);
+                    final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                    v.getContext().startActivity(it);
+                }
+            }
+        });
+
+        item_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(expandedListText)){
+                    String userId= getUserId();
+                    if(TextUtils.isEmpty(userId)){
+                        return;
+                    }
+                    Intent intent = new Intent( v.getContext(), AddProjectActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+            }
+        });
 
         final MyProjectItemModel groupModel = getGroup(listPosition);
         is_check.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
+                   String item_name = item2Model.getItem_name().toString();
+                   if("新增自定义项目".equals(item_name)){
+                       return;
+                   }
                    String userId= getUserId();
                    if(TextUtils.isEmpty(userId)){
                        return;
@@ -123,6 +175,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                        item2Model.setIs_check(is_check);
                        groupModel.setCount(groupModel.getCount()+1);
                    }
+
                    handler.sendMessage(new Message());
                    HomeFragment.EedaService service = initRetroCall();
                    Call<HashMap<String, Object>> call = service.saveProjectCheck(userId,item_id,is_check,date);
@@ -131,61 +184,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                }
            }
         );
-
-
-        //处理选择日期
-        final TextView completeDate = (TextView)
-                convertView.findViewById(R.id.complete_date);
-
-        completeDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String textValue = completeDate.getText().toString();
-                if(!"资料下载".equals(textValue)){
-                    String userId= getUserId();
-                    if(!TextUtils.isEmpty(userId)) {
-                        new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                                  int dayOfMonth) {
-                                CustomExpandableListAdapter.this.year = year;
-                                month = monthOfYear + 1;
-                                day = dayOfMonth;
-                                String dateStr = year + "/" + month + "/" + day;
-                                completeDate.setText(dateStr);
-                                item2Model.setComplete_date(dateStr);
-                                saveDate(item2Model);
-                            }
-                        }, year, month - 1, day).show();
-                    }
-                }else{
-                    String file = MainActivity.HOST_URL+"download/file/"+item2Model.getFile_name();
-                    final Uri uri = Uri.parse(file);
-                    final Intent it = new Intent(Intent.ACTION_VIEW, uri);
-                    v.getContext().startActivity(it);
-                }
-            }
-        });
-
-        item_name.setText(expandedListText);
-
-        String isCheck = item2Model.getIs_check();
-        if("Y".equals(isCheck)){
-            is_check.setChecked(true);
-        }else{
-            is_check.setChecked(false);
-        }
-        String date = null;
-        if("Y".equals(item2Model.getDownload_flag())){
-            //completeDate.setTextColor(ContextCompat.getColor(context,R.color.black));
-            //completeDate.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
-            date = "资料下载";
-            completeDate.setText(date);
-        }else{
-            date = item2Model.getComplete_date()==null?"选日期":item2Model.getComplete_date();
-            completeDate.setText(date);
-        }
-
         return convertView;
     }
 
@@ -212,6 +210,11 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
 
     private void saveDate(MyProjectItem2Model item2Model){
+        String item_name = item2Model.getItem_name().toString();
+        if("新增自定义项目".equals(item_name)){
+            return;
+        }
+
         String userId= getUserId();
         if(userId==null)
             return;
