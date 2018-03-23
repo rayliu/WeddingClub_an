@@ -13,6 +13,12 @@
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
 
     <application
         android:name=".MainApplication"
@@ -29,6 +35,11 @@
         <meta-data
             android:name="com.alibaba.app.appsecret"
             android:value="e40feeca8f01871a0dec11b3d82ab712" /> <!-- 请填写你自己的appSecret -->
+
+        <meta-data
+            android:name="ALIYUN_MAN_CHANNEL"
+            android:value="WEDDING" >
+        </meta-data>
 
         <!-- 消息接收监听器 （用户可自主扩展） -->
         <receiver
@@ -113,6 +124,7 @@
         </activity>
 
         <activity android:name=".config.FeedbackActivity"></activity>
+        <activity android:name=".myProject.myProjectItem.AddProjectActivity"></activity>
         <activity android:name=".config.WeddingDateActivity"></activity>
         <activity android:name=".config.AboutUsActivity"></activity>
         <activity android:name=".config.BizContactActivity"></activity>

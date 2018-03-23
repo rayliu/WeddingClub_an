@@ -10,6 +10,10 @@ android {
         versionName '1'
         //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         versionCode 1
+        ndk {
+            moduleName "jniLibs"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
     }
     buildTypes {
         release {
@@ -83,4 +87,7 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.35'
 
     compile 'com.bm.photoview:library:1.4.1'
+
+    //阿里云数据分析
+    compile 'com.aliyun.ams:alicloud-android-man:1.2.0'
 }
