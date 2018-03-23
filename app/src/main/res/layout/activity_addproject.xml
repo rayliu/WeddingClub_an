@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="495dp"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="com.eeda123.wedding.config.FeedbackActivity"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp">
+
+    <TextView
+        android:text="自定义项目名称"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/project_name"
+        android:windowSoftInputMode="adjustUnspecified|stateHidden"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/saveAskBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorPrimary"
+        android:text="提交"
+        android:textColor="@color/accent"
+        android:textSize="18sp"/>
+</LinearLayout>
+
