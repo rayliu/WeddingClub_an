@@ -37,6 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import butterknife.OnTextChanged;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -250,9 +251,22 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         }
     }
 
-    @OnLongClick(R.id.answerBtn) boolean onAnswerBtnLongClick() {
+    @OnLongClick(R.id.answerBtn) boolean onAnswerBtnLongCick() {
         //TODO implement
         return true;
+    }
+
+
+    @OnTextChanged(R.id.answerValue) void onAnswerValueChange() {
+        int length = answerValue.length();
+        if(length  >  500){
+            Toast.makeText(getBaseContext(), "最多只能输入500个字哦", Toast.LENGTH_LONG).show();
+            answerBtn.setEnabled(false);
+            answerBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
+        }else{
+            answerBtn.setEnabled(true);
+            answerBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
+        }
     }
 
 

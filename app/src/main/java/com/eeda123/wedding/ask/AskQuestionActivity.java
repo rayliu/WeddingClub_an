@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import butterknife.OnTextChanged;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -126,6 +127,18 @@ public class AskQuestionActivity extends AppCompatActivity {
             default:
                 finish();
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @OnTextChanged(R.id.questionValue) void onQuestionValueChange() {
+        int length = questionValue.length();
+        if(length  >  300){
+            Toast.makeText(getBaseContext(), "最多只能输入300个字哦", Toast.LENGTH_LONG).show();
+            saveAskBtn.setEnabled(false);
+            saveAskBtn.setBackgroundColor(Color.parseColor("#ABABAB"));
+        }else{
+            saveAskBtn.setEnabled(true);
+            saveAskBtn.setBackgroundColor(Color.parseColor("#FFEB7D86"));
         }
     }
 
